@@ -1,35 +1,64 @@
 const { PrismaClient } = require('@prisma/client');
+const catchQuery = require('../utils/catchQuery');
 
 const prisma = new PrismaClient();
 
-const { catchQuery } = require('../utils/catchQuery');
-
-const createComment = catchQuery(async (data) => {
-  return await prisma.user.create({ data });
-});
-
-const getCommentById = catchQuery(async (id) => {
-  return await prisma.user.findUnique({
-    where: { id },
+async function createComment(content, userId) {
+  return await catchQuery(async () => {
+    return await prisma.comment.create({ data: { content, userId } });
   });
-});
+}
 
-const deleteComment = catchQuery(async (id) => {
-  return await prisma.user.delete({
-    where: { id },
+async function getCommentById(id) {
+  return await catchQuery(async () => {
+    return await prisma.comment.findUnique({
+      where: { id },
+    });
   });
-});
+}
 
-const updateComment = catchQuery(async (id, data) => {
-  return await prisma.user.update({
-    where: { id },
-    data,
+// Get comments by post ID with error handling
+async function getCommentsByPostId(postId) {
+  return await catchQuery(async () => {
+    return await prisma.comment.findMany({
+      where: {
+        postId: postId,
+      },
+      include: {
+        user: {
+          select: { username: true },
+        },
+      },
+    });
   });
-});
+}
+
+// Get comments by user ID with error handling
+async function getCommentsByUserId(userId) {
+  return await catchQuery(async () => {
+    return await prisma.comment.findMany({
+      where: {
+        userId: userId,
+      },
+    });
+  });
+}
+
+// Delete a comment with error handling
+async function deleteComment(id) {
+  return await catchQuery(async () => {
+    return await prisma.comment.delete({
+      where: {
+        id, // Use the passed id to delete the correct comment
+      },
+    });
+  });
+}
 
 module.exports = {
   createComment,
   getCommentById,
+  getCommentsByPostId,
+  getCommentsByUserId,
   deleteComment,
-  updateComment,
 };

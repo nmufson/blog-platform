@@ -2,7 +2,11 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 async function main() {
-  // Hardcoded data for users
+  await prisma.comment.deleteMany({});
+  await prisma.post.deleteMany({});
+  await prisma.user.deleteMany({});
+  console.log(`Existing data deleted!`);
+
   const usersData = [
     {
       email: 'alice@example.com',
@@ -39,20 +43,23 @@ async function main() {
     {
       title: 'Alice’s First Post',
       content: 'This is Alice’s first post.',
-      authorId: allUsers[0].id,
+      userId: allUsers[0].id,
       published: true,
+      timestamp: new Date(),
     },
     {
       title: 'Bob’s First Post',
       content: 'This is Bob’s first post.',
-      authorId: allUsers[1].id,
+      userId: allUsers[1].id,
       published: true,
+      timestamp: new Date(),
     },
     {
       title: 'Alice’s Second Post',
       content: 'This is Alice’s second post.',
-      authorId: allUsers[0].id,
+      userId: allUsers[0].id,
       published: false,
+      timestamp: new Date(),
     },
   ];
 

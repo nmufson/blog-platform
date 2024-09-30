@@ -1,44 +1,52 @@
 const { PrismaClient } = require('@prisma/client');
+const catchQuery = require('../utils/catchQuery');
 
 const prisma = new PrismaClient();
 
-const { catchQuery } = require('../utils/catchQuery');
-
-const createUser = catchQuery(async (data) => {
-  return await prisma.user.create({ data });
-});
-
-const getUserById = catchQuery(async (id) => {
-  return await prisma.user.findUnique({
-    where: { id },
+async function createUser(email, username, hashedPassword) {
+  return await catchQuery(async () => {
+    return await prisma.user.create({
+      data: {
+        email, // email should come from the argument
+        username, // username should come from the argument
+        password: hashedPassword, // the hashed password should be used
+      },
+    });
   });
-});
+}
 
-const getUserByEmail = catchQuery(async (email) => {
-  return await prisma.user.findUnique({
-    where: { email },
+// Get a user by ID with error handling
+async function getUserById(id) {
+  return await catchQuery(async () => {
+    return await prisma.user.findUnique({
+      where: { id },
+    });
   });
-});
+}
 
-const deleteUser = catchQuery(async (id) => {
-  return await prisma.user.delete({
-    where: { id },
+// Get a user by email with error handling
+async function getUserByEmail(email) {
+  return await catchQuery(async () => {
+    return await prisma.user.findUnique({
+      where: { email },
+    });
   });
-});
+}
 
-const updateUser = catchQuery(async (id, data) => {
-  return await prisma.user.update({
-    where: { id },
-    // data is object containing only those fields we want to update
-    data,
+// Update a user with error handling
+async function updateUser(id, data) {
+  return await catchQuery(async () => {
+    return await prisma.user.update({
+      where: { id },
+      data,
+    });
   });
-});
+}
 
 // Export the wrapped function
 module.exports = {
   createUser,
   getUserById,
   getUserByEmail,
-  deleteUser,
   updateUser,
 };

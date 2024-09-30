@@ -1,11 +1,14 @@
 const express = require('express');
 const cors = require('cors');
 const router = require('./routes/router');
+const passport = require('passport');
+const userServices = require('./services/userServices');
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(passport.initialize());
 
 app.use(router);
 

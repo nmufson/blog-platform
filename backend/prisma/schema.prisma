@@ -30,7 +30,7 @@ model Post {
   userId    Int
   user      User     @relation(fields: [userId], references: [id])
   comments  Comment[] // One-to-many relation with comments
-  createdAt DateTime @default(now())
+  timestamp DateTime @default(now())
   published Boolean @default(false)
 }
 
