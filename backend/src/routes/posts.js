@@ -1,20 +1,30 @@
 const postController = require('../controllers/postController');
 const validators = require('../utils/validators');
+const authenticate = require('../middleware/authenticate');
+const checkUserCanPost = require('../middleware/checkUserCanPost');
 const Router = require('express');
 
 const router = Router();
 
-router.post('/', validators.postValidationRules, postController.createPost);
+router.post(
+  '/',
+  authenticate,
+  validators.postValidationRules(),
+  checkUserCanPost,
+  postController.createPost,
+);
 
-router.get('/', postController.getAllPosts);
-router.get('/:userId', postController.getPostsByUser);
+router.get('/', authenticate, postController.getAllPosts);
+router.get('/user/:userId', authenticate, postController.getPostsByUser);
+router.get('/post/:postId', authenticate, postController.getPostById);
 
 router.put(
-  '/:postId',
-  validators.postValidationRules,
+  '/post/:postId',
+  authenticate,
+  validators.postValidationRules(),
   postController.updatePost,
 );
 
-router.delete('/:postId', postController.deletePost);
+router.delete('/post/:postId', authenticate, postController.deletePost);
 
 module.exports = router;

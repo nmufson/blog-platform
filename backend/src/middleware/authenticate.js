@@ -6,7 +6,7 @@ const opts = {
   // how to extract the JWT from incoming requests
   // looks for token in Authorization header in the format Bearer <token>
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: processors.env.JWT_SECRET,
+  secretOrKey: process.env.JWT_SECRET,
 };
 
 passport.use(
@@ -23,6 +23,7 @@ passport.use(
 );
 
 // creates middleware for auth based on the JWT strategy we just defined
+// checks for vlaid JWT in the incoming request
 const authenticate = passport.authenticate('jwt', { session: false });
 
 module.exports = authenticate;

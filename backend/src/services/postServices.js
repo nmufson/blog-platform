@@ -3,9 +3,11 @@ const catchQuery = require('../utils/catchQuery');
 
 const prisma = new PrismaClient();
 
-async function createPost(title, content, userId) {
+async function createPost(title, content, userId, published) {
   return await catchQuery(async () => {
-    return await prisma.post.create({ data: { title, content, userId } });
+    return await prisma.post.create({
+      data: { title, content, userId, published },
+    });
   });
 }
 

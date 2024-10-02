@@ -8,9 +8,14 @@ async function createPost(req, res) {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
-  const { title, content, userId } = req.body;
+  const { title, content, userId, publish } = req.body;
 
-  const newPost = await postServices.createPost({ title, content, userId });
+  const newPost = await postServices.createPost(
+    title,
+    content,
+    userId,
+    publish,
+  );
 
   res.status(201).json(newPost);
 }
@@ -36,6 +41,17 @@ async function getPostsByUser(req, res) {
   res.status(200).json(posts);
 }
 
+async function getPostById(req, res) {
+  const postId = parseInt(req.params.postId, 10); // Get postId from route parameters
+  const post = await postServices.getPostById(postId); // Call the service function
+
+  if (!post) {
+    return res.status(404).json({ message: 'Post not found.' });
+  }
+
+  res.status(200).json(post);
+}
+
 async function updatePost(req, res) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -43,26 +59,47 @@ async function updatePost(req, res) {
   }
   const postId = parseInt(req.params.postId, 10);
   const { title, content } = req.body;
+  const userId = req.user.id;
+
+  const post = await postServices.getPostById(postId);
+  if (!post) {
+    return res.status(404).json({ error: 'Post not found' });
+  }
+
+  if (post.userId !== userId) {
+    return res
+      .status(403)
+      .json({ error: 'You do not have permission to update this post' });
+  }
 
   const updatedPost = await postServices.updatePost(postId, { title, content });
-  return res.status(200).json(updatedPost);
+  return res
+    .status(200)
+    .json({ message: 'Message updated successfully.', updatedPost });
 }
 
 async function deletePost(req, res) {
-  const postId = req.params.postId;
-  const deletedPost = await postServices.deletePost(postId);
+  const postId = parseInt(req.params.postId, 10);
+  const userId = req.user.id;
+  const post = await postServices.getPostById(postId);
 
-  if (!deletedPost) {
+  if (!post) {
     return res.status(404).json({ message: 'Post not found' });
   }
+  if (post.userId !== userId) {
+    return res
+      .status(403)
+      .json({ error: 'You do not have permission to update this post' });
+  }
 
-  return res.status(200).json(deletedPost);
+  return res.status(200).json({ message: 'Post deleted successfully.', post });
 }
 
 module.exports = {
   createPost: catchAsync(createPost),
   getAllPosts: catchAsync(getAllPosts),
   getPostsByUser: catchAsync(getPostsByUser),
+  getPostById: catchAsync(getPostById),
   updatePost: catchAsync(updatePost),
   deletePost: catchAsync(deletePost),
 };

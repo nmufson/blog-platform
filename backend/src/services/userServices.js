@@ -3,13 +3,27 @@ const catchQuery = require('../utils/catchQuery');
 
 const prisma = new PrismaClient();
 
-async function createUser(email, username, hashedPassword) {
+async function createUser(email, username, hashedPassword, canPost) {
   return await catchQuery(async () => {
     return await prisma.user.create({
       data: {
         email, // email should come from the argument
         username, // username should come from the argument
-        password: hashedPassword, // the hashed password should be used
+        password: hashedPassword,
+        canPost,
+      },
+    });
+  });
+}
+
+async function getAllUsers() {
+  return await catchQuery(async () => {
+    return await prisma.user.findMany({
+      select: {
+        id: true,
+        email: true,
+        username: true,
+        canPost: true,
       },
     });
   });
@@ -33,6 +47,14 @@ async function getUserByEmail(email) {
   });
 }
 
+async function getUserByUsername(username) {
+  return await catchQuery(async () => {
+    return await prisma.user.findUnique({
+      where: { username },
+    });
+  });
+}
+
 // Update a user with error handling
 async function updateUser(id, data) {
   return await catchQuery(async () => {
@@ -46,7 +68,9 @@ async function updateUser(id, data) {
 // Export the wrapped function
 module.exports = {
   createUser,
+  getAllUsers,
   getUserById,
   getUserByEmail,
+  getUserByUsername,
   updateUser,
 };
