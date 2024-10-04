@@ -12,7 +12,7 @@ const Header = () => (
           <a href="/about">About</a>
         </li>
         <li>
-          <a href="/log-in">Log In</a>
+          <a href="/login">Log In</a>
         </li>
       </ul>
     </nav>

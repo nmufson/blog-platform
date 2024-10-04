@@ -1,9 +1,13 @@
 import React from "react";
 
 const Comment = ({ comment }) => {
+  console.log(comment);
+  const username = comment.user.username;
+  const content = comment.content;
+
   return (
     <li>
-      <strong>{comment.author}</strong>:<p>{comment.content}</p>
+      <strong>{username}</strong>:<p>{content}</p>
     </li>
   );
 };

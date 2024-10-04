@@ -1,5 +1,7 @@
 import { useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { fetchBlogPostById } from "../../services/blogPostService";
+import CommentList from "../../components/Blog/CommentList/CommentList";
 
 const BlogPost = () => {
   const { postId } = useParams(); // Extract postId from URL
@@ -10,30 +12,28 @@ const BlogPost = () => {
   // api if it can't
   useEffect(() => {
     if (!post) {
-      // If post is not passed in state, fetch from backend
-      const fetchPost = async () => {
+      const getPost = async () => {
         try {
-          const response = await fetch(`/posts/${postId}`);
-          if (!response.ok) {
-            throw new Error("Failed to fetch post");
-          }
-          const data = await response.json();
-          setPost(data.post);
+          const data = await fetchBlogPostById(postId);
+          setPost(data.post); // Assuming the post is nested under `data.post`
         } catch (error) {
           console.error("Error fetching post:", error);
         }
       };
-      fetchPost();
+      getPost();
     }
   }, [postId]);
 
   if (!post) return <div>Loading...</div>;
 
   return (
-    <div>
-      <h1>{post.title}</h1>
-      <p>{post.content}</p>
-    </div>
+    <>
+      <div>
+        <h1>{post.title}</h1>
+        <p>{post.content}</p>
+      </div>
+      <CommentList comments={post.comments}></CommentList>
+    </>
   );
 };
 

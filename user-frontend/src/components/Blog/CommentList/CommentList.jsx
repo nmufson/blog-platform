@@ -1,6 +1,6 @@
 // CommentList.jsx
 import React from "react";
-import Comment from "./Comment"; // Assuming you have a Comment component
+import Comment from "../Comment/Comment"; // Assuming you have a Comment component
 
 const CommentList = ({ comments }) => {
   return (
