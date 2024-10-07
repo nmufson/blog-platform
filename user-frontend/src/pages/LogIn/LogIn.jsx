@@ -14,8 +14,6 @@ const LogIn = () => {
       const data = await loginUser(email, password); // Call the login service
 
       localStorage.setItem("token", data.token);
-
-      // Optionally store user info if needed
       localStorage.setItem("user", JSON.stringify(data.user));
       // Handle successful login (e.g., redirect, store token)
       console.log("Logged in successfully!", data);

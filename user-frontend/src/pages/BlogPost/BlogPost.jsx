@@ -2,6 +2,7 @@ import { useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchBlogPostById } from "../../services/blogPostService";
 import CommentList from "../../components/Blog/CommentList/CommentList";
+import styles from "./BlogPost.module.css";
 
 const BlogPost = () => {
   const { postId } = useParams(); // Extract postId from URL
@@ -27,13 +28,13 @@ const BlogPost = () => {
   if (!post) return <div>Loading...</div>;
 
   return (
-    <>
+    <div className={styles.BlogPost}>
       <div>
         <h1>{post.title}</h1>
         <p>{post.content}</p>
       </div>
       <CommentList comments={post.comments}></CommentList>
-    </>
+    </div>
   );
 };
 

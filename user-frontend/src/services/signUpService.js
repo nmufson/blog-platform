@@ -15,7 +15,8 @@ export const signupUser = async ({ email, username, password }) => {
 
 export const checkEmailAvailability = async (email) => {
   try {
-    const response = await fetch("/api/check-email", {
+    console.log(email);
+    const response = await fetch("http://localhost:5000/users/check-email", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),
@@ -35,7 +36,7 @@ export const checkEmailAvailability = async (email) => {
 
 export const checkUsernameAvailability = async (username) => {
   try {
-    const response = await fetch("/api/check-username", {
+    const response = await fetch("http://localhost:5000/users/check-username", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username }),

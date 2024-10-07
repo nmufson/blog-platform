@@ -1,5 +1,7 @@
+import styles from "./Footer.module.css";
+
 const Footer = () => (
-  <footer>
+  <footer className={styles.Footer}>
     <p>
       &copy; 2024 Blog API |<a href="mailto:nickmufson1@gmail.com">Email</a> |
       <a href="https://www.linkedin.com/in/nicholasmufson/">LinkedIn</a> |

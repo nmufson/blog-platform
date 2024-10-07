@@ -9,19 +9,23 @@ const router = Router();
 // for our route, we want the error array, not the func itself]
 // express-validator modifies the req object by adding validation
 // errors to it
+
 router.post(
-  '/sign-up',
+  '/signup',
   validators.signUpValidationRules(),
   userController.signUpUser,
 );
 
 router.post(
-  '/log-in',
+  '/login',
   validators.logInValidationRules(),
   userController.logInUser,
 );
 
-router.get('/', authenticate, userController.getAllUsers);
-router.get('/:userId', authenticate, userController.getUser);
+router.get('/', userController.getAllUsers);
+router.get('/user/:userId', authenticate, userController.getUser);
+
+router.post('/check-email', userController.checkEmail);
+router.post('/check-username', userController.checkUsername);
 
 module.exports = router;

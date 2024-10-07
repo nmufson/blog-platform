@@ -1,6 +1,5 @@
 const postServices = require('../services/postServices');
 const catchAsync = require('../utils/catchAsync');
-const { postValidationRules } = require('../utils/validators');
 const { validationResult } = require('express-validator');
 
 async function createPost(req, res) {
@@ -17,7 +16,7 @@ async function createPost(req, res) {
     publish,
   );
 
-  res.status(201).json(newPost);
+  res.status(201).json({ message: 'Post created successfully', newPost });
 }
 
 async function getAllPosts(req, res) {
@@ -27,7 +26,7 @@ async function getAllPosts(req, res) {
     return res.status(404).json({ message: 'No posts found.' });
   }
 
-  res.status(200).json(posts);
+  res.status(200).json({ message: 'Posts returned successfully', posts });
 }
 
 async function getPostsByUser(req, res) {
@@ -38,7 +37,16 @@ async function getPostsByUser(req, res) {
     return res.status(404).json({ message: 'No posts found for this user.' });
   }
 
-  res.status(200).json(posts);
+  res.status(200).json({ message: 'Posts returned successfully', posts });
+}
+
+async function getLatestPost(req, res) {
+  const latestPost = await postServices.getLatestPost();
+  if (!latestPost) {
+    return res.status(404).json({ message: 'Post not found.' });
+  }
+
+  res.status(200).json({ message: 'Post returned successfully', latestPost });
 }
 
 async function getPostById(req, res) {
@@ -49,7 +57,7 @@ async function getPostById(req, res) {
     return res.status(404).json({ message: 'Post not found.' });
   }
 
-  res.status(200).json(post);
+  res.status(200).json({ message: 'Post found successfully', post });
 }
 
 async function updatePost(req, res) {
@@ -99,6 +107,7 @@ module.exports = {
   createPost: catchAsync(createPost),
   getAllPosts: catchAsync(getAllPosts),
   getPostsByUser: catchAsync(getPostsByUser),
+  getLatestPost: catchAsync(getLatestPost),
   getPostById: catchAsync(getPostById),
   updatePost: catchAsync(updatePost),
   deletePost: catchAsync(deletePost),

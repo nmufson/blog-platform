@@ -6,13 +6,13 @@ const Router = require('express');
 const router = Router();
 
 router.post(
-  '/',
+  '/post/:postId',
   authenticate,
-  validators.commentValidationRules,
+  validators.commentValidationRules(),
   commentController.createComment,
 );
 
-router.get('/:postId', authenticate, commentController.getCommentsByPost);
+router.get('/post/:postId', authenticate, commentController.getCommentsByPost);
 
 router.delete('/:commentId', authenticate, commentController.deleteComment);
 

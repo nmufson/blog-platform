@@ -1,10 +1,54 @@
+:root {
+  /* Primary Colors */
+  --dark-bg: #1b262c; /* Dark Blue - Background for headers, footers, or main sections */
+  --primary: #0f4c75; /* Deep Blue - Primary font color or for buttons and navigation */
+  --accent: #3282b8; /* Lighter Blue - Accent elements like links, hover effects */
+  --light-bg: #bbe1fa; /* Light Blue - Background for cards, containers, or secondary sections */
+  --light-text: #ffffff; /* White - Font color for text on dark backgrounds */
+  --neutral-gray: #e5e5e5; /* Light Gray - Used for subtle borders or background highlights */
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
 body {
+  font-family: "Montserrat", sans-serif;
+  background-color: var(--light-bg);
+  color: var(--primary);
   font-size: 16px; /* Base font size */
   line-height: 1.5; /* Line height for readability */
+}
+
+header {
+  background-color: var(--dark-bg);
+  color: var(--light-text);
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+a {
+  color: var(--accent);
+}
+
+button {
+  background-color: var(--primary); /* Button background (Deep Blue) */
+  color: var(--light-text); /* Button text color (White) */
+}
+
+footer {
+  background-color: var(--dark-bg); /* Footer background (Dark Blue) */
+  color: var(--light-text); /* Footer text color (White) */
 }

@@ -1,4 +1,4 @@
-import BlogPreviewList from "../../components/Blog/BlogPreviewList/BlogPreviewList";
+import BlogPreviewList from "../components/Blog/BlogPreviewList";
 
 const Home = () => {
   return <BlogPreviewList></BlogPreviewList>;

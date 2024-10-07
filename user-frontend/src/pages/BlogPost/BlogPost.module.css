@@ -1,0 +1,4 @@
+.BlogPost {
+  display: flex;
+  flex-direction: column;
+}

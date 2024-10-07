@@ -38,7 +38,6 @@ async function getUserById(id) {
   });
 }
 
-// Get a user by email with error handling
 async function getUserByEmail(email) {
   return await catchQuery(async () => {
     return await prisma.user.findUnique({

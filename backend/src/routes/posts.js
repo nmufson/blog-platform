@@ -14,9 +14,10 @@ router.post(
   postController.createPost,
 );
 
-router.get('/', authenticate, postController.getAllPosts);
-router.get('/user/:userId', authenticate, postController.getPostsByUser);
-router.get('/post/:postId', authenticate, postController.getPostById);
+router.get('/', postController.getAllPosts);
+router.get('/user/:userId', postController.getPostsByUser);
+router.get('/post/:postId', postController.getPostById);
+router.get('/latest', postController.getLatestPost);
 
 router.put(
   '/post/:postId',

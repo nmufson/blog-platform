@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  signupUser,
-  checkEmailAvailability,
-  checkUsernameAvailability,
-} from "../services/SignupService"; // Import your services
+import { validateField } from "./SignUp";
 
-const SignupForm = () => {
+const SignUp = () => {
   const [formData, setFormData] = useState({
     email: "",
     username: "",
@@ -31,14 +27,54 @@ const SignupForm = () => {
     }));
 
     // Run validation for the field being changed
-    validateField(name, value);
+    const errors = validateField(name, value, formData, setFormErrors);
+
+    console.log(errors);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Perform validation for all fields before submission
-    validateEmail();
-    // ... add other validation functions as needed
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior
+
+    // Create an array of validation promises
+    const validationPromises = Object.keys(formData).map((field) =>
+      validateField(field, formData[field], formData, setFormErrors),
+    );
+    await Promise.all(validationPromises);
+
+    const hasErrors = Object.values(formErrors).some((error) => error !== "");
+    if (hasErrors) {
+      return; // Exit if there are validation errors
+    }
+
+    // If there are no errors, send the form data to the backend
+    try {
+      const response = await fetch("http://localhost:5000/users/signup", {
+        // Update with your actual endpoint
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      // Handle successful response
+      const responseData = await response.json();
+      console.log("Success:", responseData);
+      navigate("/");
+    } catch (error) {
+      console.error("Error during submission:", error);
+      // Set form errors if needed
+      setFormErrors((prevErrors) => ({
+        ...prevErrors,
+        submitError: "An error occurred while submitting the form.",
+      }));
+    }
   };
 
   return (
@@ -52,11 +88,13 @@ const SignupForm = () => {
             <input
               type="email"
               id="email"
-              value={email}
-              onChange={handleEmailChange}
+              name="email" // Add name attribute
+              value={formData.email}
+              onChange={handleChange}
               required
             />
-            <p className="error-message">{emailError}</p> {/* Error display */}
+            <p className="error-message">{formErrors.emailError}</p>{" "}
+            {/* Error display */}
           </div>
 
           <div className="form-group">
@@ -64,11 +102,12 @@ const SignupForm = () => {
             <input
               type="text"
               id="username"
-              value={username}
-              onChange={handleUsernameChange}
+              name="username" // Add name attribute
+              value={formData.username}
+              onChange={handleChange}
               required
             />
-            <p className="error-message">{usernameError}</p>{" "}
+            <p className="error-message">{formErrors.usernameError}</p>{" "}
             {/* Error display */}
           </div>
 
@@ -77,10 +116,13 @@ const SignupForm = () => {
             <input
               type="password"
               id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name="password" // Add name attribute
+              value={formData.password}
+              onChange={handleChange}
               required
             />
+            <p className="error-message">{formErrors.passwordError}</p>{" "}
+            {/* Error display */}
           </div>
 
           <div className="form-group">
@@ -88,11 +130,12 @@ const SignupForm = () => {
             <input
               type="password"
               id="confirmPassword"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              name="confirmPassword" // Add name attribute
+              value={formData.confirmPassword}
+              onChange={handleChange}
               required
             />
-            <p className="error-message">{passwordError}</p>{" "}
+            <p className="error-message">{formErrors.confirmPasswordError}</p>{" "}
             {/* Error display */}
           </div>
 
@@ -103,4 +146,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default SignUp;

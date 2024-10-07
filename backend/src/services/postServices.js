@@ -16,7 +16,13 @@ async function getAllPosts() {
     return await prisma.post.findMany({
       include: {
         user: true, // Include user data if needed
-        comments: true, // Include comments if needed
+        comments: {
+          include: {
+            user: {
+              select: { username: true }, // Only select the username field
+            },
+          },
+        }, // Include comments if needed
       },
     });
   });
@@ -28,8 +34,14 @@ async function getPostById(id) {
     return await prisma.post.findUnique({
       where: { id },
       include: {
-        user: true, // Include user data if needed
-        comments: true, // Include comments if needed
+        user: true, // Include user data for the post itself
+        comments: {
+          include: {
+            user: {
+              select: { username: true }, // Only select the username field
+            },
+          },
+        },
       },
     });
   });
@@ -43,6 +55,16 @@ async function getPostsByUserId(userId) {
       include: {
         user: true, // Include user data if needed
         comments: true, // Include comments if needed
+      },
+    });
+  });
+}
+
+async function getLatestPost() {
+  return await catchQuery(async () => {
+    return await prisma.post.findFirst({
+      orderBy: {
+        timestamp: 'desc',
       },
     });
   });
@@ -73,6 +95,7 @@ module.exports = {
   getPostsByUserId,
   getPostById,
   getPostsByUserId,
+  getLatestPost,
   deletePost,
   updatePost,
 };
