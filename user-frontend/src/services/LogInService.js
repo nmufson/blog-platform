@@ -1,4 +1,4 @@
-export const loginUser = async (email, password) => {
+export const logInUser = async (email, password) => {
   try {
     const response = await fetch("http://localhost:5000/users/login", {
       method: "POST",

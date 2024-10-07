@@ -29,7 +29,7 @@ const BlogPost = () => {
 
   return (
     <div className={styles.BlogPost}>
-      <div>
+      <div className={styles.postContainer}>
         <h1>{post.title}</h1>
         <p>{post.content}</p>
       </div>

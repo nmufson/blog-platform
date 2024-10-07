@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { validateField } from "./SignUp";
+import { signUpUser } from "../../services/signUpService";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -9,13 +10,13 @@ const SignUp = () => {
     password: "",
     confirmPassword: "",
   });
-
   const [formErrors, setFormErrors] = useState({
     emailError: "",
     usernameError: "",
     passwordError: "",
     confirmPasswordError: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,12 +33,10 @@ const SignUp = () => {
     console.log(errors);
   };
 
-  const navigate = useNavigate();
-
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent the default form submission behavior
 
-    // Create an array of validation promises
+    // array of validation promises
     const validationPromises = Object.keys(formData).map((field) =>
       validateField(field, formData[field], formData, setFormErrors),
     );
@@ -45,35 +44,17 @@ const SignUp = () => {
 
     const hasErrors = Object.values(formErrors).some((error) => error !== "");
     if (hasErrors) {
-      return; // Exit if there are validation errors
+      return;
     }
 
-    // If there are no errors, send the form data to the backend
     try {
-      const response = await fetch("http://localhost:5000/users/signup", {
-        // Update with your actual endpoint
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const data = await signUpUser(formData); // Use signupUser function with the formData
+      console.log("Success:", data);
 
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      // Handle successful response
-      const responseData = await response.json();
-      console.log("Success:", responseData);
+      localStorage.setItem("token", data.token);
       navigate("/");
     } catch (error) {
       console.error("Error during submission:", error);
-      // Set form errors if needed
-      setFormErrors((prevErrors) => ({
-        ...prevErrors,
-        submitError: "An error occurred while submitting the form.",
-      }));
     }
   };
 

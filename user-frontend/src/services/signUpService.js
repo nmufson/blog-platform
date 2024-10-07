@@ -1,5 +1,5 @@
-export const signupUser = async ({ email, username, password }) => {
-  const response = await fetch("http://localhost:5000/users/login", {
+export const signUpUser = async ({ email, username, password }) => {
+  const response = await fetch("http://localhost:5000/users/signup", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, username, password }),

@@ -7,7 +7,8 @@ const Comment = ({ comment }) => {
 
   return (
     <li>
-      <strong>{username}</strong>:<p>{content}</p>
+      <strong>{username}</strong>
+      <p>{content}</p>
     </li>
   );
 };

@@ -1,10 +1,30 @@
 .BlogPreview {
   display: flex;
   flex-direction: column;
-  border: 1px solid;
+  border: 1px solid var(--primary);
   border-radius: 10px;
-  margin: 10px 0 10px 0;
+  margin: 10px 0;
   background-color: var(--neutral-gray);
+  padding: 10px 10px 5px 10px; /* Add padding for better content spacing */
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease; /* Add transition for hover effect */
+  cursor: pointer; /* Indicate clickable area */
+}
+
+.BlogPreview:hover {
+  transform: translateY(-2px); /* Slight lift effect on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.BlogPreview h2 {
+  color: var(--primary);
+}
+
+.BlogPreview p {
+  color: var(--dark-bg); /* Dark color for the content text */
+  line-height: 1.5; /* Improved line height for readability */
+  margin: 10px 0; /* Space between paragraph and other elements */
 }
 
 .BlogPreview small {

@@ -53,7 +53,7 @@ async function signUpUser(req, res) {
   if (!newUser) return res.status(500).send('Error: User could not be created');
 
   const token = jwt.sign(
-    { id: newUser.id, email: newUser.email }, // Payload (user's ID and email)
+    { id: newUser.id, email: newUser.email, username: newUser.username }, // Payload (user's ID and email)
     process.env.JWT_SECRET, // Secret key for signing the token
     { expiresIn: '1h' }, // Optional: set token expiration time (e.g., 1 hour)
   );
@@ -61,7 +61,6 @@ async function signUpUser(req, res) {
   return res.status(201).json({
     message: 'User created successfully',
     token, // Send the generated JWT
-    user: newUser, // You can send back any necessary user info (excluding the password)
   });
 }
 
@@ -82,7 +81,7 @@ async function logInUser(req, res) {
   }
 
   const token = jwt.sign(
-    { id: user.id, email: user.email }, // Payload: user ID and email
+    { id: user.id, email: user.email, username: user.username }, // Payload: user ID and email
     process.env.JWT_SECRET, // Secret key used for signing the token
     { expiresIn: '1h' }, // Optional: set token expiration time (e.g., 1 hour)
   );
@@ -91,7 +90,6 @@ async function logInUser(req, res) {
   return res.status(200).json({
     message: 'Login successful',
     token, // JWT returned here
-    user: { id: user.id, email: user.email },
   });
 }
 

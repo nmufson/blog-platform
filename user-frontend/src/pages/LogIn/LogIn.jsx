@@ -1,22 +1,30 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { logInUser } from "../../services/LogInService";
+import { useNavigate } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const { setUser } = useOutletContext();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
 
     try {
-      const data = await loginUser(email, password); // Call the login service
+      const data = await logInUser(email, password); // Call the login service
 
       localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
-      // Handle successful login (e.g., redirect, store token)
+      const decodedToken = jwtDecode(data.token);
+      setUser(decodedToken);
+
       console.log("Logged in successfully!", data);
+      navigate("/");
     } catch (error) {
       setError(error.message);
     }
