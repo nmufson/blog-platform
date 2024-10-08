@@ -1,31 +1,31 @@
 import {
   checkEmailAvailability,
   checkUsernameAvailability,
-} from "../../services/signUpService";
-import debounce from "../../../../shared/utils/debounce";
+} from '../../services/signUpService';
+import debounce from '../../../../shared/utils/debounce';
 
 export const validateField = async (name, value, formData, setFormErrors) => {
   let updatedErrors = {
-    emailError: "",
-    usernameError: "",
-    passwordError: "",
-    confirmPasswordError: "",
+    emailError: '',
+    usernameError: '',
+    passwordError: '',
+    confirmPasswordError: '',
   };
 
   switch (name) {
-    case "email":
+    case 'email':
       updatedErrors = await validateEmail(value, setFormErrors);
       break;
 
-    case "username":
+    case 'username':
       updatedErrors = await validateUsername(value, setFormErrors);
       break;
 
-    case "password":
+    case 'password':
       updatedErrors = validatePassword(value);
       break;
 
-    case "confirmPassword":
+    case 'confirmPassword':
       updatedErrors = validateConfirmPassword(value, formData.password);
       break;
 
@@ -40,20 +40,20 @@ export const validateField = async (name, value, formData, setFormErrors) => {
 };
 
 const validateEmail = async (value, setFormErrors) => {
-  const updatedErrors = { emailError: "" };
+  const updatedErrors = { emailError: '' };
 
   if (!value) {
-    updatedErrors.emailError = "Email cannot be blank";
-  } else if (!value.includes("@")) {
-    updatedErrors.emailError = "Invalid email format";
+    updatedErrors.emailError = 'Email cannot be blank';
+  } else if (!value.includes('@')) {
+    updatedErrors.emailError = 'Invalid email format';
   } else {
     try {
       const isTaken = await checkEmailAvailability(value);
       if (isTaken) {
-        updatedErrors.emailError = "Email already in use";
+        updatedErrors.emailError = 'Email already in use';
       }
     } catch (error) {
-      updatedErrors.emailError = "Error checking email availability";
+      updatedErrors.emailError = 'Error checking email availability';
     }
   }
 
@@ -61,20 +61,20 @@ const validateEmail = async (value, setFormErrors) => {
 };
 
 const validateUsername = async (value, setFormErrors) => {
-  const updatedErrors = { usernameError: "" };
+  const updatedErrors = { usernameError: '' };
 
   if (!value) {
-    updatedErrors.usernameError = "Username cannot be blank";
+    updatedErrors.usernameError = 'Username cannot be blank';
   } else if (value.length < 3) {
-    updatedErrors.usernameError = "Username must be at least 3 characters";
+    updatedErrors.usernameError = 'Username must be at least 3 characters';
   } else {
     try {
       const isTaken = await checkUsernameAvailability(value);
       if (isTaken) {
-        updatedErrors.usernameError = "Username already in use";
+        updatedErrors.usernameError = 'Username already in use';
       }
     } catch (error) {
-      updatedErrors.usernameError = "Error checking username availability";
+      updatedErrors.usernameError = 'Error checking username availability';
     }
   }
 
@@ -82,29 +82,29 @@ const validateUsername = async (value, setFormErrors) => {
 };
 
 const validatePassword = (value) => {
-  const updatedErrors = { passwordError: "" };
+  const updatedErrors = { passwordError: '' };
 
   if (!value) {
-    updatedErrors.passwordError = "Password cannot be blank";
+    updatedErrors.passwordError = 'Password cannot be blank';
   } else if (value.length < 8) {
-    updatedErrors.passwordError = "Password must be at least 8 characters";
+    updatedErrors.passwordError = 'Password must be at least 8 characters';
   } else if (!/\d/.test(value)) {
-    updatedErrors.passwordError = "Password must contain a number";
+    updatedErrors.passwordError = 'Password must contain a number';
   } else if (!/[a-zA-Z]/.test(value)) {
     updatedErrors.passwordError =
-      "Password must contain both lowercase and uppercase letters";
+      'Password must contain both lowercase and uppercase letters';
   } else if (!/[@$!%*?&#]/.test(value)) {
-    updatedErrors.passwordError = "Password must contain a special character";
+    updatedErrors.passwordError = 'Password must contain a special character';
   }
 
   return updatedErrors;
 };
 
 const validateConfirmPassword = (value, password) => {
-  const updatedErrors = { confirmPasswordError: "" };
+  const updatedErrors = { confirmPasswordError: '' };
 
   if (value !== password) {
-    updatedErrors.confirmPasswordError = "Passwords do not match";
+    updatedErrors.confirmPasswordError = 'Passwords do not match';
   }
 
   return updatedErrors;

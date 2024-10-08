@@ -1,8 +1,13 @@
-export const signUpUser = async ({ email, username, password }) => {
-  const response = await fetch("http://localhost:5000/users/signup", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, username, password }),
+export const signUpUser = async ({
+  email,
+  username,
+  password,
+  confirmPassword,
+}) => {
+  const response = await fetch('http://localhost:5000/users/signup', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, username, password, confirmPassword }),
   });
 
   if (!response.ok) {
@@ -10,46 +15,48 @@ export const signUpUser = async ({ email, username, password }) => {
     throw new Error(errorData.message);
   }
 
-  return await response.json();
+  const data = await response.json();
+
+  return data;
 };
 
 export const checkEmailAvailability = async (email) => {
   try {
     console.log(email);
-    const response = await fetch("http://localhost:5000/users/check-email", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    const response = await fetch('http://localhost:5000/users/check-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email }),
     });
 
     if (!response.ok) {
-      throw new Error("Network response was not ok");
+      throw new Error('Network response was not ok');
     }
 
     const data = await response.json();
     return data.available; // bool
   } catch (error) {
-    console.error("Error checking email availability:", error);
+    console.error('Error checking email availability:', error);
     return false;
   }
 };
 
 export const checkUsernameAvailability = async (username) => {
   try {
-    const response = await fetch("http://localhost:5000/users/check-username", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    const response = await fetch('http://localhost:5000/users/check-username', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username }),
     });
 
     if (!response.ok) {
-      throw new Error("Network response was not ok");
+      throw new Error('Network response was not ok');
     }
 
     const data = await response.json();
     return data.available; // bool
   } catch (error) {
-    console.error("Error checking username availability:", error);
+    console.error('Error checking username availability:', error);
     return false;
   }
 };

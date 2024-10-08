@@ -1,10 +1,10 @@
 .BlogPreview {
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--primary);
+  border: 3px solid var(--dark-bg);
+  background-color: var(--neutral-gray);
   border-radius: 10px;
   margin: 10px 0;
-  background-color: var(--neutral-gray);
   padding: 10px 10px 5px 10px; /* Add padding for better content spacing */
   transition:
     transform 0.2s ease,

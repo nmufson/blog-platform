@@ -1,57 +1,93 @@
 // CommentList.jsx
-import React from "react";
-import Comment from "../Comment/Comment"; // Assuming you have a Comment component
-import { useOutletContext, Link } from "react-router-dom";
-import { useState } from "react";
-import styles from "./CommentList.module.css";
+import React from 'react';
+import Comment from '../Comment/Comment'; // Assuming you have a Comment component
+import { useOutletContext, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import styles from './CommentList.module.css';
+import { submitComment } from '../../../services/commentService';
+import { useNavigate } from 'react-router-dom';
+import { fetchBlogPostById } from '../../../services/blogPostService';
 
-const CommentList = ({ comments }) => {
+const CommentList = ({ post }) => {
   const { user } = useOutletContext();
-  const [newComment, setNewComment] = useState("");
+
+  const [comments, setComments] = useState(post.comments || []);
+  const [isFocused, setIsFocused] = useState(false);
+  const [commentDraft, setCommentDraft] = useState('');
 
   const handleCommentChange = (e) => {
-    setNewComment(e.target.value); // Update comment input
+    setCommentDraft(e.target.value); // Update comment input
+  };
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleCancel = () => {
+    setIsFocused(false);
+    setCommentDraft(''); // Clear the textarea if you want
+  };
+
+  const fetchPost = async () => {
+    try {
+      const response = await fetchBlogPostById(post.id);
+
+      setComments(response.post.comments);
+    } catch (error) {
+      console.error('Failed to fetch post:', error);
+    }
   };
 
   const handleCommentSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission
-    if (newComment.trim() === "") return; // Prevent empty comments
+    e.preventDefault();
+    if (commentDraft.trim() === '') return;
 
-    // Replace this with your API call to submit the comment
     try {
-      // Assuming you have a function to submit a comment
-      await submitComment(newComment);
-      setNewComment(""); // Clear input after successful submission
+      await submitComment(commentDraft, user, post.id);
+      setCommentDraft('');
+      setIsFocused(false);
+      await fetchPost(); // Re-fetch the post to get the updated comments
     } catch (error) {
-      console.error("Failed to submit comment:", error);
+      console.error('Failed to submit comment:', error);
     }
   };
 
   return (
     <div className={styles.CommentList}>
       <h2>Comments</h2>
-      {comments.length === 0 ? (
-        <p>No comments yet.</p>
-      ) : (
-        <ul>
-          {comments.map((comment) => (
-            <Comment key={comment.id} comment={comment} />
-          ))}
-        </ul>
-      )}
       {user ? (
-        <form onSubmit={handleCommentSubmit}>
+        <form onSubmit={handleCommentSubmit} className={styles.commentForm}>
           <textarea
-            value={newComment}
+            value={commentDraft}
             onChange={handleCommentChange}
+            onFocus={handleFocus}
             placeholder="Leave a comment..."
           />
-          <button type="submit">Submit</button>
+          <div
+            className={`${styles.commentButtonDiv} ${isFocused ? styles.visible : ''}`}
+          >
+            <button type="button" onClick={handleCancel}>
+              Cancel
+            </button>
+            <button type="submit">Submit</button>
+          </div>
         </form>
       ) : (
         <p>
           <Link to="/login">Log In</Link> to comment.
         </p>
+      )}
+      {comments.length === 0 ? (
+        <p>No comments yet.</p>
+      ) : (
+        <ul>
+          {comments
+            .slice()
+            .reverse()
+            .map((comment) => (
+              <Comment key={comment.id} comment={comment} />
+            ))}
+        </ul>
       )}
     </div>
   );

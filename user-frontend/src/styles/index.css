@@ -5,7 +5,7 @@
   --accent: #3282b8; /* Lighter Blue - Accent elements like links, hover effects */
   --light-bg: #bbe1fa; /* Light Blue - Background for cards, containers, or secondary sections */
   --light-text: #ffffff; /* White - Font color for text on dark backgrounds */
-  --neutral-gray: #e5e5e5; /* Light Gray - Used for subtle borders or background highlights */
+  --neutral-gray: #fdf5e6; /* Light Gray - Used for subtle borders or background highlights */
 }
 
 * {
@@ -21,7 +21,7 @@
 }
 
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background-color: var(--light-bg);
   color: var(--primary);
   font-size: 16px; /* Base font size */
@@ -44,16 +44,72 @@ main {
 }
 
 a {
-  color: var(--accent);
+  color: var(--primary);
 }
 
 button {
   background-color: var(--primary); /* Button background (Deep Blue) */
   color: var(--light-text); /* Button text color (White) */
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px); /* Lift up slightly */
 }
 
 footer {
   background-color: var(--dark-bg); /* Footer background (Dark Blue) */
   color: var(--light-text); /* Footer text color (White) */
   width: 100%;
+}
+
+fieldset {
+  border: none;
+}
+
+legend {
+  padding: 10px 0 0 0;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+form {
+  border: 3px solid var(--dark-bg);
+  background-color: var(--light-bg);
+  padding: 10px;
+}
+
+#logInForm,
+#signUpForm {
+  width: clamp(330px, 70%, 600px);
+  border-radius: 8px;
+  min-height: 200px;
+  margin: 10px 0 0 0;
+  align-self: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin: 0 0 20px 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group .error-message {
+  position: absolute;
+  top: 100%; /* Position below the input field */
+  right: 0;
+  color: red;
 }

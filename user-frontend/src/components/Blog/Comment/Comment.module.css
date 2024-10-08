@@ -1,0 +1,13 @@
+.Comment {
+  display: flex;
+  flex-direction: column;
+  border: 3px solid var(--dark-bg);
+  background-color: var(--neutral-gray);
+  border-radius: 10px;
+  margin: 10px 0;
+  padding: 10px 10px 5px 10px;
+}
+
+.Comment small {
+  align-self: end;
+}

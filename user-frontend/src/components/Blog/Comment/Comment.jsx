@@ -1,14 +1,21 @@
-import React from "react";
-
+import React from 'react';
+import formatDateTime from '../../../../../shared/utils/formatDateTime';
+import styles from './Comment.module.css';
 const Comment = ({ comment }) => {
-  console.log(comment);
   const username = comment.user.username;
   const content = comment.content;
 
+  const { date, time } = formatDateTime(comment.timestamp);
+
   return (
     <li>
-      <strong>{username}</strong>
-      <p>{content}</p>
+      <div className={styles.Comment}>
+        <strong>{username}</strong>
+        <p>{content}</p>
+        <small>
+          {time} - {date}
+        </small>
+      </div>
     </li>
   );
 };

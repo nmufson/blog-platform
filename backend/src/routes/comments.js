@@ -12,7 +12,7 @@ router.post(
   commentController.createComment,
 );
 
-router.get('/post/:postId', authenticate, commentController.getCommentsByPost);
+router.get('/post/:postId', commentController.getCommentsByPost);
 
 router.delete('/:commentId', authenticate, commentController.deleteComment);
 

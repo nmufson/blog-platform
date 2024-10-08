@@ -1,32 +1,31 @@
-import styles from "./Header.module.css";
-import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
-import Modal from "../Modal/Modal";
+import styles from './Header.module.css';
+import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
+import Modal from '../Modal/Modal';
 
 const Header = ({ user, openModal }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
-    // prev better than referencing state directly in case of
-    // stale state
     setIsDropdownOpen((prev) => !prev);
   };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // .current checks that the element with attached ref exists
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsDropdownOpen(false); // Close dropdown if click is outside
       }
     };
 
     // Add event listener
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
 
     // Clean up event listener on component unmount
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 

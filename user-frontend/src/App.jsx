@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 import { fetchLatestPostId } from "./services/blogPostService";
 
-import LogIn from "./pages/LogIn/LogIn";
+import LogIn from "./pages/LogIn/LogIn.jsx";
 import SignUp from "./pages/SignUp/SignUp.jsx";
 import "./styles/index.css";
 import Home from "./pages/Home/Home";

@@ -1,0 +1,16 @@
+.logInForm fieldset {
+  margin-bottom: 10px;
+}
+
+.logInForm button {
+  margin: 10px 0 0 0;
+}
+
+.logInForm a {
+  margin: 0 0 0 3px;
+}
+
+.logInForm a:hover {
+  font-weight: bold;
+  color: var(--dark-bg);
+}

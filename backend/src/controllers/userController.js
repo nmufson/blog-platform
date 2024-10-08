@@ -25,6 +25,7 @@ async function checkUsername(req, res) {
 }
 
 async function signUpUser(req, res) {
+  console.log(req.body.password, req.body.confirmPassword);
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -32,6 +33,7 @@ async function signUpUser(req, res) {
   }
 
   const { email, username, password, authorCode } = req.body;
+
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const existingUserByEmail = await userServices.getUserByEmail(email);
@@ -50,12 +52,13 @@ async function signUpUser(req, res) {
     hashedPassword,
     canPost,
   );
+  console.log(newUser);
   if (!newUser) return res.status(500).send('Error: User could not be created');
 
   const token = jwt.sign(
     { id: newUser.id, email: newUser.email, username: newUser.username }, // Payload (user's ID and email)
     process.env.JWT_SECRET, // Secret key for signing the token
-    { expiresIn: '1h' }, // Optional: set token expiration time (e.g., 1 hour)
+    { expiresIn: '3hr' }, // Optional: set token expiration time (e.g., 1 hour)
   );
 
   return res.status(201).json({
@@ -73,17 +76,21 @@ async function logInUser(req, res) {
   const { email, password } = req.body;
   const user = await userServices.getUserByEmail(email);
   if (!user) {
-    return res.status(401).json({ message: 'Invalid email' });
+    return res
+      .status(401)
+      .json({ message: 'Invalid email. Please try again.' });
   }
   const passwordMatch = await bcrypt.compare(password, user.password);
   if (!passwordMatch) {
-    return res.status(401).json({ message: 'Incorrect password' });
+    return res
+      .status(401)
+      .json({ message: 'Incorrect password. Please try again.' });
   }
 
   const token = jwt.sign(
     { id: user.id, email: user.email, username: user.username }, // Payload: user ID and email
     process.env.JWT_SECRET, // Secret key used for signing the token
-    { expiresIn: '1h' }, // Optional: set token expiration time (e.g., 1 hour)
+    { expiresIn: '3hr' }, // Optional: set token expiration time (e.g., 1 hour)
   );
 
   // Return success response with the JWT
