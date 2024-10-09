@@ -51,6 +51,7 @@ const LogIn = () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className={error.email ? 'inputError' : ''}
           />
           <p className="error-message">{error.email}</p>
         </div>
@@ -61,6 +62,7 @@ const LogIn = () => {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className={error.password ? 'inputError' : ''}
           />
           <p className="error-message">{error.password}</p>
         </div>

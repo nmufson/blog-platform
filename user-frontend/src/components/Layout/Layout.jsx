@@ -9,11 +9,8 @@ import { jwtDecode } from 'jwt-decode';
 
 const Layout = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const navigate = useNavigate();
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -45,28 +42,13 @@ const Layout = ({ children }) => {
     }
   }, [navigate]);
 
-  const handleConfirmLogout = () => {
-    localStorage.removeItem('token');
-    setUser(null);
-    closeModal();
-    navigate('/home');
-  };
-
   return (
     <>
-      <Header user={user} openModal={openModal} />
+      <Header user={user} setUser={setUser} />
       <Main>
         <Outlet context={{ user, setUser }} />
       </Main>
       <Footer />
-      <Modal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        onConfirm={handleConfirmLogout}
-        title="Confirm Logout"
-        message="Are you sure you want to log out?"
-        confirmText="log out"
-      />
     </>
   );
 };

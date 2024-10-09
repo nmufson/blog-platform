@@ -4,9 +4,10 @@ import Comment from '../Comment/Comment'; // Assuming you have a Comment compone
 import { useOutletContext, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import styles from './CommentList.module.css';
-import { submitComment } from '../../../services/commentService';
+import { submitComment, deleteComment } from '../../../services/commentService';
 import { useNavigate } from 'react-router-dom';
 import { fetchBlogPostById } from '../../../services/blogPostService';
+import Modal from '../../Modal/Modal';
 
 const CommentList = ({ post }) => {
   const { user } = useOutletContext();
@@ -14,6 +15,17 @@ const CommentList = ({ post }) => {
   const [comments, setComments] = useState(post.comments || []);
   const [isFocused, setIsFocused] = useState(false);
   const [commentDraft, setCommentDraft] = useState('');
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [commentToDelete, setCommentToDelete] = useState('');
+
+  const openModal = (comment) => {
+    setModalOpen(true);
+    setCommentToDelete(comment);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+    setCommentToDelete('');
+  };
 
   const handleCommentChange = (e) => {
     setCommentDraft(e.target.value); // Update comment input
@@ -52,44 +64,66 @@ const CommentList = ({ post }) => {
     }
   };
 
+  const handleConfirmDelete = async () => {
+    if (commentToDelete) {
+      await deleteComment(commentToDelete.id, user);
+      closeModal();
+      await fetchPost();
+    }
+  };
+
   return (
-    <div className={styles.CommentList}>
-      <h2>Comments</h2>
-      {user ? (
-        <form onSubmit={handleCommentSubmit} className={styles.commentForm}>
-          <textarea
-            value={commentDraft}
-            onChange={handleCommentChange}
-            onFocus={handleFocus}
-            placeholder="Leave a comment..."
-          />
-          <div
-            className={`${styles.commentButtonDiv} ${isFocused ? styles.visible : ''}`}
-          >
-            <button type="button" onClick={handleCancel}>
-              Cancel
-            </button>
-            <button type="submit">Submit</button>
-          </div>
-        </form>
-      ) : (
-        <p>
-          <Link to="/login">Log In</Link> to comment.
-        </p>
-      )}
-      {comments.length === 0 ? (
-        <p>No comments yet.</p>
-      ) : (
-        <ul>
-          {comments
-            .slice()
-            .reverse()
-            .map((comment) => (
-              <Comment key={comment.id} comment={comment} />
-            ))}
-        </ul>
-      )}
-    </div>
+    <>
+      <div className={styles.CommentList}>
+        <h2>Comments</h2>
+        {user ? (
+          <form onSubmit={handleCommentSubmit} className={styles.commentForm}>
+            <textarea
+              value={commentDraft}
+              onChange={handleCommentChange}
+              onFocus={handleFocus}
+              placeholder="Leave a comment..."
+            />
+            <div
+              className={`${styles.commentButtonDiv} ${isFocused ? styles.visible : ''}`}
+            >
+              <button type="button" onClick={handleCancel}>
+                Cancel
+              </button>
+              <button type="submit">Submit</button>
+            </div>
+          </form>
+        ) : (
+          <p>
+            <Link to="/login">Log In</Link> to comment.
+          </p>
+        )}
+        {comments.length === 0 ? (
+          <p>No comments yet.</p>
+        ) : (
+          <ul>
+            {comments
+              .slice()
+              .reverse()
+              .map((comment) => (
+                <Comment
+                  key={comment.id}
+                  openModal={openModal}
+                  comment={comment}
+                />
+              ))}
+          </ul>
+        )}
+      </div>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onConfirm={handleConfirmDelete}
+        title="Confirm Delete"
+        message="Are you sure you want to delete this comment?"
+        confirmText="Delete"
+      />
+    </>
   );
 };
 

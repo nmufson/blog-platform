@@ -1,12 +1,17 @@
 import styles from './Header.module.css';
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutlet, useOutletContext } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import Modal from '../Modal/Modal';
 
-const Header = ({ user, openModal }) => {
+const Header = ({ user, setUser }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const dropdownRef = useRef(null);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
@@ -29,24 +34,31 @@ const Header = ({ user, openModal }) => {
     };
   }, []);
 
+  const handleConfirmLogout = () => {
+    localStorage.removeItem('token');
+    setUser(null);
+    closeModal();
+    navigate('/home');
+  };
+
   return (
-    <header className={styles.Header}>
-      <h1>Nick's Blog</h1>
-      <nav>
-        <ul>
-          <li>
-            <a href="/home">Home</a>
-          </li>
-          <li>
-            <a href="/about">About</a>
-          </li>
-          {user ? (
-            <li className={styles.UserMenu} ref={dropdownRef}>
-              <button onClick={toggleDropdown} className={styles.UserButton}>
-                {user.username}
-              </button>
-              {isDropdownOpen && (
-                <div className={styles.Dropdown}>
+    <>
+      <header className={styles.Header}>
+        <h1>Nick's Blog</h1>
+        <nav>
+          <ul>
+            <li>
+              <a href="/home">Home</a>
+            </li>
+            <li>
+              <a href="/about">About</a>
+            </li>
+            {user ? (
+              <li className={styles.UserMenu} ref={dropdownRef}>
+                <button onClick={toggleDropdown} className={styles.UserButton}>
+                  {user.username}
+                </button>
+                {isDropdownOpen && (
                   <button
                     onClick={() => {
                       openModal();
@@ -55,17 +67,25 @@ const Header = ({ user, openModal }) => {
                   >
                     Log Out
                   </button>
-                </div>
-              )}
-            </li>
-          ) : (
-            <li>
-              <a href="/login">Log In</a>
-            </li>
-          )}
-        </ul>
-      </nav>
-    </header>
+                )}
+              </li>
+            ) : (
+              <li>
+                <a href="/login">Log In</a>
+              </li>
+            )}
+          </ul>
+        </nav>
+      </header>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onConfirm={handleConfirmLogout}
+        title="Confirm Logout"
+        message="Are you sure you want to log out?"
+        confirmText="log out"
+      />
+    </>
   );
 };
 

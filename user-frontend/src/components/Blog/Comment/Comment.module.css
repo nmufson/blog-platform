@@ -8,6 +8,22 @@
   padding: 10px 10px 5px 10px;
 }
 
+.Comment div:first-child {
+  display: flex;
+  justify-content: space-between;
+}
+
 .Comment small {
   align-self: end;
+}
+
+.Comment svg {
+  width: 25px;
+  height: 25px;
+}
+
+.Comment svg:hover {
+  width: 25px;
+  height: 25px;
+  transform: scale(1.2);
 }

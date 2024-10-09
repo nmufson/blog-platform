@@ -17,7 +17,12 @@ const SignUp = () => {
     passwordError: '',
     confirmPasswordError: '',
   });
-  const navigate = useNavigate();
+  const [touchedFields, setTouchedFields] = useState({
+    email: false,
+    username: false,
+    password: false,
+    confirmPassword: false,
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,10 +33,22 @@ const SignUp = () => {
       [name]: value,
     }));
 
-    // Run validation for the field being changed
-    const errors = validateField(name, value, formData, setFormErrors);
+    if (touchedFields[name]) {
+      validateField(name, value, formData, setFormErrors);
+    }
 
-    console.log(errors);
+    // validateField(name, value, formData, setFormErrors);
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+
+    setTouchedFields((prev) => ({
+      ...prev,
+      [name]: true,
+    }));
+
+    validateField(name, value, formData, setFormErrors);
   };
 
   const handleSubmit = async (event) => {
@@ -74,10 +91,11 @@ const SignUp = () => {
             name="email" // Add name attribute
             value={formData.email}
             onChange={handleChange}
+            onBlur={handleBlur}
+            className={formErrors.emailError ? 'inputError' : ''}
             required
           />
           <p className="error-message">{formErrors.emailError}</p>{' '}
-          {/* Error display */}
         </div>
 
         <div className={`form-group ${styles.formGroup}`}>
@@ -88,10 +106,11 @@ const SignUp = () => {
             name="username" // Add name attribute
             value={formData.username}
             onChange={handleChange}
+            onBlur={handleBlur}
+            className={formErrors.usernameError ? 'inputError' : ''}
             required
           />
           <p className="error-message">{formErrors.usernameError}</p>{' '}
-          {/* Error display */}
         </div>
 
         <div className={`form-group ${styles.formGroup}`}>
@@ -102,10 +121,11 @@ const SignUp = () => {
             name="password" // Add name attribute
             value={formData.password}
             onChange={handleChange}
+            onBlur={handleBlur}
+            className={formErrors.passwordError ? 'inputError' : ''}
             required
           />
           <p className="error-message">{formErrors.passwordError}</p>{' '}
-          {/* Error display */}
         </div>
 
         <div className={`form-group ${styles.formGroup}`}>
@@ -116,10 +136,11 @@ const SignUp = () => {
             name="confirmPassword" // Add name attribute
             value={formData.confirmPassword}
             onChange={handleChange}
+            onBlur={handleBlur}
+            className={formErrors.confirmPasswordError ? 'inputError' : ''}
             required
           />
           <p className="error-message">{formErrors.confirmPasswordError}</p>{' '}
-          {/* Error display */}
         </div>
 
         <button type="submit">Sign Up</button>

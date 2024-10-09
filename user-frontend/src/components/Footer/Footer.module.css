@@ -5,3 +5,8 @@ footer {
   align-items: center;
   text-align: center;
 }
+
+footer p,
+footer a {
+  color: var(--light-text);
+}
