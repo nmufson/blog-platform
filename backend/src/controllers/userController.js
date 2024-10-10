@@ -25,7 +25,6 @@ async function checkUsername(req, res) {
 }
 
 async function signUpUser(req, res) {
-  console.log(req.body.password, req.body.confirmPassword);
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -44,6 +43,8 @@ async function signUpUser(req, res) {
   if (existingUserByUsername) {
     return res.status(400).json({ message: 'Username already taken' });
   }
+
+  console.log(process.env.AUTHOR_CODE, authorCode);
   const canPost = process.env.AUTHOR_CODE === authorCode ? true : false;
 
   const newUser = await userServices.createUser(
@@ -56,7 +57,12 @@ async function signUpUser(req, res) {
   if (!newUser) return res.status(500).send('Error: User could not be created');
 
   const token = jwt.sign(
-    { id: newUser.id, email: newUser.email, username: newUser.username }, // Payload (user's ID and email)
+    {
+      id: newUser.id,
+      email: newUser.email,
+      username: newUser.username,
+      canPost: newUser.canPost,
+    }, // Payload (user's ID and email)
     process.env.JWT_SECRET, // Secret key for signing the token
     { expiresIn: '3hr' }, // Optional: set token expiration time (e.g., 1 hour)
   );
