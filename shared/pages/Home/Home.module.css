@@ -1,6 +1,7 @@
 .Home {
   display: flex;
   flex-direction: column;
+  width: clamp(200px, 50%, 1000px);
 }
 
 .Home button {

@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tinymce/tinymce-react": "^5.1.1",
+    "dompurify": "^3.1.7",
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
     "react": "^18.3.1",

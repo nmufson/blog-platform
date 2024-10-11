@@ -10,7 +10,9 @@ const BlogPreview = ({ post }) => {
     navigate(`/posts/${post.id}`, { state: { post } });
   };
 
-  const excerpt = post.content.substring(0, 100);
+  const excerpt = post.content
+    .replace(/<[^>]*>/g, '') // Remove HTML tags
+    .substring(0, 100);
 
   const { date, time } = formatDateTime(post.timestamp);
   const formattedDate = date;

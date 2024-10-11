@@ -29,7 +29,9 @@ const LogIn = () => {
 
       console.log('Logged in successfully!', data);
 
-      window.location.href = '/';
+      // make it so navigates to previous page they were on
+      // (could be a post or home)
+      window.location.href = '/home';
     } catch (error) {
       handleAuthError(error, setError);
     }

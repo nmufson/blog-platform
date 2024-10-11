@@ -28,8 +28,7 @@ const CommentList = ({ post }) => {
   };
 
   const handleCommentChange = (e) => {
-    setCommentDraft(e.target.value); // Update comment input
-    console.log(commentDraft);
+    setCommentDraft(e.target.value);
   };
 
   const handleFocus = () => {
@@ -38,7 +37,7 @@ const CommentList = ({ post }) => {
 
   const handleCancel = () => {
     setIsFocused(false);
-    setCommentDraft(''); // Clear the textarea if you want
+    setCommentDraft('');
   };
 
   const fetchPost = async () => {
@@ -108,16 +107,13 @@ const CommentList = ({ post }) => {
           <p>No comments yet.</p>
         ) : (
           <ul>
-            {comments
-              .slice()
-              .reverse()
-              .map((comment) => (
-                <Comment
-                  key={comment.id}
-                  openModal={openModal}
-                  comment={comment}
-                />
-              ))}
+            {comments.map((comment) => (
+              <Comment
+                key={comment.id}
+                openModal={openModal}
+                comment={comment}
+              />
+            ))}
           </ul>
         )}
       </div>

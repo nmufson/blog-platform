@@ -94,7 +94,12 @@ async function logInUser(req, res) {
   }
 
   const token = jwt.sign(
-    { id: user.id, email: user.email, username: user.username }, // Payload: user ID and email
+    {
+      id: user.id,
+      email: user.email,
+      username: user.username,
+      canPost: user.canPost,
+    }, // Payload: user ID and email
     process.env.JWT_SECRET, // Secret key used for signing the token
     { expiresIn: '3hr' }, // Optional: set token expiration time (e.g., 1 hour)
   );

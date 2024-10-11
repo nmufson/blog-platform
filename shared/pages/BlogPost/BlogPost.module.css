@@ -1,6 +1,7 @@
 .BlogPost {
   display: flex;
   flex-direction: column;
+  width: clamp(200px, 50%, 1000px);
 }
 
 .postContainer {

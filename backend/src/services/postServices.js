@@ -22,7 +22,13 @@ async function getAllPosts() {
               select: { username: true }, // Only select the username field
             },
           },
+          orderBy: {
+            timestamp: 'desc', // Sort comments by descending timestamp
+          },
         }, // Include comments if needed
+      },
+      orderBy: {
+        timestamp: 'desc', // Sort posts by descending timestamp
       },
     });
   });

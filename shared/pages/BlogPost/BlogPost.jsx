@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { fetchBlogPostById } from '../../services/blogPostService';
 import CommentList from '../../components/Blog/CommentList/CommentList';
 import styles from './BlogPost.module.css';
+import DOMPurify from 'dompurify';
 
 const BlogPost = () => {
   const { postId } = useParams(); // Extract postId from URL
@@ -27,11 +28,17 @@ const BlogPost = () => {
 
   if (!post) return <div>Loading...</div>;
 
+  // perhaps underline the title
   return (
     <div className={styles.BlogPost}>
+      {/* <div className={styles.publishDiv}>
+        <button>Publish</button>
+      </div> */}
       <div className={styles.postContainer}>
         <h1>{post.title}</h1>
-        <p>{post.content}</p>
+        <div
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
+        />
       </div>
       <CommentList post={post} comments={post.comments}></CommentList>
     </div>

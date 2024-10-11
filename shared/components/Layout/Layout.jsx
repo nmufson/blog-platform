@@ -33,6 +33,7 @@ const Layout = ({ children }) => {
             id: decodedToken.id,
             username: decodedToken.username,
             canPost: decodedToken.canPost,
+            token,
           });
         } else {
           localStorage.removeItem('token');
