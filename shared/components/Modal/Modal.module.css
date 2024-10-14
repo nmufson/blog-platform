@@ -44,11 +44,11 @@
 
 .CancelButton {
   background-color: var(--primary);
-  color: var(--light-text);
+  color: var(--white);
   margin-right: 10px;
 }
 
 .ConfirmButton {
   background-color: var(--alert);
-  color: var(--light-text);
+  color: var(--white);
 }

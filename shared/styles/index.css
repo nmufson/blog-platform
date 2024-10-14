@@ -4,7 +4,7 @@
   --primary: #0f4c75; /* Deep Blue - Primary font color or for buttons and navigation */
   --accent: #3282b8; /* Lighter Blue - Accent elements like links, hover effects */
   --light-bg: #bbe1fa; /* Light Blue - Background for cards, containers, or secondary sections */
-  --light-text: #ffffff; /* White - Font color for text on dark backgrounds */
+
   --light-beige: #fdf5e6; /* Light Gray - Used for subtle borders or background highlights */
   --pale-blue: #dbe2ef;
 
@@ -39,7 +39,7 @@ body {
 
 header {
   background-color: var(--deep-teal);
-  color: var(--light-text);
+  color: var(--white);
   width: 100%;
 }
 
@@ -59,7 +59,7 @@ a {
 
 button {
   background-color: var(--primary); /* Button background (Deep Blue) */
-  color: var(--light-text); /* Button text color (White) */
+  color: var(--white); /* Button text color (White) */
   border: none;
   padding: 12px 24px;
   font-size: 16px;
@@ -84,7 +84,7 @@ form button:hover {
 
 footer {
   background-color: var(--deep-teal); /* Footer background (Dark Blue) */
-  color: var(--light-text); /* Footer text color (White) */
+  color: var(--white); /* Footer text color (White) */
   width: 100%;
 }
 

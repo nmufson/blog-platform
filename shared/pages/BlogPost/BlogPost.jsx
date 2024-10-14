@@ -27,7 +27,7 @@ const BlogPost = () => {
 
   // allow title and main edits if isEditing is true, add save button
   // if isEditing is true, remove publish config
-  const { date, time } = formatDateTime(post.timestamp);
+  const { date, time } = formatDateTime(post?.timestamp);
   const navigate = useNavigate();
 
   // tries to pull post data from parent component state, or calls
@@ -112,7 +112,7 @@ const BlogPost = () => {
             ) : (
               <h1>{post.title || post.title}</h1>
             )}
-            <strong className={styles.AuthorName}>{post.user.username}</strong>
+            <p className={styles.AuthorName}>{post.user.username}</p>
             <p className={styles.DateTime}>
               {date}, {time}
             </p>

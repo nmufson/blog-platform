@@ -4,7 +4,7 @@
 
 .CommentList a:hover {
   font-weight: bold;
-  color: var(--dark-bg);
+  color: var(--deep-teal);
 }
 
 .commentForm {

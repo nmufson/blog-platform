@@ -10,7 +10,7 @@
 }
 
 .Header h1 a {
-  color: var(--light-text);
+  color: var(--white);
   text-decoration: none;
 }
 
@@ -34,7 +34,7 @@
 
 .Header ul a,
 .Header ul button {
-  color: var(--light-text); /* White text color for links */
+  color: var(--white); /* White text color for links */
   text-decoration: none; /* Remove underline from links */
   font-size: 1.3rem;
   padding: 0.5rem 1rem; /* Padding around links */
