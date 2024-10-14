@@ -2,18 +2,9 @@
   width: clamp(200px, 50%, 1000px);
 }
 
-/* .newPostForm textarea {
-  min-height: 200px;
-  min-width: 100%;
-  border-radius: 10px;
-  padding: 10px;
-  border: 1px solid #d1d1d1; Light border color
-  resize: vertical; 
-  font-family: inherit; 
-  font-size: 1rem;
-  background-color: #fff; 
-  transition: border-color 0.2s ease-in-out; 
-} */
+.newPostForm input {
+  margin-bottom: 10px;
+}
 
 .postButtonDiv {
   margin-top: 10px;
@@ -23,6 +14,10 @@
 
 .postButtonDiv button {
   margin-left: 10px;
+}
+
+.postButtonDiv button:first-child {
+  background-color: var(--alert);
 }
 
 button.disabled {

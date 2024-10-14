@@ -15,14 +15,14 @@
 }
 
 .commentForm textarea {
+  background-color: var(--pale-blue);
   border-radius: 10px;
   padding: 10px;
-  border: 1px solid #d1d1d1; /* Light border color */
+  border: 2px solid black; /* Light border color */
   width: 100%;
   resize: vertical; /* Allow vertical resize for better UX */
   font-family: inherit; /* Use the same font as the rest of your app */
   font-size: 1rem;
-  background-color: #fff; /* Keep the text area light for readability */
   transition: border-color 0.2s ease-in-out; /* Smooth border transition */
 }
 
@@ -59,4 +59,8 @@
 
 .commentForm button.disabled {
   background-color: rgb(146, 135, 135);
+}
+
+.noCommentsP {
+  margin-left: 3px;
 }

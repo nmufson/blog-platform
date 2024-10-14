@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import styles from './NewPostForm.module.css';
 import { useRef } from 'react';
-import EditorComponent from '../Editor/Editor.jsx';
+import EditorComponent from '../EditorComponent/EditorComponent.jsx';
 
 const NewPostForm = ({
   handleDiscardClick,
@@ -13,6 +13,8 @@ const NewPostForm = ({
   setPostTitle,
   postContent,
   setPostContent,
+  imageURL,
+  setImageURL,
   titleRef,
   editorRef,
   titleFocused,
@@ -23,8 +25,6 @@ const NewPostForm = ({
   const handleChange = (content) => {
     setPostContent(content);
   };
-
-  const handleFocus = () => {};
 
   // discard (modal asking if they want to delete progress or save as draft)
   // save as draft
@@ -56,6 +56,14 @@ const NewPostForm = ({
           titleFocused={titleFocused}
           editorFocused={editorFocused}
         ></EditorComponent>
+
+        <label htmlFor="imageURL">Image URL (optional):</label>
+        <input
+          type="text"
+          name="imageURL"
+          placeholder="Image URL"
+          onChange={(e) => setImageURL(e.target.value)}
+        />
 
         <div className={styles.postButtonDiv}>
           <button

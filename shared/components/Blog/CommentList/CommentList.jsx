@@ -104,7 +104,7 @@ const CommentList = ({ post }) => {
           </p>
         )}
         {comments.length === 0 ? (
-          <p>No comments yet.</p>
+          <p className={styles.noCommentsP}>No comments yet.</p>
         ) : (
           <ul>
             {comments.map((comment) => (

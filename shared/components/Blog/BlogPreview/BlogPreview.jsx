@@ -20,15 +20,33 @@ const BlogPreview = ({ post }) => {
 
   return (
     <div onClick={handlePostClick} className={styles.BlogPreview}>
-      <h2>{post.title}</h2>
-      <p>
-        {excerpt}
-        {post.content.length > 100 && '...'}{' '}
-      </p>
+      <img
+        src={post.image}
+        // {have user include alt text}
+        // alt={post.altText}
+        className={styles.blogPreviewImage}
+      />
+      <div className={styles.bottomDiv}>
+        <h2>{post.title}</h2>
+      </div>
+
       <small>
         {formattedTime} - {formattedDate}
       </small>
     </div>
+    // <div onClick={handlePostClick} className={styles.BlogPreview}>
+    //   <div className={styles.topDiv}>
+    //     <h2>{post.title}</h2>
+    //     <small>{post.published ? 'Published' : 'Not Published'}</small>
+    //   </div>
+    //   <p>
+    //     {excerpt}
+    //     {post.content.length > 100 && '...'}{' '}
+    //   </p>
+    //   <small>
+    //     {formattedTime} - {formattedDate}
+    //   </small>
+    // </div>
   );
 };
 

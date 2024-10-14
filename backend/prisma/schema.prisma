@@ -32,6 +32,7 @@ model Post {
   comments  Comment[] // One-to-many relation with comments
   timestamp DateTime @default(now())
   published Boolean @default(false)
+  image     String?
 }
 
 model Comment {

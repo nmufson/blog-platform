@@ -4,12 +4,12 @@ import { useState } from 'react';
 
 function EditorComponent({
   content,
-  onContentChange,
-  editorRef,
-  setTitleFocused,
-  titleFocused,
-  editorFocused,
-  setEditorFocused,
+  onContentChange = () => {},
+  editorRef = { current: null },
+  setTitleFocused = () => {},
+  titleFocused = false,
+  editorFocused = false,
+  setEditorFocused = () => {},
 }) {
   return (
     <>
@@ -58,7 +58,9 @@ function EditorComponent({
             'alignright alignjustify | bullist numlist outdent indent | ' +
             'removeformat | help',
           content_style:
-            'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+            'body { font-family:Montserrat,sans-serif; font-size:14px; background-color: #dbe2ef; }',
+          content_css: '/EditorComponent.module.css',
+          body_class: 'tox-tinymce',
         }}
       />
     </>

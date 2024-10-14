@@ -1,0 +1,17 @@
+.publishDiv {
+  margin-bottom: 20px;
+}
+
+.linkButton {
+  background: none;
+  border: none;
+  color: blue; /* change this later */
+  cursor: pointer;
+  padding: 0;
+  font-size: 14px;
+  box-shadow: none;
+}
+
+.smallMessage {
+  color: black;
+}

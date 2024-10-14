@@ -3,22 +3,21 @@ import Modal from '../../../shared/components/Modal/Modal.jsx';
 import Notification from '../components/Notification/Notification.jsx';
 import { useState, useEffect } from 'react';
 import { useRef } from 'react';
-import EditorComponent from '../components/Editor/Editor';
+
 import { useOutletContext, Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { newBlogPost } from '../../../shared/services/blogPostService.js';
 
 const NewPost = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // consolidate these three into an object
   const [postContent, setPostContent] = useState('');
   const [postTitle, setPostTitle] = useState('');
+  const [imageURL, setImageURL] = useState('');
   const [modalType, setModalType] = useState(null);
-  const [notificationType, setNotificationType] = useState(null);
   const [titleFocused, setTitleFocused] = useState(false);
   const [editorFocused, setEditorFocused] = useState(false);
   const { user } = useOutletContext();
-
-  const navigate = useNavigate();
 
   const titleRef = useRef(null);
   const editorRef = useRef(null);
@@ -51,20 +50,21 @@ const NewPost = () => {
     setIsModalOpen(false);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    handleFocus();
-  };
-
   const submitPost = async (e, publish) => {
     e.preventDefault();
     if (postContent.trim() === '') return;
 
     try {
-      const response = await newBlogPost(postTitle, postContent, user, publish);
+      const response = await newBlogPost(
+        user,
+        postTitle,
+        postContent,
+        publish,
+        imageURL,
+      );
       setPostContent('');
       const newPost = response.newPost;
-      navigate(`/posts/${newPost.id}`);
+      window.location.href = `/posts/${newPost.id}`;
     } catch (error) {
       console.error('Failed to submit:', error);
     }
@@ -86,6 +86,8 @@ const NewPost = () => {
         setPostTitle={setPostTitle}
         postContent={postContent}
         setPostContent={setPostContent}
+        imageURL={imageURL}
+        setImageURL={setImageURL}
         titleRef={titleRef}
         editorRef={editorRef}
         titleFocused={titleFocused}
@@ -102,10 +104,9 @@ const NewPost = () => {
         }
         onConfirm={(e) => handleConfirm(e, modalType === 'submit')}
         isOpen={isModalOpen}
-        onClose={handleCloseModal}
+        setIsModalOpen={setIsModalOpen}
         confirmText={modalType === 'discard' ? 'Discard' : 'Publish'}
       />
-      <Notification></Notification>
     </>
   );
 };

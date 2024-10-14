@@ -5,8 +5,15 @@
   --accent: #3282b8; /* Lighter Blue - Accent elements like links, hover effects */
   --light-bg: #bbe1fa; /* Light Blue - Background for cards, containers, or secondary sections */
   --light-text: #ffffff; /* White - Font color for text on dark backgrounds */
-  --neutral-gray: #fdf5e6; /* Light Gray - Used for subtle borders or background highlights */
-  --form-color: #dbe2ef;
+  --light-beige: #fdf5e6; /* Light Gray - Used for subtle borders or background highlights */
+  --pale-blue: #dbe2ef;
+
+  --dark-gray: #353535; /* Dark Gray for text and backgrounds */
+  --teal: #3c6e71; /* Teal for accents and buttons */
+  --white: #ffffff; /* White for backgrounds and text */
+  --light-gray: #d9d9d9; /* Light Gray for form backgrounds */
+  --deep-teal: #284b63;
+  --alert: #ff4757;
 }
 
 * {
@@ -24,14 +31,14 @@
 
 body {
   font-family: 'Montserrat', sans-serif;
-  background-color: var(--light-bg);
-  color: var(--primary);
+  background-color: var(--white);
+  color: var(--dark-gray);
   font-size: 16px; /* Base font size */
   line-height: 1.5; /* Line height for readability */
 }
 
 header {
-  background-color: var(--dark-bg);
+  background-color: var(--deep-teal);
   color: var(--light-text);
   width: 100%;
 }
@@ -66,13 +73,17 @@ button {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+button:hover {
+  filter: brightness(0.9);
+}
+
 form button:hover {
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
   transform: translateY(-2px); /* Lift up slightly */
 }
 
 footer {
-  background-color: var(--dark-bg); /* Footer background (Dark Blue) */
+  background-color: var(--deep-teal); /* Footer background (Dark Blue) */
   color: var(--light-text); /* Footer text color (White) */
   width: 100%;
 }
@@ -102,10 +113,22 @@ input {
   width: 100%; /* Full width for inputs */
   font-family: inherit; /* Use the same font as the rest of your app */
   font-size: 1rem; /* Base font size */
-  background-color: #afc1e2; /* Light gray for input background */
+
   transition:
     border-color 0.2s ease-in-out,
     box-shadow 0.2s ease-in-out;
+}
+
+input,
+textarea {
+  background-color: var(--white); /* White for input background */
+  color: var(--dark-gray); /* Dark Gray for input text */
+  border: 1px solid var(--teal);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(53, 53, 53, 0.6); /* Lighten Dark Gray for placeholder */
 }
 
 input:focus {
@@ -122,13 +145,22 @@ input:focus {
   margin: 10px 0 0 0;
   align-self: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  background-color: var(--form-color);
-  border: 3px solid var(--dark-bg);
+  background-color: var(--light-gray); /* Light Gray for form background */
+  border: 2px solid var(--deep-teal);
 }
 
 #logInForm button,
 #signUpForm button {
   margin-left: 5px;
+}
+
+button {
+  background-color: var(--teal);
+  color: var(--white);
+}
+
+button:hover {
+  background-color: var(--dark-gray);
 }
 
 .form-group {
@@ -158,4 +190,21 @@ input:-webkit-autofill {
 input:-webkit-autofill:focus {
   border-color: #1b262c;
   box-shadow: 0 0 0 3px rgba(27, 38, 44, 0.2);
+}
+
+.tox-tinymce.tox-tinymce {
+  border: 2px solid black !important;
+}
+
+.tox-tinymce.tox-tinymce * {
+  background-color: var(--pale-blue) !important;
+  border-color: var(--pale-blue) !important;
+}
+
+.tox-edit-focus {
+  box-shadow: 0 0 0 3px rgba(27, 38, 44, 0.2) !important;
+}
+
+.tox .tox-edit-area::before {
+  border: none !important;
 }

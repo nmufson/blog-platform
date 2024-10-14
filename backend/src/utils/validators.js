@@ -55,8 +55,13 @@ const postValidationRules = () => [
     .trim()
     .notEmpty()
     .withMessage('Title cannot be blank')
-    .isLength({ max: 50 }),
+    .isLength({ max: 50 })
+    .withMessage('Title cannot exceed 50 characters'),
   body('content').trim().notEmpty().withMessage('Post content cannot be empty'),
+  body('imageURL')
+    .optional()
+    .isURL()
+    .withMessage('Image URL must be a valid URL'),
 ];
 
 const commentValidationRules = () => [

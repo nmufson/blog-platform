@@ -1,0 +1,21 @@
+.my-editor-body {
+  background-color: var(--pale-blue); /* Content area background */
+}
+
+/* .tox-toolbar__group {
+} */
+
+.tox-tinymce {
+  border: 2px solid black;
+}
+
+.tox-tinymce,
+.tox.tinymce * {
+  background-color: var(
+    --pale-blue
+  ); /* Optional: editor container background */
+}
+
+.tox-tinymce {
+  cursor: text;
+}

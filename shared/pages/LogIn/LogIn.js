@@ -31,23 +31,3 @@ export const handleAuthError = (error, setError) => {
     }));
   }
 };
-
-const handleLogin = async (e) => {
-  e.preventDefault();
-  setError({ email: '', password: '' });
-
-  const errors = validateLogin(email, password);
-  if (Object.keys(errors).length > 0) {
-    setError(errors);
-    return;
-  }
-
-  try {
-    const data = await logInUser(email, password);
-    localStorage.setItem('token', data.token);
-    console.log('Logged in successfully!', data);
-    window.location.href = '/';
-  } catch (error) {
-    handleAuthError(error, setError);
-  }
-};

@@ -1,11 +1,9 @@
 .BlogPreview {
-  display: flex;
-  flex-direction: column;
-  border: 3px solid var(--dark-bg);
-  background-color: var(--neutral-gray);
+  background-color: var(--light-gray);
+  border: 2px solid var(--deep-teal);
   border-radius: 10px;
   margin: 10px 0;
-  padding: 10px 10px 5px 10px; /* Add padding for better content spacing */
+
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease; /* Add transition for hover effect */
@@ -19,6 +17,11 @@
 
 .BlogPreview h2 {
   color: var(--primary);
+  margin-right: 15px;
+}
+
+.blogPreviewImage {
+  width: 100%;
 }
 
 .BlogPreview p {
@@ -29,4 +32,13 @@
 
 .BlogPreview small {
   align-self: flex-end;
+}
+
+.bottomDiv {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottomDiv small {
+  align-self: flex-start;
 }

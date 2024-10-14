@@ -3,7 +3,6 @@ import {
   RouterProvider,
   redirect,
 } from 'react-router-dom';
-
 import { fetchLatestPostId } from '../../shared/services/blogPostService';
 
 import SignUp from '../../shared/pages/SignUp/SignUp.jsx';

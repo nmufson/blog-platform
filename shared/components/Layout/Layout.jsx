@@ -2,19 +2,16 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
 import { useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useNavigation } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
+import Loading from '../Loading/Loading';
 
 const Layout = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
-
-  const onClick = () => {
-    const token = localStorage.getItem('token');
-    console.log(jwtDecode(token));
-  };
+  const navigation = useNavigation();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -47,12 +44,23 @@ const Layout = ({ children }) => {
     } else {
       setUser(null);
     }
+    setLoading(false);
   }, [navigate]);
+
+  useEffect(() => {
+    if (user) {
+      console.log('User state has been updated:', user);
+    }
+  }, [user]);
+
+  if (loading || navigation.state === 'loading') {
+    return <Loading />;
+  }
 
   return (
     <>
       <Header user={user} setUser={setUser} />
-      <Main onClick={onClick}>
+      <Main>
         <Outlet context={{ user, setUser }} />
       </Main>
       <Footer />

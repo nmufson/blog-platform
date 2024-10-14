@@ -41,12 +41,28 @@ async function main() {
   // Hardcoded data for posts (each associated with a specific user)
   const postsData = [
     {
-      title: 'Alice’s First Post',
-      content:
-        'Welcome to my blog! I’m thrilled to share my thoughts and experiences with you all. As a newcomer to the blogging world, I want to create a space where I can express my ideas, share my creativity, and connect with like-minded individuals. Today, I want to talk about the journey of starting something new. It can be daunting, filled with self-doubt and uncertainty, but it’s also incredibly rewarding. Each day brings new challenges and learning opportunities that help us grow. Through this blog, I hope to inspire others to embrace their passions and take the leap into the unknown. I’ll be writing about various topics, including travel, lifestyle, and personal growth. I’m excited to share my adventures and insights along the way. So stay tuned for more posts, and feel free to leave your comments and feedback! I’m eager to hear from you and learn together as we embark on this exciting journey.',
+      title:
+        'The Importance of Walkability and Bike Infrastructure in Urbanism',
+      content: `<h2>Understanding Urbanism</h2>
+                  <p>Urbanism refers to the study and design of cities, emphasizing how urban environments can enhance the quality of life for their inhabitants. At the heart of successful urbanism lies the concept of walkability — the measure of how friendly an area is to walking.</p>
+
+                  <h2>Why Walkability Matters</h2>
+                  <p>Walkable cities promote healthier lifestyles, reduce traffic congestion, and lower pollution levels. When neighborhoods are designed with pedestrian-friendly infrastructure, such as sidewalks, crosswalks, and green spaces, residents are more likely to walk to their destinations.</p>
+                  <p>Moreover, walkability fosters community interaction. People are more inclined to engage with their surroundings and with each other when they can easily stroll through their neighborhoods. This sense of community can lead to safer, more vibrant environments.</p>
+
+                  <h2>The Role of Bike Infrastructure</h2>
+                  <p>In addition to walking, cycling is an essential component of urban mobility. Well-designed bike infrastructure, including dedicated bike lanes, bike-sharing programs, and secure parking, encourages more people to opt for cycling as a primary mode of transportation.</p>
+                  <p>Good bike infrastructure not only reduces car dependency but also contributes to reduced emissions, improved air quality, and enhanced physical health. Cities that prioritize cycling create a more sustainable urban environment.</p>
+
+                  <h2>Conclusion</h2>
+                  <p>In conclusion, the principles of urbanism advocate for walkable and bike-friendly cities. By investing in pedestrian and cycling infrastructure, urban planners can create healthier, more connected, and more sustainable communities. Embracing these ideals is crucial for the future of urban living.</p>
+
+                  <p>For more insights on urbanism and sustainable living, follow our blog or connect with us on social media!</p>`,
       userId: allUsers[0].id,
       published: true,
       timestamp: new Date(),
+      image:
+        'https://www.brookings.edu/wp-content/uploads/2019/07/20190712_metro_bass_walkabilityincities.jpg',
     },
     {
       title: 'Bob’s First Post',
@@ -55,6 +71,8 @@ async function main() {
       userId: allUsers[1].id,
       published: true,
       timestamp: new Date(),
+      image:
+        'https://ec.europa.eu/eurostat/documents/4187653/15349461/Prostock-studio_AdobeStock_437049103_RV.jpg',
     },
     {
       title: 'Alice’s Second Post',
@@ -63,6 +81,8 @@ async function main() {
       userId: allUsers[0].id,
       published: false,
       timestamp: new Date(),
+      image:
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Ipomoea_batatas_006.JPG/800px-Ipomoea_batatas_006.JPG',
     },
   ];
 

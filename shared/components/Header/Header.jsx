@@ -7,6 +7,7 @@ import Modal from '../../../shared/components/Modal/Modal';
 const Header = ({ user, setUser }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const dropdownRef = useRef(null);
 
@@ -82,6 +83,7 @@ const Header = ({ user, setUser }) => {
       <Modal
         isOpen={isModalOpen}
         onClose={closeModal}
+        setIsModalOpen={setIsModalOpen}
         onConfirm={handleConfirmLogout}
         title="Confirm Logout"
         message="Are you sure you want to log out?"

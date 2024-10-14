@@ -7,13 +7,14 @@ async function createPost(req, res) {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
-  const { title, content, userId, publish } = req.body;
+  const { title, content, userId, publish, imageURL } = req.body;
 
   const newPost = await postServices.createPost(
     title,
     content,
     userId,
     publish,
+    imageURL || null,
   );
 
   res.status(201).json({ message: 'Post created successfully', newPost });
@@ -66,7 +67,7 @@ async function updatePost(req, res) {
     return res.status(400).json({ errors: errors.array() });
   }
   const postId = parseInt(req.params.postId, 10);
-  const { title, content } = req.body;
+  const { title, content, published } = req.body;
   const userId = req.user.id;
 
   const post = await postServices.getPostById(postId);
@@ -80,7 +81,11 @@ async function updatePost(req, res) {
       .json({ error: 'You do not have permission to update this post' });
   }
 
-  const updatedPost = await postServices.updatePost(postId, { title, content });
+  const updatedPost = await postServices.updatePost(postId, {
+    title,
+    content,
+    published,
+  });
   return res
     .status(200)
     .json({ message: 'Message updated successfully.', updatedPost });
@@ -97,10 +102,12 @@ async function deletePost(req, res) {
   if (post.userId !== userId) {
     return res
       .status(403)
-      .json({ error: 'You do not have permission to update this post' });
+      .json({ error: 'You do not have permission to delete this post' });
   }
 
-  return res.status(200).json({ message: 'Post deleted successfully.', post });
+  await postServices.deletePost(postId);
+
+  return res.status(200).json({ message: 'Post deleted successfully.' });
 }
 
 module.exports = {
