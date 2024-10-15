@@ -34,15 +34,10 @@
 
 .Header ul a,
 .Header ul button {
-  color: var(--white); /* White text color for links */
   text-decoration: none; /* Remove underline from links */
   font-size: 1.3rem;
   padding: 0.5rem 1rem; /* Padding around links */
   border-radius: 0;
-
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease; /* Smooth transition for hover effects */
 }
 
 .Header li:nth-child(3) {
@@ -53,17 +48,9 @@
   position: absolute; /* Position it relative to the first button */
   top: 100%; /* Position it directly below the first button */
   left: 0; /* Align with the left edge of the first button */
-}
-
-.Header li:nth-child(3) button {
-  width: 110px;
+  width: 100%;
 }
 
 .Header ul a:hover {
-  background-color: var(--accent); /* Change background on hover */
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-.Header ul button:hover {
-  background-color: var(--accent);
 }

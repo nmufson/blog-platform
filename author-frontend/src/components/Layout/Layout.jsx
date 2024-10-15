@@ -2,19 +2,24 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
 import { useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 
 const Layout = ({ children }) => {
   const [user, setUser] = useState(null);
 
+  const location = useLocation();
   const navigate = useNavigate();
 
   const onClick = () => {
     const token = localStorage.getItem('token');
     console.log(jwtDecode(token));
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   useEffect(() => {
     const token = localStorage.getItem('token');

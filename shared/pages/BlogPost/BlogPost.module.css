@@ -17,6 +17,16 @@
   font-size: 1.7em;
 }
 
+.postContent h1,
+.postContent h2,
+.postContent h3 {
+  margin-top: 10px;
+}
+
+.postContent ul {
+  margin-left: 30px;
+}
+
 .blogImage {
   width: 100%;
   height: 60vh;

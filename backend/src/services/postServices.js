@@ -47,6 +47,9 @@ async function getPostById(id) {
               select: { username: true }, // Only select the username field
             },
           },
+          orderBy: {
+            timestamp: 'desc', // Sort comments by descending timestamp
+          },
         },
       },
     });

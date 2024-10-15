@@ -1,5 +1,6 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
+const bcrypt = require('bcrypt');
 
 async function main() {
   await prisma.comment.deleteMany({});
@@ -10,27 +11,43 @@ async function main() {
   const usersData = [
     {
       email: 'alice@example.com',
-      username: 'alice',
-      password: 'password123',
+      username: 'Alice Thinksdeep',
+      password: 'Password123&',
       canPost: true,
     },
     {
       email: 'bob@example.com',
-      username: 'bob',
-      password: 'password456',
+      username: 'Bob Writeswell',
+      password: 'Password456$',
       canPost: true,
     },
     {
       email: 'charlie@example.com',
-      username: 'charlie',
-      password: 'password789',
-      canPost: false,
+      username: 'Charlie Speakswise',
+      password: 'Password789@',
+      canPost: true,
+    },
+    {
+      email: 'nick@gmail.com',
+      username: 'Nick Featherpage',
+      password: 'Lembas123!',
+      canPost: true,
     },
   ];
 
+  const hashedUsersData = await Promise.all(
+    usersData.map(async (user) => {
+      const hashedPassword = await bcrypt.hash(user.password, 10);
+      return {
+        ...user,
+        password: hashedPassword,
+      };
+    }),
+  );
+
   // Insert multiple users using createMany
   await prisma.user.createMany({
-    data: usersData,
+    data: hashedUsersData,
     skipDuplicates: true,
   });
   console.log(`Users created!`);
@@ -68,20 +85,20 @@ async function main() {
       title: 'Looking for a Hobby? Try Language Learning',
       content: `<p>Language learning is not just an educational pursuit; it can also be a fulfilling and enjoyable <strong>hobby</strong>. Whether you’re picking up a new language for travel, personal interest, or cognitive benefits, engaging with languages can provide a rich and rewarding experience.</p>
 
-<h3>Fun and Engaging</h3>
-<p>Learning a language opens the door to <strong>new cultures</strong> and experiences. From exploring foreign films and music to reading literature in its original form, the journey of language learning can be both fun and enriching. This hobby encourages you to immerse yourself in diverse cultural contexts, making each learning session an adventure.</p>
+            <h3>Fun and Engaging</h3>
+            <p>Learning a language opens the door to <strong>new cultures</strong> and experiences. From exploring foreign films and music to reading literature in its original form, the journey of language learning can be both fun and enriching. This hobby encourages you to immerse yourself in diverse cultural contexts, making each learning session an adventure.</p>
 
-<h3>Social Connections</h3>
-<p>Language learning can also lead to <strong>meaningful connections</strong> with others. Joining language classes, conversation groups, or online forums allows you to meet new people who share your interests. These interactions can lead to friendships and provide opportunities for cultural exchange, making the learning process more enjoyable.</p>
+            <h3>Social Connections</h3>
+            <p>Language learning can also lead to <strong>meaningful connections</strong> with others. Joining language classes, conversation groups, or online forums allows you to meet new people who share your interests. These interactions can lead to friendships and provide opportunities for cultural exchange, making the learning process more enjoyable.</p>
 
-<h3>Cognitive Benefits</h3>
-<p>Engaging in a language hobby is an excellent way to keep your mind active and sharp. Research has shown that learning a new language can improve memory, enhance problem-solving skills, and boost creativity. This cognitive exercise makes language learning a valuable hobby that benefits your overall mental health.</p>
+            <h3>Cognitive Benefits</h3>
+            <p>Engaging in a language hobby is an excellent way to keep your mind active and sharp. Research has shown that learning a new language can improve memory, enhance problem-solving skills, and boost creativity. This cognitive exercise makes language learning a valuable hobby that benefits your overall mental health.</p>
 
-<h3>A Sense of Achievement</h3>
-<p>As you progress in your language learning journey, you'll experience a profound sense of <strong>accomplishment</strong>. Each new word, phrase, or grammar rule mastered brings you closer to fluency. This achievement fosters confidence and motivates you to continue expanding your language skills.</p>
+            <h3>A Sense of Achievement</h3>
+            <p>As you progress in your language learning journey, you'll experience a profound sense of <strong>accomplishment</strong>. Each new word, phrase, or grammar rule mastered brings you closer to fluency. This achievement fosters confidence and motivates you to continue expanding your language skills.</p>
 
-<h3>Conclusion</h3>
-<p>In conclusion, language learning is not just a practical skill; it is a rewarding hobby that enriches your life in many ways. From cultural exploration to cognitive enhancement and social interaction, the benefits of learning a language are numerous. So why not embark on this exciting journey today and discover the joy of language learning?</p>`,
+            <h3>Conclusion</h3>
+            <p>In conclusion, language learning is not just a practical skill; it is a rewarding hobby that enriches your life in many ways. From cultural exploration to cognitive enhancement and social interaction, the benefits of learning a language are numerous. So why not embark on this exciting journey today and discover the joy of language learning?</p>`,
       userId: allUsers[1].id,
       published: true,
       timestamp: new Date(),
@@ -89,28 +106,200 @@ async function main() {
         'https://ec.europa.eu/eurostat/documents/4187653/15349461/Prostock-studio_AdobeStock_437049103_RV.jpg',
     },
     {
-      title: 'Sweet Potatoes Are Incredible',
-      content: `<p>Sweet potatoes are a delicious and nutritious addition to any diet. They are not only versatile and easy to prepare but also packed with essential nutrients that can support overall health.</p>
+      title: 'The Benefits of Maintaining a Consistent Sleep-Wake Routine',
+      content: `<p>
+          A consistent sleep-wake routine is more than just a habit—it's a foundation for overall well-being. While it's tempting to hit the snooze button on weekends or stay up late, aligning your sleep schedule can offer numerous advantages for your physical and mental health.
+        </p>
 
-<h3>Affordability</h3>
-<p>One of the best things about sweet potatoes is their <strong>affordability</strong>. They are often less expensive than other vegetables and can be found in most grocery stores year-round. This makes them a budget-friendly option for families and individuals looking to eat healthily without breaking the bank.</p>
+        <h3>Improves Sleep Quality</h3>
+        <p>
+          When you go to bed and wake up at the same time each day, your body adapts to a natural rhythm known as the circadian rhythm. This helps you fall asleep more quickly and achieve deeper sleep, ensuring you wake up feeling refreshed and recharged.
+        </p>
 
-<h3>Nutrient-Rich</h3>
-<p>Sweet potatoes are incredibly <strong>nutrient-dense</strong>, providing a wealth of vitamins and minerals. They are an excellent source of vitamin A, which is vital for eye health, and also contain significant amounts of vitamin C, potassium, and dietary fiber. Incorporating sweet potatoes into your meals can help you meet your daily nutrient needs.</p>
+        <h3>Boosts Mental Clarity and Focus</h3>
+        <p>
+          A stable sleep pattern supports cognitive functions like memory, problem-solving, and focus. By sticking to a routine, your brain knows when to wind down and when to be alert, making it easier to stay sharp throughout the day.
+        </p>
 
-<h3>Easy to Prepare</h3>
-<p>Another reason to love sweet potatoes is how <strong>easy they are to cook</strong>. Whether you roast, boil, mash, or bake them, sweet potatoes can be prepared in various ways to suit your taste. They can also be added to soups, stews, or salads, making them a versatile ingredient in the kitchen.</p>
+        <h3>Enhances Mood and Reduces Stress</h3>
+        <p>
+          Poor sleep can lead to irritability and increased stress. On the other hand, a regular sleep schedule helps stabilize your mood by ensuring you get enough rest each night. This can reduce feelings of anxiety and make it easier to handle daily challenges.
+        </p>
 
-<h3>Delicious Flavor</h3>
-<p>Sweet potatoes are naturally <strong>sweet and flavorful</strong>, making them a favorite among many. Their creamy texture and sweet taste pair well with both savory and sweet dishes, allowing for endless culinary possibilities. From sweet potato fries to casseroles, there's no shortage of tasty recipes to try.</p>
+        <h3>Morning Walks: A Refreshing Start</h3>
+        <p>
+          Incorporating a morning walk into your routine can further boost the benefits of a consistent sleep schedule. Morning walks help you soak in natural sunlight, which signals your body to wake up and align your internal clock for the day. Exposure to sunlight in the morning can also improve your sleep at night by regulating your body's production of melatonin.
+        </p>
+        <p>
+          Additionally, morning walks are a great way to energize your body and mind, providing a gentle form of exercise that can elevate your mood and kickstart your metabolism. It's a simple way to start your day on a positive note and enhance the benefits of a steady sleep-wake cycle.
+        </p>
 
-<h3>Conclusion</h3>
-<p>In conclusion, sweet potatoes are an excellent food choice for anyone looking to eat healthily. With their affordability, nutrient-rich profile, ease of preparation, and delicious flavor, sweet potatoes are a wonderful addition to your meals. Consider adding them to your diet and enjoy all the benefits they have to offer!</p>`,
-      userId: allUsers[0].id,
-      published: false,
+        <h3>Supports Physical Health</h3>
+        <p>
+          Consistent sleep helps regulate important bodily functions, including metabolism, immune system strength, and heart health. This means that by prioritizing a steady sleep-wake routine, you're also taking care of your body in the long run.
+        </p>
+
+        <p>
+          Overall, maintaining a regular sleep-wake schedule, along with a morning walk, is a simple yet effective way to support a healthier lifestyle. Set a bedtime, stick to it, and consider adding a daily walk to start your mornings right. You’ll soon notice the positive impact on your energy, mood, and focus!
+        </p>`,
+      userId: allUsers[2].id,
+      published: true,
       timestamp: new Date(),
       image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Ipomoea_batatas_006.JPG/800px-Ipomoea_batatas_006.JPG',
+        'https://earthtrekgear.com/cdn/shop/articles/morningwalktomasz-wozniak-V62UrdknDCA-unsplash.jpg?v=1582743235',
+    },
+    {
+      title: 'The OneBag Travel Trend: Embrace Minimalism on the Go',
+      content: `<p>
+        The OneBag travel trend is all about simplicity and freedom. Rather than lugging around heavy suitcases and multiple bags, OneBag travelers aim to pack everything they need into a single, compact bag. This minimalist approach to travel has gained popularity among adventurers who value flexibility and a stress-free experience.
+      </p>
+
+      <h3>Why Choose OneBag Travel?</h3>
+      <p>
+        Traveling with just one bag offers numerous advantages. It allows for faster airport navigation, easy transitions between destinations, and a lighter load. No more waiting at baggage claim or worrying about lost luggage—your essentials are always with you. The simplicity of packing less means you can focus more on your experiences rather than your belongings.
+      </p>
+
+      <h3>Focus on Essentials</h3>
+      <p>
+        OneBag travel encourages you to be intentional with what you pack, focusing only on versatile, multi-purpose items. It’s a chance to rethink what you truly need while on the road, helping you become more adaptable and creative with your wardrobe and gear.
+      </p>
+
+      <h3>A Sustainable Choice</h3>
+      <p>
+        In addition to convenience, OneBag travel is also environmentally friendly. By packing lighter, you reduce your carbon footprint when flying or taking other forms of transportation. Plus, it’s a way to practice mindful consumption, bringing only what truly adds value to your journey.
+      </p>
+
+      <p>
+        The OneBag trend is ideal for those who love adventure, appreciate flexibility, and enjoy the challenge of living with less. With a little planning and smart packing, you can experience the freedom of travel without being weighed down—literally and figuratively.
+      </p>`,
+      userId: allUsers[0].id,
+      published: true,
+      timestamp: new Date(),
+      image:
+        'https://capital-placement.com/wp-content/uploads/2021/07/The-benefits-of-travelling.jpg',
+    },
+    {
+      title:
+        'Steady State Cardio vs. High-Intensity Cardio: Which is Right for You?',
+      content: `<p>
+          When it comes to fitness, cardio exercises are essential for improving cardiovascular health, burning calories, and enhancing endurance. However, two popular approaches—steady state cardio and high-intensity cardio—offer different benefits and may suit different fitness goals. Understanding their differences can help you choose the right routine for your needs.
+        </p>
+
+        <h3>What is Steady State Cardio?</h3>
+        <p>
+          Steady state cardio involves maintaining a consistent, moderate level of intensity over a prolonged period. This could include activities like jogging, cycling, or swimming at a steady pace. Steady state workouts are generally easier to sustain for longer durations, making them an excellent option for endurance training and building aerobic capacity.
+        </p>
+
+        <h3>The Benefits of Steady State Cardio</h3>
+        <ul>
+          <li><strong>Improved Endurance:</strong> Regular steady state cardio sessions enhance stamina, allowing you to perform activities for longer periods.</li>
+          <li><strong>Lower Injury Risk:</strong> The moderate intensity of steady state exercises typically results in a lower risk of injury compared to high-intensity workouts.</li>
+          <li><strong>Stress Reduction:</strong> The rhythmic nature of steady state cardio can be meditative, helping to reduce stress levels and improve mental well-being.</li>
+        </ul>
+
+        <h3>What is High-Intensity Cardio?</h3>
+        <p>
+          High-intensity cardio, often referred to as HIIT (High-Intensity Interval Training), consists of short bursts of intense exercise followed by brief recovery periods. Activities can include sprinting, cycling, or circuit training. This approach is known for its efficiency, allowing for significant calorie burning in a shorter amount of time.
+        </p>
+
+        <h3>The Benefits of High-Intensity Cardio</h3>
+        <ul>
+          <li><strong>Time Efficiency:</strong> HIIT workouts can often be completed in 20-30 minutes while delivering substantial calorie burn.</li>
+          <li><strong>Increased Metabolism:</strong> The intensity of HIIT can lead to an elevated metabolic rate for hours after your workout, known as the afterburn effect.</li>
+          <li><strong>Variety and Fun:</strong> High-intensity workouts can be varied and engaging, helping to keep you motivated and excited about your fitness routine.</li>
+        </ul>
+
+        <h3>Which Should You Choose?</h3>
+        <p>
+          Ultimately, the best choice between steady state and high-intensity cardio depends on your personal goals, fitness level, and preferences. If you're looking for improved endurance and a lower-impact workout, steady state cardio may be ideal. Conversely, if you're short on time and seeking to maximize calorie burn, high-intensity cardio could be the better option.
+        </p>
+
+        <p>
+          Many fitness enthusiasts find a combination of both approaches to be the most effective. Incorporating a mix of steady state and high-intensity workouts can help you enjoy the benefits of each while keeping your routine fresh and challenging. Listen to your body, find what works for you, and enjoy the journey to better health!
+        </p>`,
+      userId: allUsers[1].id,
+      published: true,
+      timestamp: new Date(),
+      image:
+        'https://www.shape.com/thmb/DjCIHGX6cWaIniuqHeBAAreNE08=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/best-cardio-exercises-promo-2000-498cbfb8f07541b78572bf810e7fb600.jpg',
+    },
+    {
+      title: 'The Importance of Young Voices in Local Politics',
+      content: `<p>
+          In recent years, there's been a growing concern that young people are not sufficiently engaged in local politics. Despite being heavily affected by the decisions made at the community level, many young individuals often feel disconnected or disillusioned with the political process. This trend is troubling, as the involvement of young people in local politics is crucial for shaping the future of their communities.
+        </p>
+
+        <h3>Understanding the Disengagement</h3>
+        <p>
+          Several factors contribute to the lack of youth engagement in local politics. Many young people perceive politics as boring, complicated, or dominated by older generations. Additionally, the fast-paced nature of modern life, including education and career demands, can leave little room for civic involvement. This disengagement can lead to a lack of representation and a disconnect between the needs of young citizens and the policies enacted by local governments.
+        </p>
+
+        <h3>The Impact of Youth Involvement</h3>
+        <p>
+          When young people actively participate in local politics, they bring fresh perspectives and innovative ideas to the table. Their engagement can influence crucial issues such as education, climate change, housing, and job opportunities—topics that directly affect their lives and futures. Furthermore, young voices can advocate for change, pushing local leaders to prioritize policies that address their concerns.
+        </p>
+
+        <h3>Why Getting Involved Matters</h3>
+        <p>
+          Engaging in local politics offers young people an opportunity to make a tangible impact in their communities. By participating in town hall meetings, voting in local elections, and joining advocacy groups, young individuals can shape the decisions that affect their lives. Additionally, getting involved fosters a sense of community and empowerment, allowing young people to connect with like-minded peers and create networks of support.
+        </p>
+
+        <h3>How to Get Involved</h3>
+        <p>
+          Fortunately, there are many ways for young people to become more engaged in local politics:
+        </p>
+        <ul>
+          <li><strong>Attend Local Meetings:</strong> Participate in town hall meetings or city council sessions to stay informed and voice your opinions.</li>
+          <li><strong>Volunteer for Campaigns:</strong> Support candidates or causes you believe in by volunteering your time and skills.</li>
+          <li><strong>Educate Yourself:</strong> Take the time to understand local issues and policies, making informed decisions at the polls.</li>
+          <li><strong>Join Youth Organizations:</strong> Connect with groups that advocate for youth interests in politics, amplifying your voice and efforts.</li>
+        </ul>
+
+        <p>
+          In conclusion, while there may be a perception that young people are not involved enough in local politics, there is a growing movement of engaged and passionate youth seeking to make a difference. By encouraging greater participation and recognizing the value of their voices, we can ensure that the concerns of younger generations are heard and addressed. It’s time for young people to step up and take an active role in shaping their communities' futures!
+        </p>`,
+      userId: allUsers[2].id,
+      published: true,
+      timestamp: new Date(),
+      image:
+        'https://media.wired.com/photos/66c7baadb9d04db8f0de5aca/3:2/w_1280%2Cc_limit/politics_election_betting.jpg',
+    },
+    {
+      title: 'The Value of Eating Whole Foods and Avoiding Processed Foods',
+      content: `
+        <p>In today’s fast-paced world, the convenience of processed foods often tempts us to make quick dietary choices. However, <strong>embracing whole foods</strong> can significantly enhance our health and well-being. In this post, we’ll explore the numerous benefits of choosing whole foods over their processed counterparts.</p>
+
+        <h3>What Are Whole Foods?</h3>
+
+        <p>Whole foods are those that are minimally processed and are as close to their natural state as possible. This includes fruits, vegetables, whole grains, nuts, seeds, and lean proteins. Unlike processed foods, which often contain added sugars, unhealthy fats, and artificial ingredients, whole foods provide a wealth of nutrients that our bodies need.</p>
+
+        <h3>The Benefits of Whole Foods</h3>
+
+        <ul>
+          <li><strong>Nutrient-Rich</strong><br>
+            Whole foods are packed with essential vitamins, minerals, and antioxidants that are crucial for maintaining optimal health. For example, fruits and vegetables are rich in fiber, which aids digestion and promotes a healthy gut.</li>
+          
+          <li><strong>Improved Energy Levels</strong><br>
+            By choosing whole foods, you provide your body with a steady source of energy. Processed foods, often high in sugar and unhealthy fats, can lead to energy spikes followed by crashes. Whole foods release energy gradually, helping you maintain stamina throughout the day.</li>
+          
+          <li><strong>Weight Management</strong><br>
+            Whole foods tend to be lower in calories and higher in nutritional value compared to processed foods. This makes it easier to manage your weight while ensuring your body receives the nutrients it needs. Incorporating more whole foods into your diet can promote a feeling of fullness, reducing the likelihood of overeating.</li>
+          
+          <li><strong>Better Mood and Mental Clarity</strong><br>
+            Diet plays a significant role in mental health. Studies suggest that a diet rich in whole foods can improve mood and cognitive function. On the other hand, processed foods may contribute to feelings of sluggishness and irritability.</li>
+          
+          <li><strong>Reduced Risk of Chronic Diseases</strong><br>
+            A diet focused on whole foods has been linked to a lower risk of chronic diseases, such as heart disease, diabetes, and certain cancers. The antioxidants and anti-inflammatory compounds found in whole foods can help protect your body from damage and support overall health.</li>
+        </ul>
+
+        <h3>Conclusion</h3>
+
+        <p>Incorporating more whole foods into your diet while reducing processed food intake can have profound benefits for your physical and mental health. By making conscious food choices, you can nourish your body, improve your energy levels, and enhance your overall well-being. Embrace the power of whole foods and enjoy the delicious flavors and textures they have to offer!</p>`,
+      userId: allUsers[3].id,
+      published: true,
+      timestamp: new Date(),
+      image:
+        'https://images-prod.healthline.com/hlcmsresource/images/topic_centers/2020-7/whole-food-foods-healthy-vegetables-eggs-ingredients-1296x728-header.jpg',
     },
   ];
 

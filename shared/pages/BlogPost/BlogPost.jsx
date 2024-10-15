@@ -101,7 +101,13 @@ const BlogPost = () => {
   // allow them to update or delete the post
   return (
     <>
-      <div className={styles.BlogPost} onClick={() => console.log(post)}>
+      <div
+        className={styles.BlogPost}
+        onClick={() => {
+          console.log(post);
+          console.log(user);
+        }}
+      >
         <div className={styles.postContainer}>
           <div className={styles.BlogHeader}>
             {isEditing ? (
@@ -137,6 +143,7 @@ const BlogPost = () => {
             />
           ) : (
             <div
+              className={styles.postContent}
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(post.content),
               }}

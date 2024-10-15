@@ -9,6 +9,7 @@
     "@mdi/js": "^7.4.47",
     "@mdi/react": "^1.6.1",
     "dompurify": "^3.1.7",
-    "jwt-decode": "^4.0.0"
+    "jwt-decode": "^4.0.0",
+    "masonry-layout": "^4.2.2"
   }
 }

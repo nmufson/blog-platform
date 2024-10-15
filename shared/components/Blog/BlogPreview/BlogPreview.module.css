@@ -1,7 +1,7 @@
 .BlogPreview {
   background-color: var(--light-gray);
   border: 2px solid var(--deep-teal);
-  height: 350px;
+  /* height: 350px; */
   width: auto;
   border-radius: 10px;
   margin: 10px 0;
@@ -41,7 +41,7 @@
   left: 0; /* Align to the left */
   right: 0; /* Stretch to the right */
   padding: 5px 10px 10px 10px;
-  min-height: 20%;
+
   background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
   display: flex;
   flex-direction: column;
