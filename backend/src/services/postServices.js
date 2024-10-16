@@ -3,10 +3,10 @@ const catchQuery = require('../utils/catchQuery');
 
 const prisma = new PrismaClient();
 
-async function createPost(title, content, userId, published, image) {
+async function createPost(title, content, userId, published, imageURL) {
   return await catchQuery(async () => {
     return await prisma.post.create({
-      data: { title, content, userId, published, image },
+      data: { title, content, userId, published, imageURL },
     });
   });
 }
@@ -94,6 +94,19 @@ async function updatePost(id, data) {
     return await prisma.post.update({
       where: { id },
       data,
+      include: {
+        user: true, // Include user data for the post itself
+        comments: {
+          include: {
+            user: {
+              select: { username: true }, // Only select the username field
+            },
+          },
+          orderBy: {
+            timestamp: 'desc', // Sort comments by descending timestamp
+          },
+        },
+      },
     });
   });
 }

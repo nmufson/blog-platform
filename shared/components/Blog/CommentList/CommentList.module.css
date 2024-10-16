@@ -15,7 +15,7 @@
 }
 
 .commentForm textarea {
-  background-color: var(--pale-blue);
+  background-color: var(--light-gray);
   border-radius: 10px;
   padding: 10px;
   border: 2px solid black; /* Light border color */

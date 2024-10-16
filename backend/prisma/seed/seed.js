@@ -78,8 +78,9 @@ async function main() {
       userId: allUsers[0].id,
       published: true,
       timestamp: new Date(),
-      image:
+      imageURL:
         'https://cdn.vox-cdn.com/thumbor/7bO5pVP0Qadns5u1LoWrJlBqt9s=/0x0:6016x4016/1200x800/filters:focal(2527x1527:3489x2489)/cdn.vox-cdn.com/uploads/chorus_image/image/62709976/shutterstock_1155677656.0.jpg',
+      imageAltText: 'Person biking in a city',
     },
     {
       title: 'Looking for a Hobby? Try Language Learning',
@@ -102,8 +103,9 @@ async function main() {
       userId: allUsers[1].id,
       published: true,
       timestamp: new Date(),
-      image:
+      imageURL:
         'https://ec.europa.eu/eurostat/documents/4187653/15349461/Prostock-studio_AdobeStock_437049103_RV.jpg',
+      imageAltText: 'Vase containing flags of different countries',
     },
     {
       title: 'The Benefits of Maintaining a Consistent Sleep-Wake Routine',
@@ -145,8 +147,9 @@ async function main() {
       userId: allUsers[2].id,
       published: true,
       timestamp: new Date(),
-      image:
+      imageURL:
         'https://earthtrekgear.com/cdn/shop/articles/morningwalktomasz-wozniak-V62UrdknDCA-unsplash.jpg?v=1582743235',
+      imageAltText: 'People running',
     },
     {
       title: 'The OneBag Travel Trend: Embrace Minimalism on the Go',
@@ -175,8 +178,9 @@ async function main() {
       userId: allUsers[0].id,
       published: true,
       timestamp: new Date(),
-      image:
+      imageURL:
         'https://capital-placement.com/wp-content/uploads/2021/07/The-benefits-of-travelling.jpg',
+      imageAltText: 'Traveler wearing backpack looking at view',
     },
     {
       title:
@@ -220,8 +224,9 @@ async function main() {
       userId: allUsers[1].id,
       published: true,
       timestamp: new Date(),
-      image:
+      imageURL:
         'https://www.shape.com/thmb/DjCIHGX6cWaIniuqHeBAAreNE08=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/best-cardio-exercises-promo-2000-498cbfb8f07541b78572bf810e7fb600.jpg',
+      imageAltText: 'Woman performing cardio exercise',
     },
     {
       title: 'The Importance of Young Voices in Local Politics',
@@ -261,8 +266,9 @@ async function main() {
       userId: allUsers[2].id,
       published: true,
       timestamp: new Date(),
-      image:
+      imageURL:
         'https://media.wired.com/photos/66c7baadb9d04db8f0de5aca/3:2/w_1280%2Cc_limit/politics_election_betting.jpg',
+      imageAltText: 'Votes being cast into a ballot',
     },
     {
       title: 'The Value of Eating Whole Foods and Avoiding Processed Foods',
@@ -298,8 +304,9 @@ async function main() {
       userId: allUsers[3].id,
       published: true,
       timestamp: new Date(),
-      image:
+      imageURL:
         'https://images-prod.healthline.com/hlcmsresource/images/topic_centers/2020-7/whole-food-foods-healthy-vegetables-eggs-ingredients-1296x728-header.jpg',
+      imageAltText: 'Several foods including fruits, vegetables, grain',
     },
   ];
 

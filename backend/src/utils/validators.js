@@ -55,8 +55,8 @@ const postValidationRules = () => [
     .trim()
     .notEmpty()
     .withMessage('Title cannot be blank')
-    .isLength({ max: 50 })
-    .withMessage('Title cannot exceed 50 characters'),
+    .isLength({ max: 100 })
+    .withMessage('Title cannot exceed 100 characters'),
   body('content').trim().notEmpty().withMessage('Post content cannot be empty'),
   body('imageURL')
     .optional()

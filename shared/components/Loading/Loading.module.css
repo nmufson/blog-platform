@@ -5,7 +5,7 @@
   flex-direction: column;
   height: 100vh; /* Full height to center the spinner */
   background-color: var(
-    --light-bg
+    --light-gray
   ); /* You can use your custom CSS variable here */
 }
 

@@ -3,48 +3,63 @@ import Modal from '../../../shared/components/Modal/Modal.jsx';
 import Notification from '../components/Notification/Notification.jsx';
 import { useState, useEffect } from 'react';
 import { useRef } from 'react';
-
+import styles from './NewPost.module.css';
 import { useOutletContext, Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import EditorComponent from '../components/EditorComponent/EditorComponent.jsx';
 import { newBlogPost } from '../../../shared/services/blogPostService.js';
+import LabelInput from '../components/LabelInput/LabelInput.jsx';
+import { validateField } from './NewPost.js';
 
 const NewPost = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // consolidate these three into an object
-  const [postContent, setPostContent] = useState('');
-  const [postTitle, setPostTitle] = useState('');
-  const [imageURL, setImageURL] = useState('');
   const [modalType, setModalType] = useState(null);
-  const [titleFocused, setTitleFocused] = useState(false);
-  const [editorFocused, setEditorFocused] = useState(false);
+  const [post, setPost] = useState({
+    title: '',
+    content: '',
+    imageURL: '',
+    imageAltText: '',
+  });
+  const [formErrors, setFormErrors] = useState({
+    titleError: '',
+    contentError: '',
+    imageURLError: '',
+    imageAltTextError: '',
+  });
+  const [touchedFields, setTouchedFields] = useState({
+    title: false,
+    content: false,
+    imageURL: false,
+    imageAltText: false,
+  });
+  const [buttonEnabled, setButtonEnabled] = useState({
+    discard: false,
+    saveOrPublish: false,
+  });
+
   const { user } = useOutletContext();
-
-  const titleRef = useRef(null);
-  const editorRef = useRef(null);
-
-  const handleFocus = () => {
-    if (titleFocused && titleRef.current) {
-      titleRef.current.focus();
-    } else if (editorFocused && editorRef.current) {
-      editorRef.current.focus();
-    }
-  };
 
   const handleDiscardClick = () => {
     setModalType('discard');
     setIsModalOpen(true);
   };
 
+  const discardPost = () => {
+    setPost({ title: '', content: '', imageURL: '', imageAltText: '' });
+    setButtonEnabled({ discard: false, saveOrPublish: false });
+    console.log('Post discarded.');
+  };
+
   const handleSubmitClick = () => {
-    setModalType('submit');
+    setModalType('publish');
     setIsModalOpen(true);
   };
 
   const handleConfirm = (e, publish) => {
     if (modalType === 'discard') {
       discardPost();
-    } else if (modalType === 'submit') {
-      if (postContent.trim() === '') return;
+    } else if (modalType === 'publish') {
+      if (post.content.trim() === '') return;
       submitPost(e, publish);
     }
     setIsModalOpen(false);
@@ -52,17 +67,18 @@ const NewPost = () => {
 
   const submitPost = async (e, publish) => {
     e.preventDefault();
-    if (postContent.trim() === '') return;
+    if (post.content.trim() === '') return;
 
     try {
       const response = await newBlogPost(
         user,
-        postTitle,
-        postContent,
+        post.title,
+        post.content,
         publish,
-        imageURL,
+        post.imageURL,
+        post.imageAltText,
       );
-      setPostContent('');
+      setPost({ title: '', content: '', imageURL: '', imageAltText: '' });
       const newPost = response.newPost;
       window.location.href = `/posts/${newPost.id}`;
     } catch (error) {
@@ -70,31 +86,138 @@ const NewPost = () => {
     }
   };
 
-  const discardPost = () => {
-    setPostContent('');
-    setPostTitle('');
-    console.log('Post discarded.');
+  const onChange = (e, field) => {
+    const { name, value } = e.target;
+
+    setPost((prevPost) => {
+      const updatedPost = { ...prevPost, [field]: value };
+
+      // Check if any field is non-empty
+      const isAnyFieldFilled = Object.values(updatedPost).some(
+        (val) => val !== '',
+      );
+
+      // check if errors are populated !!!!
+
+      const areAllFieldsFilled =
+        updatedPost.title !== '' &&
+        updatedPost.content !== '' &&
+        ((updatedPost.imageURL === '' && updatedPost.imageAltText === '') ||
+          (updatedPost.imageURL !== '' && updatedPost.imageAltText !== ''));
+
+      // Update button states
+      setButtonEnabled((prevEnabled) => ({
+        ...prevEnabled,
+        discard: isAnyFieldFilled,
+        saveOrPublish: areAllFieldsFilled,
+      }));
+
+      return updatedPost;
+    });
+
+    if (touchedFields[name]) {
+      validateField(name, value, post, setFormErrors);
+    }
   };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    console.log(name, value);
+
+    setTouchedFields((prev) => ({
+      ...prev,
+      [name]: true,
+    }));
+
+    validateField(name, value, post, setFormErrors);
+  };
+
+  // {have user include alt text}
 
   return (
     <>
-      <NewPostForm
-        handleDiscardClick={handleDiscardClick}
-        submitPost={submitPost}
-        handleSubmitClick={handleSubmitClick}
-        postTitle={postTitle}
-        setPostTitle={setPostTitle}
-        postContent={postContent}
-        setPostContent={setPostContent}
-        imageURL={imageURL}
-        setImageURL={setImageURL}
-        titleRef={titleRef}
-        editorRef={editorRef}
-        titleFocused={titleFocused}
-        setTitleFocused={setTitleFocused}
-        editorFocused={editorFocused}
-        setEditorFocused={setEditorFocused}
-      ></NewPostForm>
+      <form className={`${styles.newPostForm} new-post-container`}>
+        <div className="form-group">
+          <LabelInput
+            name="title"
+            value={post.title}
+            type="text"
+            maxLength={100}
+            formErrors={formErrors}
+            onBlur={handleBlur}
+            onChange={(e) => onChange(e, 'title')}
+          ></LabelInput>
+        </div>
+
+        <div className={`${styles.editorContainer} editor-container`}>
+          <EditorComponent
+            content={post.content}
+            onContentChange={(newContent) => {
+              onChange(
+                { target: { value: newContent, name: 'content' } },
+                'content',
+              );
+            }}
+            onBlur={() => {
+              handleBlur({ target: { name: 'content', value: post.content } });
+            }}
+          ></EditorComponent>
+          <p className="error-message">{formErrors.contentError}</p>
+        </div>
+        <div className="form-group">
+          <LabelInput
+            label="Image URL (optional):"
+            name="imageURL"
+            placeholder="Image URL"
+            value={post.imageURL}
+            type="text"
+            formErrors={formErrors}
+            onBlur={handleBlur}
+            onChange={(e) => onChange(e, 'imageURL')}
+          ></LabelInput>
+        </div>
+
+        <div className="form-group" id={styles.imageAltTextFormGroup}>
+          <LabelInput
+            label="Describe the Image:"
+            name="imageAltText"
+            placeholder="Image Description"
+            value={post.imageAltText}
+            type="text"
+            maxLength={50}
+            formErrors={formErrors}
+            onBlur={handleBlur}
+            onChange={(e) => onChange(e, 'imageAltText')}
+          ></LabelInput>
+        </div>
+
+        <div className={styles.postButtonDiv}>
+          <button
+            type="button"
+            onClick={handleDiscardClick}
+            disabled={!buttonEnabled.discard}
+            className={`${!buttonEnabled.discard ? styles.disabled : ''} ${styles.discardButton}`}
+          >
+            Discard
+          </button>
+          <button
+            type="button"
+            onClick={(e) => submitPost(e, false)}
+            disabled={!buttonEnabled.saveOrPublish}
+            className={!buttonEnabled.saveOrPublish ? styles.disabled : ''}
+          >
+            Save Draft
+          </button>
+          <button
+            type="button"
+            onClick={handleSubmitClick}
+            disabled={!buttonEnabled.saveOrPublish}
+            className={!buttonEnabled.saveOrPublish ? styles.disabled : ''}
+          >
+            Publish
+          </button>
+        </div>
+      </form>
       <Modal
         title={modalType === 'discard' ? 'Discard Post' : 'Publish Post'}
         message={

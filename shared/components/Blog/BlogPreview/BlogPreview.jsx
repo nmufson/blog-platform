@@ -19,7 +19,7 @@ const BlogPreview = ({ post }) => {
     <div onClick={handlePostClick} className={styles.BlogPreview}>
       <>
         <img
-          src={post.image}
+          src={post.imageURL}
           // {have user include alt text}
           // alt={post.altText}
           className={styles.blogPreviewImage}

@@ -5,10 +5,12 @@ import { useState } from 'react';
 function EditorComponent({
   content,
   onContentChange = () => {},
+  onBlur,
   editorRef = { current: null },
   setTitleFocused = () => {},
   titleFocused = false,
   editorFocused = false,
+  onChange,
   setEditorFocused = () => {},
 }) {
   return (
@@ -17,7 +19,14 @@ function EditorComponent({
         apiKey="fzq8ut8l4whwspu2pqzxwf84ukek80fotkywi6xvv99jpk5y"
         onInit={(_evt, editor) => (editorRef.current = editor)}
         value={content} // Control the value of the editor
-        onEditorChange={onContentChange} // Handle content changes
+        onEditorChange={(newContent) => {
+          // Call the parent component's onContentChange function
+          onContentChange(newContent);
+        }}
+        onBlur={() => {
+          // Call the parent component's onBlur function when the editor loses focus
+          onBlur();
+        }}
         onClick={() => {
           setTitleFocused(false);
           setEditorFocused(true);
@@ -29,7 +38,7 @@ function EditorComponent({
           );
         }}
         init={{
-          height: 300,
+          height: 500,
           menubar: false,
           placeholder: 'Let your mind run free...',
           plugins: [

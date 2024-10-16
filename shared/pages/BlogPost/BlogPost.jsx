@@ -15,7 +15,7 @@ import EditorComponent from '../../../author-frontend/src/components/EditorCompo
 import { deleteBlogPost, updateBlogPost } from '../../services/blogPostService';
 
 const BlogPost = () => {
-  const { postId } = useParams(); // Extract postId from URL
+  const { postId } = useParams();
   const location = useLocation(); // Access state passed from navigation
   const [post, setPost] = useState(location.state?.post || null);
   const [postContent, setPostContent] = useState(post?.content || '');
@@ -25,13 +25,10 @@ const BlogPost = () => {
   const [isEditing, setIsEditing] = useState(false);
   const { user } = useOutletContext();
 
-  // allow title and main edits if isEditing is true, add save button
-  // if isEditing is true, remove publish config
   const { date, time } = formatDateTime(post?.timestamp);
   const navigate = useNavigate();
 
-  // tries to pull post data from parent component state, or calls
-  // api if it can't
+  // tries to pull post data from location, calls api if it can't
   useEffect(() => {
     if (!post) {
       const getPost = async () => {
@@ -56,10 +53,6 @@ const BlogPost = () => {
     setIsModalOpen(true);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
   const handleConfirm = () => {
     if (modalType === 'delete') {
       deletePost();
@@ -69,21 +62,25 @@ const BlogPost = () => {
     setIsModalOpen(false);
   };
 
-  const updatePost = async (published) => {
-    try {
-      const response = await updateBlogPost(
-        user,
-        post.id,
-        postTitle,
-        postContent,
-        published,
-      );
-      const updatedPost = response.updatedPost;
-      setPost(updatedPost);
-    } catch (error) {
-      console.error('Failed to update post:', error);
-    }
+  const createUpdatePostFunction = () => {
+    // optional parameter
+    return async (newPublishedStatus = null) => {
+      try {
+        const response = await updateBlogPost(
+          user,
+          post.id,
+          postTitle,
+          postContent,
+          newPublishedStatus !== null ? newPublishedStatus : post.published,
+        );
+        const updatedPost = response.updatedPost;
+        setPost(updatedPost);
+      } catch (error) {
+        console.error('Failed to update post:', error);
+      }
+    };
   };
+  const updatePost = createUpdatePostFunction();
 
   const deletePost = async () => {
     try {
@@ -96,23 +93,15 @@ const BlogPost = () => {
     }
   };
 
-  // perhaps underline the title
-  // check if theyre an author before showing the publish div
-  // allow them to update or delete the post
   return (
     <>
-      <div
-        className={styles.BlogPost}
-        onClick={() => {
-          console.log(post);
-          console.log(user);
-        }}
-      >
+      <div className={styles.BlogPost}>
         <div className={styles.postContainer}>
           <div className={styles.BlogHeader}>
             {isEditing ? (
               <input
                 value={postTitle}
+                maxLength={100}
                 onChange={(event) => setPostTitle(event.target.value)}
               ></input>
             ) : (
@@ -123,19 +112,20 @@ const BlogPost = () => {
               {date}, {time}
             </p>
           </div>
-
+          {/* alt={post.altText} */}
           <img
-            src={post.image}
-            // {have user include alt text}
-            // alt={post.altText}
+            src={post.imageURL}
+            alt={post.imageAltText}
             className={styles.blogImage}
           />
+
           {user?.canPost && post.userId === user.id && !isEditing && (
             <AffectPublish
               post={post}
               handleAffectPublishClick={handleAffectPublishClick}
             />
           )}
+
           {isEditing ? (
             <EditorComponent
               content={postContent || post.content}
@@ -150,6 +140,7 @@ const BlogPost = () => {
             />
           )}
         </div>
+
         {user?.id === post.userId && (
           <div className={styles.EditDeleteContainer}>
             <EditDeleteIcons
@@ -157,13 +148,14 @@ const BlogPost = () => {
               setModalType={setModalType}
               isEditing={isEditing}
               setIsEditing={setIsEditing}
-              updatePost={updatePost}
+              updatePost={createUpdatePostFunction()}
             ></EditDeleteIcons>
           </div>
         )}
 
         <CommentList post={post} comments={post.comments}></CommentList>
       </div>
+
       <Modal
         title={
           modalType === 'delete'

@@ -32,14 +32,14 @@ const EditDeleteIcons = ({
           onClick={handleSaveClick}
           style={{ cursor: 'pointer' }}
           path={mdiContentSaveCheckOutline}
-          size={1}
+          className="icon"
         />
       ) : (
         <Icon
           onClick={handleEditClick}
           style={{ cursor: 'pointer' }}
           path={mdiTextBoxEditOutline}
-          size={1}
+          className="icon"
         />
       )}
 
@@ -48,7 +48,7 @@ const EditDeleteIcons = ({
         onClick={handleDeleteClick}
         style={{ cursor: 'pointer' }}
         path={mdiTrashCanOutline}
-        size={1}
+        className="icon"
       />
     </>
   );

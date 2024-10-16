@@ -64,10 +64,13 @@ async function getPostById(req, res) {
 async function updatePost(req, res) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
+    console.log(errors.array());
     return res.status(400).json({ errors: errors.array() });
   }
+  console.log('yes');
   const postId = parseInt(req.params.postId, 10);
   const { title, content, published } = req.body;
+
   const userId = req.user.id;
 
   const post = await postServices.getPostById(postId);
@@ -86,6 +89,7 @@ async function updatePost(req, res) {
     content,
     published,
   });
+  console.log(updatedPost);
   return res
     .status(200)
     .json({ message: 'Message updated successfully.', updatedPost });

@@ -1,7 +1,7 @@
 .BlogPost {
   display: flex;
   flex-direction: column;
-  width: clamp(300px, 70%, 1000px);
+  width: clamp(300px, 70%, 800px);
   position: relative;
   align-self: flex-start;
 }
@@ -51,7 +51,7 @@
 .EditDeleteContainer {
   position: absolute;
   top: 10px;
-  left: 130%;
+  left: 100%;
   display: flex;
 }
 
@@ -61,6 +61,11 @@
 
 .EditDeleteContainer svg {
   height: 30px;
+  transition: transform 0.2s ease;
+}
+
+.EditDeleteContainer svg:hover {
+  transform: translateY(-2px); /* Slight lift effect on hover */
 }
 
 .AuthorName {

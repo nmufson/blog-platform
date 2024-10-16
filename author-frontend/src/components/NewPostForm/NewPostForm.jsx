@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import styles from './NewPostForm.module.css';
 import { useRef } from 'react';
+import Modal from '../../../../shared/components/Modal/Modal.jsx';
 import EditorComponent from '../EditorComponent/EditorComponent.jsx';
 
 const NewPostForm = ({
@@ -38,6 +39,7 @@ const NewPostForm = ({
           type="text"
           id="postTitle"
           ref={titleRef}
+          maxLength={100}
           value={postTitle}
           onChange={(e) => setPostTitle(e.target.value)}
           onClick={() => {
@@ -92,6 +94,18 @@ const NewPostForm = ({
           </button>
         </div>
       </form>
+      <Modal
+        title={modalType === 'discard' ? 'Discard Post' : 'Publish Post'}
+        message={
+          modalType === 'discard'
+            ? 'Are you sure you want to discard this post? This action cannot be undone.'
+            : 'Are you sure you want to publish this post?'
+        }
+        onConfirm={(e) => handleConfirm(e, modalType === 'submit')}
+        isOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        confirmText={modalType === 'discard' ? 'Discard' : 'Publish'}
+      />
     </>
   );
 };

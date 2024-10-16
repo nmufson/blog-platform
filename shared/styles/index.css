@@ -1,11 +1,6 @@
 :root {
   /* Primary Colors */
 
-  --light-bg: #bbe1fa; /* Light Blue - Background for cards, containers, or secondary sections */
-
-  --light-beige: #fdf5e6; /* Light Gray - Used for subtle borders or background highlights */
-  --pale-blue: #dbe2ef;
-
   --dark-gray: #353535; /* Dark Gray for text and backgrounds */
   --teal: #3c6e71; /* Teal for accents and buttons */
   --white: #ffffff; /* White for backgrounds and text */
@@ -173,13 +168,23 @@ button:hover {
   position: relative;
   display: flex;
   flex-direction: column;
+  margin-bottom: 25px;
 }
 
-.form-group .error-message {
+.form-group input {
+  margin: 0;
+}
+
+.error-message {
   position: absolute;
+  color: red;
+}
+
+#loginForm .error-message,
+#signUpFOrm .error-message,
+.new-post-container .error-message {
   top: 100%; /* Position below the input field */
   right: 0;
-  color: red;
 }
 
 .inputError {
@@ -202,8 +207,8 @@ input:-webkit-autofill:focus {
 }
 
 .tox-tinymce.tox-tinymce * {
-  background-color: var(--pale-blue) !important;
-  border-color: var(--pale-blue) !important;
+  background-color: var(--light-gray) !important;
+  border-color: var(--light-gray) !important;
 }
 
 .tox-edit-focus {

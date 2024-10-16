@@ -94,6 +94,7 @@ export const updateBlogPost = async (
   published,
 ) => {
   const token = user.token;
+
   try {
     const response = await fetch(`http://localhost:5000/posts/post/${postId}`, {
       method: 'PUT',
@@ -105,9 +106,16 @@ export const updateBlogPost = async (
     });
     // Replace with your backend route
     if (!response.ok) {
-      const errorMessage = `Failed to update post: ${response.status} ${response.statusText}`;
-      throw new Error(errorMessage);
+      const errorData = await response.json();
+      if (response.status === 400 && errorData.errors) {
+        throw new Error('Validation failed');
+      } else {
+        throw new Error(
+          `Failed to update post: ${response.status} ${response.statusText}`,
+        );
+      }
     }
+
     return await response.json();
   } catch (error) {
     console.error('Error updating post:', error);
