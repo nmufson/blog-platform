@@ -14,6 +14,10 @@ router.post(
 
 router.get('/post/:postId', commentController.getCommentsByPost);
 
-router.delete('/:commentId', authenticate, commentController.deleteComment);
+router.delete(
+  '/:postId/:commentId',
+  authenticate,
+  commentController.deleteComment,
+);
 
 module.exports = router;

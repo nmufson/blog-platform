@@ -76,7 +76,6 @@ const validateImageURL = (value, post) => {
       updatedErrors.imageURLError = 'Please enter a valid image URL';
     }
   }
-  console.log(updatedErrors);
 
   return updatedErrors;
 };

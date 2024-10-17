@@ -30,12 +30,6 @@ function EditorComponent({
         onClick={() => {
           setTitleFocused(false);
           setEditorFocused(true);
-          console.log(
-            'Focus changed - Title:',
-            titleFocused,
-            'Editor:',
-            editorFocused,
-          );
         }}
         init={{
           height: 500,

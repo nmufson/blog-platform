@@ -44,7 +44,6 @@ async function signUpUser(req, res) {
     return res.status(400).json({ message: 'Username already taken' });
   }
 
-  console.log(process.env.AUTHOR_CODE, authorCode);
   const canPost = process.env.AUTHOR_CODE === authorCode ? true : false;
 
   const newUser = await userServices.createUser(
@@ -53,7 +52,7 @@ async function signUpUser(req, res) {
     hashedPassword,
     canPost,
   );
-  console.log(newUser);
+
   if (!newUser) return res.status(500).send('Error: User could not be created');
 
   const token = jwt.sign(
@@ -78,7 +77,7 @@ async function logInUser(req, res) {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
-  console.log(req.body);
+
   const { email, password } = req.body;
   const user = await userServices.getUserByEmail(email);
   if (!user) {

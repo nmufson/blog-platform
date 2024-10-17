@@ -1,8 +1,8 @@
-.CommentList li {
+.CommentSection li {
   list-style-type: none;
 }
 
-.CommentList a:hover {
+.CommentSection a:hover {
   font-weight: bold;
   color: var(--deep-teal);
 }

@@ -4,8 +4,9 @@ import {
   redirect,
 } from 'react-router-dom';
 import { fetchLatestPostId } from '../../shared/services/blogPostService';
-import SignUp from '../../shared/pages/SignUp/SignUp.jsx';
+
 import '../../shared/styles/index.css';
+import SignUp from '../../shared/pages/SignUp/SignUp.jsx';
 import Home from '../../shared/pages/Home/Home.jsx';
 import About from '../../shared/pages/About/About';
 import LogIn from '../../shared/pages/LogIn/LogIn.jsx';

@@ -65,11 +65,8 @@ const SignUp = () => {
     }
 
     try {
-      console.log(formData);
       const data = await signUpUser(formData); // Use signupUser function with the formData
       localStorage.setItem('token', data.token);
-
-      console.log('Signed up successfully:', data);
 
       window.location.href = '/';
     } catch (error) {

@@ -41,7 +41,6 @@
   left: 0; /* Align to the left */
   right: 0; /* Stretch to the right */
   padding: 5px 10px 10px 10px;
-
   background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
   display: flex;
   flex-direction: column;
@@ -53,7 +52,7 @@
 
 .bottomDiv h3 {
   font-size: 1.3em;
-  font-weight: lighter;
+  font-weight: 500;
   transition: text-decoration 0.2s ease;
 }
 

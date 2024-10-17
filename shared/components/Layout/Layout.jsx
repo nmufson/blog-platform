@@ -6,7 +6,7 @@ import { Outlet, useNavigate, useNavigation } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import Loading from '../Loading/Loading';
 
-const Layout = ({ children }) => {
+const Layout = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -46,12 +46,6 @@ const Layout = ({ children }) => {
     }
     setLoading(false);
   }, [navigate]);
-
-  useEffect(() => {
-    if (user) {
-      console.log('User state has been updated:', user);
-    }
-  }, [user]);
 
   if (loading || navigation.state === 'loading') {
     return <Loading />;

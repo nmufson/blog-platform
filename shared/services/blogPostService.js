@@ -9,7 +9,6 @@ export const newBlogPost = async (
   const userId = user.id;
   const token = user.token;
 
-  console.log(title, content, userId, publish, imageURL, imageAltText);
   try {
     const response = await fetch('http://localhost:5000/posts', {
       method: 'POST',
@@ -81,7 +80,7 @@ export const fetchLatestPostId = async () => {
 export const deleteBlogPost = async (user, postId) => {
   const token = user.token;
   const userId = user.id;
-  console.log(user, token);
+
   try {
     const response = await fetch(`http://localhost:5000/posts/post/${postId}`, {
       method: 'DELETE',

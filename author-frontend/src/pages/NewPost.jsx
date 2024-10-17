@@ -43,7 +43,6 @@ const NewPost = () => {
   const discardPost = () => {
     setPost({ title: '', content: '', imageURL: '', imageAltText: '' });
     setButtonEnabled({ discard: false, saveOrPublish: false });
-    console.log('Post discarded.');
   };
 
   const handleSubmitClick = () => {
@@ -114,7 +113,6 @@ const NewPost = () => {
 
   const handleBlur = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
 
     setTouchedFields((prev) => ({
       ...prev,

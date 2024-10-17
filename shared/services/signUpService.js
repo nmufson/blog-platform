@@ -29,7 +29,6 @@ export const signUpUser = async ({
 
 export const checkEmailAvailability = async (email) => {
   try {
-    console.log(email);
     const response = await fetch('http://localhost:5000/users/check-email', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

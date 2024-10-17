@@ -2,7 +2,7 @@ import { useParams, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { fetchBlogPostById } from '../../services/blogPostService';
 import AffectPublish from '../../../author-frontend/src/components/AffectPublish/AffectPublish';
-import CommentList from '../../components/Blog/CommentList/CommentList';
+import CommentSection from '../../components/Blog/CommentSection/CommentSection.jsx';
 import styles from './BlogPost.module.css';
 import { useOutletContext } from 'react-router-dom';
 import formatDateTime from '../../utils/formatDateTime';
@@ -85,7 +85,7 @@ const BlogPost = () => {
   const deletePost = async () => {
     try {
       await deleteBlogPost(user, post.id);
-      console.log('Post deleted.');
+
       navigate('/home');
       // Optionally, you might want to redirect or update the UI here
     } catch (error) {
@@ -153,7 +153,7 @@ const BlogPost = () => {
           </div>
         )}
 
-        <CommentList post={post} comments={post.comments}></CommentList>
+        <CommentSection post={post} comments={post.comments}></CommentSection>
       </div>
 
       <Modal

@@ -25,11 +25,11 @@ export const submitComment = async (comment, user, postId) => {
   }
 };
 
-export const deleteComment = async (commentId, user) => {
+export const deleteComment = async (commentId, user, postId) => {
   const token = user.token;
   try {
     const response = await fetch(
-      `http://localhost:5000/comments/${commentId}`,
+      `http://localhost:5000/comments/${postId}/${commentId}`,
       {
         method: 'DELETE',
         headers: {

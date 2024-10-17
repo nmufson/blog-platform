@@ -1,15 +1,13 @@
-// CommentList.jsx
 import React from 'react';
 import Comment from '../Comment/Comment'; // Assuming you have a Comment component
 import { useOutletContext, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import styles from './CommentList.module.css';
+import { useState } from 'react';
+import styles from './CommentSection.module.css';
 import { submitComment, deleteComment } from '../../../services/commentService';
-import { useNavigate } from 'react-router-dom';
 import { fetchBlogPostById } from '../../../services/blogPostService';
 import Modal from '../../Modal/Modal';
 
-const CommentList = ({ post }) => {
+const CommentSection = ({ post }) => {
   const { user } = useOutletContext();
 
   const [comments, setComments] = useState(post.comments || []);
@@ -66,7 +64,7 @@ const CommentList = ({ post }) => {
 
   const handleConfirmDelete = async () => {
     if (commentToDelete) {
-      await deleteComment(commentToDelete.id, user);
+      await deleteComment(commentToDelete.id, user, post.id);
       closeModal();
       await fetchPost();
     }
@@ -74,7 +72,7 @@ const CommentList = ({ post }) => {
 
   return (
     <>
-      <div className={styles.CommentList}>
+      <div className={styles.CommentSection}>
         <h2>Comments</h2>
         {user ? (
           <form onSubmit={handleCommentSubmit} className={styles.commentForm}>
@@ -112,6 +110,7 @@ const CommentList = ({ post }) => {
                 key={comment.id}
                 openModal={openModal}
                 comment={comment}
+                post={post}
               />
             ))}
           </ul>
@@ -129,4 +128,4 @@ const CommentList = ({ post }) => {
   );
 };
 
-export default CommentList;
+export default CommentSection;

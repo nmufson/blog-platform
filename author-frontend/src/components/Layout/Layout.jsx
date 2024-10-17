@@ -12,11 +12,6 @@ const Layout = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const onClick = () => {
-    const token = localStorage.getItem('token');
-    console.log(jwtDecode(token));
-  };
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
@@ -34,7 +29,7 @@ const Layout = ({ children }) => {
         if (decodedToken.exp > currentTime) {
           // this right below is redundent (decoding token and
           // including it)
-          console.log(decodedToken);
+
           setUser({
             id: decodedToken.id,
             username: decodedToken.username,

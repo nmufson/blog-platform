@@ -9,7 +9,6 @@ async function createPost(req, res) {
   }
   const { title, content, userId, publish, imageURL, imageAltText } = req.body;
 
-  console.log(title, content, userId, publish, imageURL, imageAltText);
   const newPost = await postServices.createPost(
     title,
     content,
@@ -66,10 +65,9 @@ async function getPostById(req, res) {
 async function updatePost(req, res) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log(errors.array());
     return res.status(400).json({ errors: errors.array() });
   }
-  console.log('yes');
+
   const postId = parseInt(req.params.postId, 10);
   const { title, content, published } = req.body;
 
@@ -91,7 +89,7 @@ async function updatePost(req, res) {
     content,
     published,
   });
-  console.log(updatedPost);
+
   return res
     .status(200)
     .json({ message: 'Message updated successfully.', updatedPost });

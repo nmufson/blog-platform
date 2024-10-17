@@ -37,7 +37,7 @@ const Home = () => {
 
   return (
     <>
-      <div className={styles.Home} onClick={() => console.log(user)}>
+      <div className={styles.Home}>
         {user?.canPost && (
           <button onClick={onButtonClick}>Draft New Post</button>
         )}
