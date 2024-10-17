@@ -1,11 +1,7 @@
-import NewPostForm from '../components/NewPostForm/NewPostForm';
 import Modal from '../../../shared/components/Modal/Modal.jsx';
-import Notification from '../components/Notification/Notification.jsx';
-import { useState, useEffect } from 'react';
-import { useRef } from 'react';
+import { useState } from 'react';
 import styles from './NewPost.module.css';
-import { useOutletContext, Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
 import EditorComponent from '../components/EditorComponent/EditorComponent.jsx';
 import { newBlogPost } from '../../../shared/services/blogPostService.js';
 import LabelInput from '../components/LabelInput/LabelInput.jsx';
@@ -97,15 +93,11 @@ const NewPost = () => {
         (val) => val !== '',
       );
 
-      // check if errors are populated !!!!
-
       const areAllFieldsFilled =
         updatedPost.title !== '' &&
         updatedPost.content !== '' &&
-        ((updatedPost.imageURL === '' && updatedPost.imageAltText === '') ||
-          (updatedPost.imageURL !== '' && updatedPost.imageAltText !== ''));
+        Object.values(formErrors).every((error) => error === '');
 
-      // Update button states
       setButtonEnabled((prevEnabled) => ({
         ...prevEnabled,
         discard: isAnyFieldFilled,
@@ -131,8 +123,6 @@ const NewPost = () => {
 
     validateField(name, value, post, setFormErrors);
   };
-
-  // {have user include alt text}
 
   return (
     <>
@@ -190,7 +180,7 @@ const NewPost = () => {
             onChange={(e) => onChange(e, 'imageAltText')}
           ></LabelInput>
         </div>
-
+        {/* we can prob refactor this */}
         <div className={styles.postButtonDiv}>
           <button
             type="button"

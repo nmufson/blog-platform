@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { validateField } from './SignUp';
 import { signUpUser } from '../../services/signUpService';
+import LabelInput from '../../../author-frontend/src/components/LabelInput/LabelInput';
 import styles from './SignUp.module.css';
 
 const SignUp = () => {
@@ -82,75 +83,63 @@ const SignUp = () => {
         <legend>Sign Up</legend>
 
         <div className={`form-group ${styles.formGroup}`}>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email" // Add name attribute
+          <LabelInput
+            label="Email:"
+            name="email"
             value={formData.email}
-            onChange={handleChange}
+            type="email"
+            formErrors={formErrors}
             onBlur={handleBlur}
-            className={formErrors.emailError ? 'inputError' : ''}
-            required
-          />
-          <p className="error-message">{formErrors.emailError}</p>{' '}
+            onChange={(e) => handleChange(e, 'email')}
+          ></LabelInput>
         </div>
 
         <div className={`form-group ${styles.formGroup}`}>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            name="username" // Add name attribute
+          <LabelInput
+            label="Username:"
+            name="username"
             value={formData.username}
-            onChange={handleChange}
+            type="text"
+            formErrors={formErrors}
             onBlur={handleBlur}
-            className={formErrors.usernameError ? 'inputError' : ''}
-            required
-          />
-          <p className="error-message">{formErrors.usernameError}</p>{' '}
+            onChange={(e) => handleChange(e, 'email')}
+          ></LabelInput>
         </div>
 
         <div className={`form-group ${styles.formGroup}`}>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password" // Add name attribute
+          <LabelInput
+            label="Password:"
+            name="password"
             value={formData.password}
-            onChange={handleChange}
+            type="password"
+            formErrors={formErrors}
             onBlur={handleBlur}
-            className={formErrors.passwordError ? 'inputError' : ''}
-            required
-          />
-          <p className="error-message">{formErrors.passwordError}</p>{' '}
+            onChange={(e) => handleChange(e, 'email')}
+          ></LabelInput>
         </div>
 
         <div className={`form-group ${styles.formGroup}`}>
-          <label htmlFor="confirmPassword">Confirm Password:</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword" // Add name attribute
+          <LabelInput
+            label="Confirm Password:"
+            name="confirmPassword"
             value={formData.confirmPassword}
-            onChange={handleChange}
+            type="password"
+            formErrors={formErrors}
             onBlur={handleBlur}
-            className={formErrors.confirmPasswordError ? 'inputError' : ''}
-            required
-          />
-          <p className="error-message">{formErrors.confirmPasswordError}</p>{' '}
+            onChange={(e) => handleChange(e, 'email')}
+          ></LabelInput>
         </div>
 
         <div className={`form-group ${styles.formGroup}`}>
-          <label htmlFor="authorCode">Author Code:</label>
-          <input
-            type="password"
-            id="authorCode"
-            name="authorCode" // Add name attribute
+          <LabelInput
+            label="Author Code:"
+            name="authorCode"
             value={formData.authorCode}
-            onChange={handleChange}
-          />
-          <p className="error-message">{formErrors.authorCodeError}</p>
+            type="password"
+            formErrors={formErrors}
+            onBlur={handleBlur}
+            onChange={(e) => handleChange(e, 'email')}
+          ></LabelInput>
         </div>
 
         <button type="submit">Sign Up</button>

@@ -23,9 +23,10 @@ const BlogPost = () => {
   const [modalType, setModalType] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const { user } = useOutletContext();
 
+  const { user } = useOutletContext();
   const { date, time } = formatDateTime(post?.timestamp);
+
   const navigate = useNavigate();
 
   // tries to pull post data from location, calls api if it can't
@@ -63,7 +64,6 @@ const BlogPost = () => {
   };
 
   const createUpdatePostFunction = () => {
-    // optional parameter
     return async (newPublishedStatus = null) => {
       try {
         const response = await updateBlogPost(
@@ -105,14 +105,14 @@ const BlogPost = () => {
                 onChange={(event) => setPostTitle(event.target.value)}
               ></input>
             ) : (
-              <h1>{post.title || post.title}</h1>
+              <h1>{post.title}</h1>
             )}
             <p className={styles.AuthorName}>{post.user.username}</p>
             <p className={styles.DateTime}>
               {date}, {time}
             </p>
           </div>
-          {/* alt={post.altText} */}
+
           <img
             src={post.imageURL}
             alt={post.imageAltText}

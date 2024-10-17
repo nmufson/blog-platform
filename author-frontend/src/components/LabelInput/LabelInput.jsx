@@ -5,8 +5,7 @@ const LabelInput = ({
   label = null,
   maxLength = undefined,
   placeholder = name,
-  onBlur,
-
+  onBlur = () => {},
   onChange,
   formErrors,
 }) => {
@@ -22,6 +21,7 @@ const LabelInput = ({
         maxLength={maxLength}
         onBlur={onBlur}
         onChange={onChange}
+        className={formErrors[`${name}Error`] ? 'input-error' : ''}
       />
       <p className="error-message">{formErrors[`${name}Error`]}</p>
     </>

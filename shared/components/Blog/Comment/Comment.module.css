@@ -4,7 +4,8 @@
   background-color: var(--light-gray);
   color: var(--dark-gray);
   border: 2px solid var(--deep-teal);
-  border-radius: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   margin: 10px 0;
   padding: 10px 10px 5px 10px;
 }

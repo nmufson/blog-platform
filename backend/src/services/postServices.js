@@ -3,10 +3,17 @@ const catchQuery = require('../utils/catchQuery');
 
 const prisma = new PrismaClient();
 
-async function createPost(title, content, userId, published, imageURL) {
+async function createPost(
+  title,
+  content,
+  userId,
+  published,
+  imageURL,
+  imageAltText,
+) {
   return await catchQuery(async () => {
     return await prisma.post.create({
-      data: { title, content, userId, published, imageURL },
+      data: { title, content, userId, published, imageURL, imageAltText },
     });
   });
 }

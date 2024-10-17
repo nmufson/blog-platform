@@ -180,14 +180,14 @@ button:hover {
   color: red;
 }
 
-#loginForm .error-message,
-#signUpFOrm .error-message,
+#logInForm .error-message,
+#signUpForm .error-message,
 .new-post-container .error-message {
   top: 100%; /* Position below the input field */
   right: 0;
 }
 
-.inputError {
+.input-error {
   border: 1px solid red; /* Red border for error */
 }
 

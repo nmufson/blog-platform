@@ -7,14 +7,16 @@ async function createPost(req, res) {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
-  const { title, content, userId, publish, imageURL } = req.body;
+  const { title, content, userId, publish, imageURL, imageAltText } = req.body;
 
+  console.log(title, content, userId, publish, imageURL, imageAltText);
   const newPost = await postServices.createPost(
     title,
     content,
     userId,
     publish,
     imageURL || null,
+    imageAltText || null,
   );
 
   res.status(201).json({ message: 'Post created successfully', newPost });

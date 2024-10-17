@@ -1,6 +1,15 @@
-export const newBlogPost = async (user, title, content, publish, imageURL) => {
+export const newBlogPost = async (
+  user,
+  title,
+  content,
+  publish,
+  imageURL,
+  imageAltText,
+) => {
   const userId = user.id;
   const token = user.token;
+
+  console.log(title, content, userId, publish, imageURL, imageAltText);
   try {
     const response = await fetch('http://localhost:5000/posts', {
       method: 'POST',
@@ -8,7 +17,15 @@ export const newBlogPost = async (user, title, content, publish, imageURL) => {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`, // Include the token here
       },
-      body: JSON.stringify({ title, content, userId, publish, imageURL }),
+
+      body: JSON.stringify({
+        title,
+        content,
+        userId,
+        publish,
+        imageURL,
+        imageAltText,
+      }),
     });
     // Replace with your backend route
     if (!response.ok) {

@@ -1,33 +1,35 @@
 export const validateLogin = (email, password) => {
-  const errors = {};
+  const formErrors = {};
 
   if (!email) {
-    errors.email = 'Please include email.';
+    formErrors.emailError = 'Please include email.';
+  } else if (!email.includes('@')) {
+    formErrors.emailError = 'Please include valid email.';
   }
 
   if (!password) {
-    errors.password = 'Please include password.';
+    formErrors.passwordError = 'Please include password.';
   }
 
-  return errors;
+  return formErrors;
 };
 
-export const handleAuthError = (error, setError) => {
+export const handleAuthError = (error, setFormErrors) => {
   if (error.message.includes('email')) {
-    setError((prevError) => ({
-      ...prevError,
-      email: 'Invalid email. Please try again.',
+    setFormErrors((prevErrors) => ({
+      ...prevErrors,
+      emailError: 'Invalid email. Please try again.',
     }));
   } else if (error.message.includes('password')) {
-    setError((prevError) => ({
-      ...prevError,
-      password: 'Incorrect password. Please try again.',
+    setFormErrors((prevErrors) => ({
+      ...prevErrors,
+      passwordError: 'Incorrect password. Please try again.',
     }));
   } else {
     // Handle other types of errors or set a general error message
-    setError((prevError) => ({
-      ...prevError,
-      password: 'An unexpected error occurred. Please try again later.',
+    setFormErrors((prevErrors) => ({
+      ...prevErrors,
+      passwordError: 'An unexpected error occurred. Please try again later.',
     }));
   }
 };

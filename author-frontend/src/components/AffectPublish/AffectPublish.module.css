@@ -11,6 +11,9 @@
   font-size: 14px;
   box-shadow: none;
 }
+.publishDiv .linkButton:hover {
+  background-color: inherit;
+}
 
 .smallMessage {
   color: black;
