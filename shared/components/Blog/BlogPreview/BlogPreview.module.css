@@ -51,7 +51,7 @@
 }
 
 .bottomDiv h3 {
-  font-size: 1.3em;
+  font-size: 1.3rem;
   font-weight: 500;
   transition: text-decoration 0.2s ease;
 }
@@ -65,7 +65,7 @@
 }
 
 .details {
-  font-size: 1.1em;
+  font-size: 1.1rem;
   display: flex;
   justify-content: space-between;
 }

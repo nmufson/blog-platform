@@ -61,7 +61,7 @@ button {
   color: var(--white); /* Button text color (White) */
   border: none;
   padding: 12px 24px;
-  font-size: 16px;
+  /* font-size: 16px; */
   font-weight: bold;
   border-radius: 8px;
   cursor: pointer;
@@ -103,7 +103,7 @@ form {
 }
 
 label {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }
 
 input {
@@ -112,8 +112,7 @@ input {
   border: 2px solid black; /* Light border color */
   width: 100%; /* Full width for inputs */
   font-family: inherit; /* Use the same font as the rest of your app */
-  font-size: 1rem; /* Base font size */
-
+  font-size: 1.3rem; /* Base font size */
   transition:
     border-color 0.2s ease-in-out,
     box-shadow 0.2s ease-in-out;

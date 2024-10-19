@@ -8,7 +8,6 @@ const BlogPreview = ({ post }) => {
 
   const handlePostClick = () => {
     navigate(`/posts/${post.id}`, { state: { post } });
-    window.scrollTo(0, 0);
   };
 
   const { date } = formatDateTime(post.timestamp);
