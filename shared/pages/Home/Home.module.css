@@ -4,6 +4,10 @@
   width: clamp(300px, 80vw, 1200px);
 }
 
+.Home * {
+  font-size: 1.3rem;
+}
+
 .Home button {
   align-self: center;
 }
@@ -53,7 +57,7 @@ make this look better */
 }
 
 .headingDiv h3 {
-  font-size: 1.3rem;
+  font-size: 1.7rem;
   margin: 0; /* Remove default margins */
   display: inline-block; /* Center the h3 */
   position: relative; /* Relative positioning to place the hr */

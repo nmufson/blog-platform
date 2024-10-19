@@ -2,6 +2,10 @@
   width: clamp(200px, 50%, 1000px);
 }
 
+.newPostForm * {
+  font-size: 1.3rem;
+}
+
 .postButtonDiv {
   margin-top: 10px;
   display: flex;

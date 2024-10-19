@@ -11,9 +11,8 @@ const BlogPreview = ({ post }) => {
     window.scrollTo(0, 0);
   };
 
-  const { date, time } = formatDateTime(post.timestamp);
+  const { date } = formatDateTime(post.timestamp);
   const formattedDate = date;
-  const formattedTime = time;
 
   return (
     <div onClick={handlePostClick} className={styles.BlogPreview}>

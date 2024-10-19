@@ -7,12 +7,10 @@ import { jwtDecode } from 'jwt-decode';
 import { validateLogin, handleAuthError } from './LogIn';
 import LabelInput from '../../../author-frontend/src/components/LabelInput/LabelInput';
 import styles from './LogIn.module.css';
+import DOMPurify from 'dompurify';
 
 const LogIn = () => {
-  // make this into one object??
   const [formData, setFormData] = useState({ email: '', password: '' });
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
   const [formErrors, setFormErrors] = useState({
     emailError: '',
     passwordError: '',
@@ -31,9 +29,10 @@ const LogIn = () => {
     }
 
     try {
+      console.log(formData);
       const data = await logInUser(formData.email, formData.password); // Call the login service
       localStorage.setItem('token', data.token);
-
+      console.log('now');
       // make it so navigates to previous page they were on
       // (could be a post or home)
       window.location.href = '/home';
@@ -46,7 +45,7 @@ const LogIn = () => {
     const { value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [field]: value,
+      [field]: DOMPurify.sanitize(value),
     }));
   };
 
@@ -56,6 +55,7 @@ const LogIn = () => {
       className={styles.logInForm}
       id="logInForm"
       noValidate
+      onClick={() => console.log(formData)}
     >
       <fieldset>
         <legend>Log In</legend>

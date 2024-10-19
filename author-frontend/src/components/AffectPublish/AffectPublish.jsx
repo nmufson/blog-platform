@@ -1,10 +1,11 @@
 import styles from './AffectPublish.module.css';
+import React from 'react';
 
 const AffectPublish = ({ post, handleAffectPublishClick }) => {
   return (
     <div className={styles.publishDiv}>
       {post.published ? (
-        <small className={styles.smallMessage}>
+        <p className={styles.publishMessage}>
           This post is currently published.{' '}
           <button
             type="button"
@@ -13,9 +14,9 @@ const AffectPublish = ({ post, handleAffectPublishClick }) => {
           >
             Select to unpublish
           </button>
-        </small>
+        </p>
       ) : (
-        <small className={styles.smallMessage}>
+        <p className={styles.publishMessage}>
           This post is currently saved as a draft.{' '}
           <button
             type="button"
@@ -24,7 +25,7 @@ const AffectPublish = ({ post, handleAffectPublishClick }) => {
           >
             Select to publish
           </button>
-        </small>
+        </p>
       )}
     </div>
   );

@@ -7,12 +7,12 @@ const Modal = ({
   title,
   message,
   confirmText,
-  setIsModalOpen,
+  closeModal,
 }) => {
   if (!isOpen) return null;
 
   const onClose = () => {
-    setIsModalOpen(false);
+    closeModal();
   };
 
   return (

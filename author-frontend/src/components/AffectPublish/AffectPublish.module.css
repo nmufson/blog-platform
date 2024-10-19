@@ -2,19 +2,26 @@
   margin-bottom: 20px;
 }
 
+.publishMessage {
+  font-size: 1.3em;
+}
+
+.linkButton {
+  font-size: 1.1em;
+}
+
 .linkButton {
   background: none;
   border: none;
   color: blue; /* change this later */
   cursor: pointer;
   padding: 0;
-  font-size: 14px;
   box-shadow: none;
 }
 .publishDiv .linkButton:hover {
   background-color: inherit;
 }
 
-.smallMessage {
+.publishMessage {
   color: black;
 }

@@ -1,4 +1,5 @@
 import Icon from '@mdi/react';
+import React from 'react';
 import { mdiTrashCanOutline } from '@mdi/js';
 import { mdiTextBoxEditOutline } from '@mdi/js';
 import { mdiContentSaveCheckOutline } from '@mdi/js';

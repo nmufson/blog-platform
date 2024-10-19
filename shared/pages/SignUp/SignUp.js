@@ -29,9 +29,9 @@ export const validateField = async (name, value, formData, setFormErrors) => {
       updatedErrors = validateConfirmPassword(value, formData.password);
       break;
 
-    case 'authorCode':
-      updatedErrors = validateAuthorCode(value);
-      break;
+    // case 'authorCode':
+    //   updatedErrors = validateAuthorCode(value);
+    //   break;
 
     default:
       break;
@@ -116,12 +116,12 @@ const validateConfirmPassword = (value, password) => {
   return updatedErrors;
 };
 
-const validateAuthorCode = (value) => {
-  const updatedErrors = { authorCodeError: '' };
+// const validateAuthorCode = (value) => {
+//   const updatedErrors = { authorCodeError: '' };
 
-  if (!value) {
-    updatedErrors.authorCodeError = 'Author code cannot be blank';
-  }
+//   if (!value) {
+//     updatedErrors.authorCodeError = 'Author code cannot be blank';
+//   }
 
-  return updatedErrors;
-};
+//   return updatedErrors;
+// };

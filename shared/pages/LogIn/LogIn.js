@@ -32,4 +32,5 @@ export const handleAuthError = (error, setFormErrors) => {
       passwordError: 'An unexpected error occurred. Please try again later.',
     }));
   }
+  console.log(error);
 };

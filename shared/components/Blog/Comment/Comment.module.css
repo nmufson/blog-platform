@@ -1,5 +1,6 @@
 .Comment {
   display: flex;
+  font-size: 1.3rem;
   flex-direction: column;
   background-color: var(--light-gray);
   color: var(--dark-gray);
@@ -20,12 +21,10 @@
 }
 
 .Comment svg {
-  width: 25px;
-  height: 25px;
+  height: 35px;
 }
 
 .Comment svg:hover {
-  width: 25px;
-  height: 25px;
+  height: 35px;
   transform: scale(1.2);
 }

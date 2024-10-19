@@ -6,6 +6,7 @@
 }
 
 .Header h1 {
+  font-size: 2.8rem;
   margin: 0 0 0 10px;
 }
 
@@ -35,7 +36,7 @@
 .Header ul a,
 .Header ul button {
   text-decoration: none; /* Remove underline from links */
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   padding: 0.5rem 1rem; /* Padding around links */
   border-radius: 0;
 }

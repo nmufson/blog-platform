@@ -2,17 +2,16 @@ import styles from './Header.module.css';
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useOutlet, useOutletContext } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
+import React from 'react';
 import Modal from '../../../shared/components/Modal/Modal';
+import { useModal } from '../../hooks/useModal/useModal';
 
 const Header = ({ user, setUser }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isModalOpen, openModal, closeModal } = useModal();
   const navigate = useNavigate();
 
   const dropdownRef = useRef(null);
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
@@ -20,16 +19,12 @@ const Header = ({ user, setUser }) => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // .current checks that the element with attached ref exists
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsDropdownOpen(false); // Close dropdown if click is outside
       }
     };
 
-    // Add event listener
     document.addEventListener('mousedown', handleClickOutside);
-
-    // Clean up event listener on component unmount
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
@@ -83,7 +78,7 @@ const Header = ({ user, setUser }) => {
       <Modal
         isOpen={isModalOpen}
         onClose={closeModal}
-        setIsModalOpen={setIsModalOpen}
+        closeModal={closeModal}
         onConfirm={handleConfirmLogout}
         title="Confirm Logout"
         message="Are you sure you want to log out?"

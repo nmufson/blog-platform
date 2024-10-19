@@ -1,67 +1,34 @@
-import Modal from '../../../shared/components/Modal/Modal.jsx';
-import { useState } from 'react';
+import React from 'react';
+import { useOutletContext, useNavigate } from 'react-router-dom';
+import { usePostForm } from '../../../../shared/hooks/usePostForm/usePostForm';
+import { useModal } from '../../../../shared/hooks/useModal/useModal';
+import { newBlogPost } from '../../../../shared/services/blogPostService.js';
+import LabelInput from '../../components/LabelInput/LabelInput.jsx';
+import EditorComponent from '../../components/EditorComponent/EditorComponent.jsx';
+import Modal from '../../../../shared/components/Modal/Modal.jsx';
 import styles from './NewPost.module.css';
-import { useOutletContext } from 'react-router-dom';
-import EditorComponent from '../components/EditorComponent/EditorComponent.jsx';
-import { newBlogPost } from '../../../shared/services/blogPostService.js';
-import LabelInput from '../components/LabelInput/LabelInput.jsx';
-import { validateField } from './NewPost.js';
 
 const NewPost = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalType, setModalType] = useState(null);
-  const [post, setPost] = useState({
-    title: '',
-    content: '',
-    imageURL: '',
-    imageAltText: '',
-  });
-  const [formErrors, setFormErrors] = useState({
-    titleError: '',
-    contentError: '',
-    imageURLError: '',
-    imageAltTextError: '',
-  });
-  const [touchedFields, setTouchedFields] = useState({
-    title: false,
-    content: false,
-    imageURL: false,
-    imageAltText: false,
-  });
-  const [buttonEnabled, setButtonEnabled] = useState({
-    discard: false,
-    saveOrPublish: false,
-  });
-
+  const { post, formErrors, buttonEnabled, onChange, resetForm } =
+    usePostForm();
+  const { isModalOpen, modalType, openModal, closeModal } = useModal();
   const { user } = useOutletContext();
+  const navigate = useNavigate();
 
-  const handleDiscardClick = () => {
-    setModalType('discard');
-    setIsModalOpen(true);
-  };
+  const handleDiscardClick = () => openModal('discard');
+  const handleSubmitClick = () => openModal('publish');
 
-  const discardPost = () => {
-    setPost({ title: '', content: '', imageURL: '', imageAltText: '' });
-    setButtonEnabled({ discard: false, saveOrPublish: false });
-  };
-
-  const handleSubmitClick = () => {
-    setModalType('publish');
-    setIsModalOpen(true);
-  };
-
-  const handleConfirm = (e, publish) => {
+  const handleConfirm = async (e, publish) => {
     if (modalType === 'discard') {
-      discardPost();
+      resetForm();
     } else if (modalType === 'publish') {
-      if (post.content.trim() === '') return;
-      submitPost(e, publish);
+      await submitPost(e, publish);
     }
-    setIsModalOpen(false);
+    closeModal();
   };
 
   const submitPost = async (e, publish) => {
-    e.preventDefault();
+    // e.preventDefault();
     if (post.content.trim() === '') return;
 
     try {
@@ -73,53 +40,15 @@ const NewPost = () => {
         post.imageURL,
         post.imageAltText,
       );
-      setPost({ title: '', content: '', imageURL: '', imageAltText: '' });
+      resetForm();
+
       const newPost = response.newPost;
-      window.location.href = `/posts/${newPost.id}`;
+      console.log(newPost);
+      // window.location.href = `/posts/${newPost.id}`;
+      navigate(`/posts/${newPost.id}`);
     } catch (error) {
       console.error('Failed to submit:', error);
     }
-  };
-
-  const onChange = (e, field) => {
-    const { name, value } = e.target;
-
-    setPost((prevPost) => {
-      const updatedPost = { ...prevPost, [field]: value };
-
-      // Check if any field is non-empty
-      const isAnyFieldFilled = Object.values(updatedPost).some(
-        (val) => val !== '',
-      );
-
-      const areAllFieldsFilled =
-        updatedPost.title !== '' &&
-        updatedPost.content !== '' &&
-        Object.values(formErrors).every((error) => error === '');
-
-      setButtonEnabled((prevEnabled) => ({
-        ...prevEnabled,
-        discard: isAnyFieldFilled,
-        saveOrPublish: areAllFieldsFilled,
-      }));
-
-      return updatedPost;
-    });
-
-    if (touchedFields[name]) {
-      validateField(name, value, post, setFormErrors);
-    }
-  };
-
-  const handleBlur = (e) => {
-    const { name, value } = e.target;
-
-    setTouchedFields((prev) => ({
-      ...prev,
-      [name]: true,
-    }));
-
-    validateField(name, value, post, setFormErrors);
   };
 
   return (
@@ -132,7 +61,6 @@ const NewPost = () => {
             type="text"
             maxLength={100}
             formErrors={formErrors}
-            onBlur={handleBlur}
             onChange={(e) => onChange(e, 'title')}
           ></LabelInput>
         </div>
@@ -146,9 +74,6 @@ const NewPost = () => {
                 'content',
               );
             }}
-            onBlur={() => {
-              handleBlur({ target: { name: 'content', value: post.content } });
-            }}
           ></EditorComponent>
           <p className="error-message">{formErrors.contentError}</p>
         </div>
@@ -160,7 +85,6 @@ const NewPost = () => {
             value={post.imageURL}
             type="text"
             formErrors={formErrors}
-            onBlur={handleBlur}
             onChange={(e) => onChange(e, 'imageURL')}
           ></LabelInput>
         </div>
@@ -174,11 +98,9 @@ const NewPost = () => {
             type="text"
             maxLength={50}
             formErrors={formErrors}
-            onBlur={handleBlur}
             onChange={(e) => onChange(e, 'imageAltText')}
           ></LabelInput>
         </div>
-        {/* we can prob refactor this */}
         <div className={styles.postButtonDiv}>
           <button
             type="button"
@@ -215,7 +137,7 @@ const NewPost = () => {
         }
         onConfirm={(e) => handleConfirm(e, modalType === 'submit')}
         isOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
+        closeModal={closeModal}
         confirmText={modalType === 'discard' ? 'Discard' : 'Publish'}
       />
     </>

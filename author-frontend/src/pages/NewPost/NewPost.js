@@ -1,4 +1,4 @@
-export const validateField = async (name, value, post, setFormErrors) => {
+export const validateField = (name, value, post, setFormErrors) => {
   let updatedErrors = {
     titleError: '',
     contentError: '',
@@ -62,7 +62,7 @@ const validateContent = (value) => {
 const validateImageURL = (value, post) => {
   const updatedErrors = { imageURLError: '' };
 
-  if (post.imageAltText && !value) {
+  if (!value) {
     updatedErrors.imageURLError = 'Image URL cannot be blank';
   } else if (!post.imageAltText && !value) {
     updatedErrors.imageURLError = '';
@@ -70,7 +70,7 @@ const validateImageURL = (value, post) => {
   } else {
     // Regular expression to validate URL
     const urlPattern = new RegExp(
-      /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg|webp))$/i,
+      /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg|webp))(\?.*)?$/i,
     );
     if (!urlPattern.test(value)) {
       updatedErrors.imageURLError = 'Please enter a valid image URL';
@@ -83,9 +83,9 @@ const validateImageURL = (value, post) => {
 const validateImageAltText = (value, post) => {
   const updatedErrors = { imageAltTextError: '' };
 
-  if (post.imageURL && !value) {
+  if (!value) {
     updatedErrors.imageAltTextError = 'Alt text cannot be blank';
-  } else if (value.length > 50) {
+  } else if (value.length === 50) {
     updatedErrors.imageAltTextError =
       'Alt text cannot be more than 50 characters';
   } else if (!post.imageURL && !value) {

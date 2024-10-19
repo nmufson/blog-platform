@@ -5,7 +5,12 @@ const prisma = new PrismaClient();
 
 async function createComment(content, userId, postId) {
   return await catchQuery(async () => {
-    return await prisma.comment.create({ data: { content, userId, postId } });
+    return await prisma.comment.create({
+      data: { content, userId, postId },
+      include: {
+        user: true, // Include user data with the created comment
+      },
+    });
   });
 }
 

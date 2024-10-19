@@ -19,3 +19,7 @@
 .tox-tinymce {
   cursor: text;
 }
+
+.mce-content-body {
+  font-size: 1.5rem;
+}

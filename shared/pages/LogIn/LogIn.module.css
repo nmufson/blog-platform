@@ -2,6 +2,14 @@
   margin-bottom: 10px;
 }
 
+.logInForm * {
+  font-size: 1.3rem;
+}
+
+.logInForm legend {
+  font-size: 2.2rem;
+}
+
 .logInForm button {
   margin: 10px 0 0 0;
 }

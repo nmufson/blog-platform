@@ -31,6 +31,7 @@ export const newBlogPost = async (
       const errorMessage = `Failed to submit post: ${response.status} ${response.statusText}`;
       throw new Error(errorMessage);
     }
+
     return await response.json();
   } catch (error) {
     console.error('Error submitting post:', error);

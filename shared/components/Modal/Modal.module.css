@@ -13,7 +13,7 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  width: clamp(200px, 50vw, 400px);
+  width: clamp(300px, 50vw, 400px);
   transform: translate(-50%, -50%);
   border: 2px solid black;
   display: flex;
@@ -23,6 +23,15 @@
   z-index: 1000;
   padding: 1rem;
   border-radius: 8px;
+}
+
+.Modal h2 {
+  font-size: 1.7rem;
+}
+
+.Modal p,
+.Modal button {
+  font-size: 1.3rem;
 }
 
 .ButtonGroup {

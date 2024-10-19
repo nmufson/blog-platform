@@ -21,17 +21,9 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
-        loader: async () => {
-          const data = await fetchLatestPostId();
-          const latestPostId = data.latestPost.id;
-
-          if (latestPostId) {
-            return redirect(`/posts/${latestPostId}`);
-          }
-          return redirect('/home'); // Redirect to Home if no latest post ID is found
+        loader: () => {
+          return redirect('/home');
         },
-        // This child route effectively handles the root redirection
-        element: <Home />, // Show Home if directly accessing `/`
       },
       { path: 'home', element: <Home /> }, // Home page with blog previews
       { path: 'about', element: <About /> }, // About page

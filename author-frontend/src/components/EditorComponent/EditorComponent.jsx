@@ -1,16 +1,12 @@
-import { useRef } from 'react';
+import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
-import { useState } from 'react';
 
 function EditorComponent({
   content,
   onContentChange = () => {},
-  onBlur,
+  onBlur = () => {},
   editorRef = { current: null },
   setTitleFocused = () => {},
-  titleFocused = false,
-  editorFocused = false,
-  onChange,
   setEditorFocused = () => {},
 }) {
   return (

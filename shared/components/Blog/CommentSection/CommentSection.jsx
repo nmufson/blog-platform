@@ -1,20 +1,36 @@
 import React from 'react';
 import Comment from '../Comment/Comment'; // Assuming you have a Comment component
 import { useOutletContext, Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './CommentSection.module.css';
 import { submitComment, deleteComment } from '../../../services/commentService';
 import { fetchBlogPostById } from '../../../services/blogPostService';
 import Modal from '../../Modal/Modal';
+import DOMPurify from 'dompurify';
 
-const CommentSection = ({ post }) => {
+const CommentSection = ({ postId }) => {
   const { user } = useOutletContext();
 
-  const [comments, setComments] = useState(post.comments || []);
-  const [isFocused, setIsFocused] = useState(false);
+  const [comments, setComments] = useState([]);
+  const [post, setPost] = useState(null);
   const [commentDraft, setCommentDraft] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
   const [commentToDelete, setCommentToDelete] = useState('');
+
+  const fetchComments = async () => {
+    try {
+      const response = await fetchBlogPostById(postId);
+      setPost(response.post);
+      setComments(response.post.comments);
+    } catch (error) {
+      console.error('Failed to fetch comments:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchComments();
+  }, [postId]);
 
   const openModal = (comment) => {
     setModalOpen(true);
@@ -26,7 +42,8 @@ const CommentSection = ({ post }) => {
   };
 
   const handleCommentChange = (e) => {
-    setCommentDraft(e.target.value);
+    const { value } = e.target;
+    setCommentDraft(DOMPurify.sanitize(value));
   };
 
   const handleFocus = () => {
@@ -41,7 +58,7 @@ const CommentSection = ({ post }) => {
   const fetchPost = async () => {
     try {
       const response = await fetchBlogPostById(post.id);
-
+      console.log(response.post.comments);
       setComments(response.post.comments);
     } catch (error) {
       console.error('Failed to fetch post:', error);
@@ -53,10 +70,11 @@ const CommentSection = ({ post }) => {
     if (commentDraft.trim() === '') return;
 
     try {
-      await submitComment(commentDraft, user, post.id);
+      await submitComment(commentDraft, user, postId);
+
       setCommentDraft('');
       setIsFocused(false);
-      await fetchPost(); // Re-fetch the post to get the updated comments
+      await fetchComments();
     } catch (error) {
       console.error('Failed to submit comment:', error);
     }
@@ -64,7 +82,7 @@ const CommentSection = ({ post }) => {
 
   const handleConfirmDelete = async () => {
     if (commentToDelete) {
-      await deleteComment(commentToDelete.id, user, post.id);
+      await deleteComment(commentToDelete.id, user, postId);
       closeModal();
       await fetchPost();
     }
@@ -72,7 +90,10 @@ const CommentSection = ({ post }) => {
 
   return (
     <>
-      <div className={styles.CommentSection}>
+      <div
+        className={styles.CommentSection}
+        onClick={() => console.log(comments)}
+      >
         <h2>Comments</h2>
         {user ? (
           <form onSubmit={handleCommentSubmit} className={styles.commentForm}>

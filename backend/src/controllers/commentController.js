@@ -35,6 +35,7 @@ async function deleteComment(req, res) {
   const postId = parseInt(req.params.postId, 10);
   const commentId = parseInt(req.params.commentId, 10);
   const userId = req.user.id;
+
   const comment = await commentServices.getCommentById(commentId);
   const post = await postServices.getPostById(postId);
 

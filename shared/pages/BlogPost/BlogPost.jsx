@@ -31,21 +31,19 @@ const BlogPost = () => {
 
   // tries to pull post data from location, calls api if it can't
   useEffect(() => {
-    if (!post) {
-      const getPost = async () => {
-        try {
-          const data = await fetchBlogPostById(postId);
-          const post = data.post;
-          setPost(post); // Assuming the post is nested under `data.post`
-          setPostTitle(post.title);
-          setPostContent(post.content);
-        } catch (error) {
-          console.error('Error fetching post:', error);
-        }
-      };
-      getPost();
-    }
-  }, [post, postId, setPostContent, setPostTitle]);
+    const getPost = async () => {
+      try {
+        const data = await fetchBlogPostById(postId);
+        const post = data.post;
+        setPost(post); // Assuming the post is nested under `data.post`
+        setPostTitle(post.title);
+        setPostContent(post.content);
+      } catch (error) {
+        console.error('Error fetching post:', error);
+      }
+    };
+    getPost();
+  }, [postId]);
 
   if (!post) return <div>Loading...</div>;
 
@@ -63,6 +61,7 @@ const BlogPost = () => {
     setIsModalOpen(false);
   };
 
+  // should i be concerned about scripts going into state? like post.title, post.content?
   const createUpdatePostFunction = () => {
     return async (newPublishedStatus = null) => {
       try {
@@ -113,11 +112,13 @@ const BlogPost = () => {
             </p>
           </div>
 
-          <img
-            src={post.imageURL}
-            alt={post.imageAltText}
-            className={styles.blogImage}
-          />
+          {post.imageURL && (
+            <img
+              src={post.imageURL}
+              alt={post.imageAltText}
+              className={styles.blogImage}
+            />
+          )}
 
           {user?.canPost && post.userId === user.id && !isEditing && (
             <AffectPublish
@@ -153,7 +154,7 @@ const BlogPost = () => {
           </div>
         )}
 
-        <CommentSection post={post} comments={post.comments}></CommentSection>
+        <CommentSection postId={post.id}></CommentSection>
       </div>
 
       <Modal

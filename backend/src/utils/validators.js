@@ -8,6 +8,7 @@ const signUpValidationRules = () => [
     .isEmail()
     .withMessage('Invalid email address')
     .normalizeEmail()
+    .escape()
     .custom(async (email) => {
       const existingUser = await userServices.getUserByEmail(email);
       if (existingUser) {
@@ -20,6 +21,7 @@ const signUpValidationRules = () => [
     .withMessage('Username cannot be blank')
     .isLength({ min: 3, max: 15 })
     .withMessage('Username must be between 3 and 15 characters long')
+    .escape()
     .custom(async (username) => {
       const existingUser = await userServices.getUserByUsername(username);
       if (existingUser) {
@@ -36,7 +38,8 @@ const signUpValidationRules = () => [
     .matches(/[A-Z]/)
     .withMessage('Password must contain an uppercase letter')
     .matches(/[@$!%*?&#]/)
-    .withMessage('Password must contain a special character'),
+    .withMessage('Password must contain a special character')
+    .escape(),
   body('confirmPassword').custom((value, { req }) => {
     if (value !== req.body.password) {
       throw new Error('Password confirmation does not match password');
@@ -46,8 +49,12 @@ const signUpValidationRules = () => [
 ];
 
 const logInValidationRules = () => [
-  body('email').isEmail().withMessage('Invalid email address').normalizeEmail(),
-  body('password').notEmpty().withMessage('Password cannot be empty'),
+  body('email')
+    .isEmail()
+    .withMessage('Invalid email address')
+    .normalizeEmail()
+    .escape(),
+  body('password').notEmpty().withMessage('Password cannot be empty').escape(),
 ];
 
 const postValidationRules = () => [
@@ -56,12 +63,11 @@ const postValidationRules = () => [
     .notEmpty()
     .withMessage('Title cannot be blank')
     .isLength({ max: 100 })
-    .withMessage('Title cannot exceed 100 characters'),
+    .withMessage('Title cannot exceed 100 characters')
+    .escape(),
   body('content').trim().notEmpty().withMessage('Post content cannot be empty'),
-  body('imageURL')
-    .optional()
-    .isURL()
-    .withMessage('Image URL must be a valid URL'),
+  body('imageURL').optional(),
+  body('imageAltText').optional(),
 ];
 
 const commentValidationRules = () => [
@@ -70,7 +76,8 @@ const commentValidationRules = () => [
     .notEmpty()
     .withMessage('Comment cannot be empty')
     .isLength({ max: 500 })
-    .withMessage('Message cannot be longer than 500 characters'),
+    .withMessage('Message cannot be longer than 500 characters')
+    .escape(),
 ];
 
 module.exports = {

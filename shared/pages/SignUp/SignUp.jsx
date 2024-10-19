@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { validateField } from './SignUp';
 import { signUpUser } from '../../services/signUpService';
+import DOMPurify from 'dompurify';
 import LabelInput from '../../../author-frontend/src/components/LabelInput/LabelInput';
 import styles from './SignUp.module.css';
 
@@ -31,7 +32,8 @@ const SignUp = () => {
     // Update form input values
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      // to prevent XSS
+      [name]: DOMPurify.sanitize(value),
     }));
 
     if (touchedFields[name]) {
@@ -75,7 +77,12 @@ const SignUp = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} id="signUpForm" noValidate>
+    <form
+      onSubmit={handleSubmit}
+      className={styles.signUpForm}
+      id="signUpForm"
+      noValidate
+    >
       <fieldset>
         <legend>Sign Up</legend>
 

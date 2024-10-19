@@ -10,3 +10,7 @@ footer p,
 footer a {
   color: var(--white);
 }
+
+footer * {
+  font-size: 1.3rem;
+}
