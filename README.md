@@ -53,10 +53,10 @@ Full-stack blogging platform integrating a backend with two frontends, offering 
 |              | GET         | /                            | Retrieve the home page                                       |
 |              | GET         | /about                       | Retrieve the about page                                      |
 | **Users**    |             |                              |                                                              |
-|              | POST        | /users/signup                | Register a new user                                          |
+|              | POST        | /users/signup                | Register a new user and logs them in with token              |
 |              | POST        | /users/login                 | Authenticate a user and receive a token                      |
 |              | GET         | /users                       | Retrieve all users                                           |
-|              | GET         | /users/user/:userId          | Retrieve a specific user's details (requires authentication) |
+|              | GET         | /users/user/:userId          | Retrieve a specific user's details                           |
 |              | POST        | /users/check-email           | Check if an email is available                               |
 |              | POST        | /users/check-username        | Check if a username is available                             |
 | **Posts**    |             |                              |                                                              |
