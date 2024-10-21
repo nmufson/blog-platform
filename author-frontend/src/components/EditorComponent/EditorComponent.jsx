@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Editor } from '@tinymce/tinymce-react';
 
 function EditorComponent({
@@ -65,5 +66,16 @@ function EditorComponent({
     </>
   );
 }
+
+EditorComponent.propTypes = {
+  content: PropTypes.string.isRequired,
+  onContentChange: PropTypes.func,
+  onBlur: PropTypes.func,
+  editorRef: PropTypes.shape({
+    current: PropTypes.object,
+  }),
+  setTitleFocused: PropTypes.func,
+  setEditorFocused: PropTypes.func,
+};
 
 export default EditorComponent;

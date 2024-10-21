@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Comment from '../Comment/Comment'; // Assuming you have a Comment component
 import { useOutletContext, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -58,7 +59,7 @@ const CommentSection = ({ postId }) => {
   const fetchPost = async () => {
     try {
       const response = await fetchBlogPostById(post.id);
-      console.log(response.post.comments);
+
       setComments(response.post.comments);
     } catch (error) {
       console.error('Failed to fetch post:', error);
@@ -90,10 +91,7 @@ const CommentSection = ({ postId }) => {
 
   return (
     <>
-      <div
-        className={styles.CommentSection}
-        onClick={() => console.log(comments)}
-      >
+      <div className={styles.CommentSection}>
         <h2>Comments</h2>
         {user ? (
           <form onSubmit={handleCommentSubmit} className={styles.commentForm}>
@@ -147,6 +145,10 @@ const CommentSection = ({ postId }) => {
       />
     </>
   );
+};
+
+CommentSection.propTypes = {
+  postId: PropTypes.number.isRequired,
 };
 
 export default CommentSection;

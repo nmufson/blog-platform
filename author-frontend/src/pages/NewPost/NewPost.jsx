@@ -43,8 +43,6 @@ const NewPost = () => {
       resetForm();
 
       const newPost = response.newPost;
-      console.log(newPost);
-      // window.location.href = `/posts/${newPost.id}`;
       navigate(`/posts/${newPost.id}`);
     } catch (error) {
       console.error('Failed to submit:', error);

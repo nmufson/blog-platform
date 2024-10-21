@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import formatDateTime from '../../../utils/formatDateTime';
 import styles from './Comment.module.css';
 import { useOutletContext } from 'react-router-dom';
@@ -39,6 +40,21 @@ const Comment = ({ comment, openModal, post }) => {
       </div>
     </li>
   );
+};
+
+Comment.propTypes = {
+  comment: PropTypes.shape({
+    userId: PropTypes.number.isRequired,
+    user: PropTypes.shape({
+      username: PropTypes.string.isRequired,
+    }).isRequired,
+    content: PropTypes.string.isRequired,
+    timestamp: PropTypes.string.isRequired,
+  }).isRequired,
+  openModal: PropTypes.func.isRequired,
+  post: PropTypes.shape({
+    userId: PropTypes.number.isRequired, // User ID of the post's author
+  }).isRequired,
 };
 
 export default Comment;

@@ -60,18 +60,18 @@ async function main() {
     {
       title:
         'The Importance of Walkability and Bike Infrastructure in Urbanism',
-      content: `<h2>Understanding Urbanism</h2>
+      content: `<h3>Understanding Urbanism</h2>
                   <p>Urbanism refers to the study and design of cities, emphasizing how urban environments can enhance the quality of life for their inhabitants. At the heart of successful urbanism lies the concept of walkability — the measure of how friendly an area is to walking.</p>
 
-                  <h2>Why Walkability Matters</h2>
+                  <h3>Why Walkability Matters</h2>
                   <p>Walkable cities promote healthier lifestyles, reduce traffic congestion, and lower pollution levels. When neighborhoods are designed with pedestrian-friendly infrastructure, such as sidewalks, crosswalks, and green spaces, residents are more likely to walk to their destinations.</p>
                   <p>Moreover, walkability fosters community interaction. People are more inclined to engage with their surroundings and with each other when they can easily stroll through their neighborhoods. This sense of community can lead to safer, more vibrant environments.</p>
 
-                  <h2>The Role of Bike Infrastructure</h2>
+                  <h3>The Role of Bike Infrastructure</h2>
                   <p>In addition to walking, cycling is an essential component of urban mobility. Well-designed bike infrastructure, including dedicated bike lanes, bike-sharing programs, and secure parking, encourages more people to opt for cycling as a primary mode of transportation.</p>
                   <p>Good bike infrastructure not only reduces car dependency but also contributes to reduced emissions, improved air quality, and enhanced physical health. Cities that prioritize cycling create a more sustainable urban environment.</p>
 
-                  <h2>Conclusion</h2>
+                  <h3>Conclusion</h2>
                   <p>In conclusion, the principles of urbanism advocate for walkable and bike-friendly cities. By investing in pedestrian and cycling infrastructure, urban planners can create healthier, more connected, and more sustainable communities. Embracing these ideals is crucial for the future of urban living.</p>
 
                   <p>For more insights on urbanism and sustainable living, follow our blog or connect with us on social media!</p>`,
@@ -79,8 +79,8 @@ async function main() {
       published: true,
       timestamp: new Date(),
       imageURL:
-        'https://cdn.vox-cdn.com/thumbor/7bO5pVP0Qadns5u1LoWrJlBqt9s=/0x0:6016x4016/1200x800/filters:focal(2527x1527:3489x2489)/cdn.vox-cdn.com/uploads/chorus_image/image/62709976/shutterstock_1155677656.0.jpg',
-      imageAltText: 'Person biking in a city',
+        'https://static01.nyt.com/images/2020/03/13/nyregion/13nyvirus-biking1/13nyvirus-biking1-videoSixteenByNineJumbo1600.jpg',
+      imageAltText: 'People bike communiting in New York City',
     },
     {
       title: 'Looking for a Hobby? Try Language Learning',
@@ -104,8 +104,8 @@ async function main() {
       published: true,
       timestamp: new Date(),
       imageURL:
-        'https://ec.europa.eu/eurostat/documents/4187653/15349461/Prostock-studio_AdobeStock_437049103_RV.jpg',
-      imageAltText: 'Vase containing flags of different countries',
+        'https://gurmentor.com/wp-content/uploads/2020/06/gurmentor.com-best-techniques-for-learning-a-foreign-language-2020-06-18_14-13-33_992016.jpg',
+      imageAltText: 'Art depicting different languages around the world',
     },
     {
       title: 'The Benefits of Maintaining a Consistent Sleep-Wake Routine',
@@ -149,7 +149,7 @@ async function main() {
       timestamp: new Date(),
       imageURL:
         'https://earthtrekgear.com/cdn/shop/articles/morningwalktomasz-wozniak-V62UrdknDCA-unsplash.jpg?v=1582743235',
-      imageAltText: 'People running',
+      imageAltText: 'People running as sun rises in the background',
     },
     {
       title: 'The OneBag Travel Trend: Embrace Minimalism on the Go',
@@ -179,7 +179,8 @@ async function main() {
       published: true,
       timestamp: new Date(),
       imageURL:
-        'https://capital-placement.com/wp-content/uploads/2021/07/The-benefits-of-travelling.jpg',
+        'https://cdn.thewirecutter.com/wp-content/media/2023/12/backpackforlife-2048px-goruck-3x2-1.jpg?auto=webp&quality=75&width=1024',
+      // https://capital-placement.com/wp-content/uploads/2021/07/The-benefits-of-travelling.jpg
       imageAltText: 'Traveler wearing backpack looking at view',
     },
     {
@@ -225,8 +226,8 @@ async function main() {
       published: true,
       timestamp: new Date(),
       imageURL:
-        'https://www.shape.com/thmb/DjCIHGX6cWaIniuqHeBAAreNE08=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/best-cardio-exercises-promo-2000-498cbfb8f07541b78572bf810e7fb600.jpg',
-      imageAltText: 'Woman performing cardio exercise',
+        'https://www.in.gov/cybersecurity/blog/images/running_image.jpg',
+      imageAltText: 'Silhouette of several people running',
     },
     {
       title: 'The Importance of Young Voices in Local Politics',
@@ -307,6 +308,46 @@ async function main() {
       imageURL:
         'https://images-prod.healthline.com/hlcmsresource/images/topic_centers/2020-7/whole-food-foods-healthy-vegetables-eggs-ingredients-1296x728-header.jpg',
       imageAltText: 'Several foods including fruits, vegetables, grain',
+    },
+    {
+      title: 'The Vital Role of Trains in Modern Public Transit',
+      content: `
+        <p>In an era of increasing urbanization and growing environmental concerns, the importance of efficient public transportation cannot be overstated. Among the various modes of public transit, trains stand out as a crucial component in creating sustainable, accessible, and efficient urban mobility systems.</p>
+
+    <h3>Why Trains Matter</h3>
+
+    <p>Trains offer numerous advantages that make them an indispensable part of public transit:</p>
+
+    <ul>
+        <li><strong>High Capacity:</strong> Trains can move large numbers of people quickly and efficiently, reducing road congestion.</li>
+        <li><strong>Environmental Friendliness:</strong> Electric trains produce significantly lower emissions per passenger compared to individual cars.</li>
+        <li><strong>Reliability:</strong> With dedicated tracks, trains are less affected by traffic, offering more consistent travel times.</li>
+        <li><strong>Urban Development:</strong> Train stations often become hubs for economic activity and urban renewal.</li>
+    </ul>
+
+    <h3>The Impact on Cities</h3>
+
+    <p>Cities with well-developed train systems often experience:</p>
+
+    <ul>
+        <li>Reduced traffic congestion</li>
+        <li>Improved air quality</li>
+        <li>Enhanced mobility for all residents, including those without cars</li>
+        <li>Increased property values near transit hubs</li>
+    </ul>
+
+    <h3>Looking to the Future</h3>
+
+    <p>As we move towards smarter, more sustainable cities, investing in train infrastructure will be key. From high-speed inter-city rails to efficient metro systems, trains will continue to play a vital role in shaping the future of urban transportation.</p>
+
+    <p>By prioritizing and expanding train networks, we can create more livable, accessible, and environmentally friendly urban spaces for generations to come.</p>
+</body>`,
+      userId: allUsers[3].id,
+      published: true,
+      timestamp: new Date(),
+      imageURL:
+        'https://grist.org/wp-content/uploads/2016/03/rail-china-reuters-c.jpg?quality=75&strip=all',
+      imageAltText: 'High-speed passenger train in China',
     },
   ];
 

@@ -1,0 +1,5 @@
+.aboutDiv {
+  font-size: 1.3rem;
+  width: clamp(400px, 70%, 500px);
+  text-align: center;
+}

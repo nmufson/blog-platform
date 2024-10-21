@@ -1,5 +1,6 @@
 import Icon from '@mdi/react';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { mdiTrashCanOutline } from '@mdi/js';
 import { mdiTextBoxEditOutline } from '@mdi/js';
 import { mdiContentSaveCheckOutline } from '@mdi/js';
@@ -53,6 +54,14 @@ const EditDeleteIcons = ({
       />
     </>
   );
+};
+
+EditDeleteIcons.propTypes = {
+  setIsModalOpen: PropTypes.func.isRequired,
+  setModalType: PropTypes.func.isRequired,
+  setIsEditing: PropTypes.func.isRequired,
+  isEditing: PropTypes.bool.isRequired,
+  updatePost: PropTypes.func.isRequired,
 };
 
 export default EditDeleteIcons;

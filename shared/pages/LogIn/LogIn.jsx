@@ -29,12 +29,9 @@ const LogIn = () => {
     }
 
     try {
-      console.log(formData);
       const data = await logInUser(formData.email, formData.password); // Call the login service
       localStorage.setItem('token', data.token);
-      console.log('now');
-      // make it so navigates to previous page they were on
-      // (could be a post or home)
+
       window.location.href = '/home';
     } catch (error) {
       handleAuthError(error, setFormErrors);

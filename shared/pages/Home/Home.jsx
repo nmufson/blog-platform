@@ -1,6 +1,7 @@
 import { useOutletContext } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import BlogPreview from '../../components/Blog/BlogPreview/BlogPreview';
+import shuffleArr from '../../utils/shuffleArr';
 import { fetchBlogPosts } from '../../services/blogPostService';
 import styles from './Home.module.css';
 import { useNavigate } from 'react-router-dom';
@@ -32,12 +33,14 @@ const Home = () => {
     return <p>{error}</p>;
   }
 
-  const firstFourPosts = posts.slice(0, 4);
-  const remainingPosts = posts.slice(4);
+  const shuffledPosts = shuffleArr(posts);
+
+  const firstFourPosts = shuffledPosts.slice(0, 4);
+  const remainingPosts = shuffledPosts.slice(4);
 
   return (
     <>
-      <div className={styles.Home} onClick={() => console.log(user)}>
+      <div className={styles.Home}>
         {user?.canPost && (
           <button onClick={onButtonClick}>Draft New Post</button>
         )}

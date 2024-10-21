@@ -6,6 +6,10 @@
   list-style-type: none;
 }
 
+.CommentSection p {
+  font-size: 1.3rem;
+}
+
 .CommentSection a:hover {
   font-weight: bold;
   color: var(--deep-teal);
@@ -66,6 +70,5 @@
 }
 
 .noCommentsP {
-  font-size: 1.2rem;
   margin: 10px 0 0 3px;
 }

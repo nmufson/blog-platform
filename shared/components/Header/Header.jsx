@@ -1,4 +1,5 @@
 import styles from './Header.module.css';
+import PropTypes from 'prop-types';
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useOutlet, useOutletContext } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
@@ -86,6 +87,13 @@ const Header = ({ user, setUser }) => {
       />
     </>
   );
+};
+
+Header.propTypes = {
+  user: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+  }),
+  setUser: PropTypes.func.isRequired,
 };
 
 export default Header;

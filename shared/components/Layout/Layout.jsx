@@ -29,37 +29,3 @@ const Layout = () => {
 };
 
 export default Layout;
-
-// useEffect(() => {
-//   const token = localStorage.getItem('token');
-
-//   if (token) {
-//     try {
-//       const decodedToken = jwtDecode(token);
-//       const currentTime = Math.floor(Date.now() / 1000);
-//       // exp is a timestamp when the token will expire
-//       // jwt auto includes this
-//       //  based on the duration we passed in the backend
-//       if (decodedToken.exp > currentTime) {
-//         // setUser rather than accessing token from each component
-//         // to keep user logic centralized
-//         setUser({
-//           id: decodedToken.id,
-//           username: decodedToken.username,
-//           canPost: decodedToken.canPost,
-//           token,
-//         });
-//       } else {
-//         localStorage.removeItem('token');
-//         setUser(null);
-//       }
-//     } catch (error) {
-//       console.error('Failed to decode token', error);
-//       localStorage.removeItem('token');
-//       setUser(null);
-//     }
-//   } else {
-//     setUser(null);
-//   }
-//   setLoading(false);
-// }, [navigate]);

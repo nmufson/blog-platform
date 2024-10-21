@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import styles from './BlogPreview.module.css';
 import formatDateTime from '../../../utils/formatDateTime';
@@ -18,9 +19,8 @@ const BlogPreview = ({ post }) => {
       <>
         <img
           src={post.imageURL}
-          // {have user include alt text}
-          // alt={post.altText}
           className={styles.blogPreviewImage}
+          alt={post.imageAltText}
         />
         <div className={styles.bottomDiv}>
           <h3>{post.title}</h3>
@@ -32,6 +32,19 @@ const BlogPreview = ({ post }) => {
       </>
     </div>
   );
+};
+
+BlogPreview.propTypes = {
+  post: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    imageURL: PropTypes.string.isRequired,
+    imageAltText: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    timestamp: PropTypes.string.isRequired,
+    user: PropTypes.shape({
+      username: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default BlogPreview;
