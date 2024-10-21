@@ -230,7 +230,7 @@ async function main() {
       imageAltText: 'Silhouette of several people running',
     },
     {
-      title: 'The Importance of Young Voices in Local Politics',
+      title: 'The Silence of Young Voices in Local Politics',
       content: `<p>
           In recent years, there's been a growing concern that young people are not sufficiently engaged in local politics. Despite being heavily affected by the decisions made at the community level, many young individuals often feel disconnected or disillusioned with the political process. This trend is troubling, as the involvement of young people in local politics is crucial for shaping the future of their communities.
         </p>
