@@ -17,7 +17,6 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
-    // Remove the loader from the root path
     children: [
       {
         path: '',
