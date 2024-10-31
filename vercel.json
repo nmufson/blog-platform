@@ -1,24 +1,11 @@
 {
-  "builds": [
+  "buildCommand": "npm run build:user",
+  "outputDirectory": "user-frontend/dist",
+  "framework": "vite",
+  "rewrites": [
     {
-      "src": "user-frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
-    },
-    {
-      "src": "author-frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/author/(.*)",
-      "dest": "author-frontend/dist/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "user-frontend/dist/$1"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
