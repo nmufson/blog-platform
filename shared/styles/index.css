@@ -1,10 +1,8 @@
 :root {
-  /* Primary Colors */
-
-  --dark-gray: #353535; /* Dark Gray for text and backgrounds */
-  --teal: #3c6e71; /* Teal for accents and buttons */
-  --white: #ffffff; /* White for backgrounds and text */
-  --light-gray: #d9d9d9; /* Light Gray for form backgrounds */
+  --dark-gray: #353535;
+  --teal: #3c6e71;
+  --white: #ffffff;
+  --light-gray: #d9d9d9;
   --deep-teal: #284b63;
   --alert: #ff4757;
 }
@@ -12,7 +10,7 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  box-sizing: border-box;
 }
 
 #root {
@@ -26,8 +24,8 @@ body {
   font-family: 'Montserrat', sans-serif;
   background-color: var(--white);
   color: var(--dark-gray);
-  font-size: 16px; /* Base font size */
-  line-height: 1.5; /* Line height for readability */
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 header {
@@ -57,11 +55,10 @@ header nav a:hover {
 }
 
 button {
-  background-color: var(--teal); /* Button background (Deep Blue) */
-  color: var(--white); /* Button text color (White) */
+  background-color: var(--teal);
+  color: var(--white);
   border: none;
   padding: 12px 24px;
-  /* font-size: 16px; */
   font-weight: bold;
   border-radius: 8px;
   cursor: pointer;
@@ -83,8 +80,8 @@ form button:hover {
 }
 
 footer {
-  background-color: var(--deep-teal); /* Footer background (Dark Blue) */
-  color: var(--white); /* Footer text color (White) */
+  background-color: var(--deep-teal);
+  color: var(--white);
   width: 100%;
 }
 
@@ -107,12 +104,12 @@ label {
 }
 
 input {
-  border-radius: 10px; /* Rounded corners */
-  padding: 5px; /* Inner padding for comfort */
-  border: 2px solid black; /* Light border color */
-  width: 100%; /* Full width for inputs */
-  font-family: inherit; /* Use the same font as the rest of your app */
-  font-size: 1.3rem; /* Base font size */
+  border-radius: 10px;
+  padding: 5px;
+  border: 2px solid black;
+  width: 100%;
+  font-family: inherit;
+  font-size: 1.3rem;
   transition:
     border-color 0.2s ease-in-out,
     box-shadow 0.2s ease-in-out;
@@ -120,20 +117,20 @@ input {
 
 input,
 textarea {
-  background-color: var(--white); /* White for input background */
-  color: var(--dark-gray); /* Dark Gray for input text */
+  background-color: var(--white);
+  color: var(--dark-gray);
   border: 1px solid var(--teal);
 }
 
 input::placeholder,
 textarea::placeholder {
-  color: rgba(53, 53, 53, 0.6); /* Lighten Dark Gray for placeholder */
+  color: rgba(53, 53, 53, 0.6);
 }
 
 input:focus {
-  outline: none; /* Remove default outline */
-  border-color: #1b262c; /* Dark header color for focus */
-  box-shadow: 0 0 0 3px rgba(27, 38, 44, 0.2); /* Subtle focus shadow */
+  outline: none;
+  border-color: #1b262c;
+  box-shadow: 0 0 0 3px rgba(27, 38, 44, 0.2);
 }
 
 #logInForm,
@@ -144,7 +141,7 @@ input:focus {
   margin: 10px 0 0 0;
   align-self: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  background-color: var(--light-gray); /* Light Gray for form background */
+  background-color: var(--light-gray);
   border: 2px solid var(--deep-teal);
 }
 
@@ -182,12 +179,12 @@ button:hover {
 #logInForm .error-message,
 #signUpForm .error-message,
 .new-post-container .error-message {
-  top: 100%; /* Position below the input field */
+  top: 100%;
   right: 0;
 }
 
 .input-error {
-  border: 1px solid red; /* Red border for error */
+  border: 1px solid red;
 }
 
 input:-webkit-autofill {

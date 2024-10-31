@@ -32,4 +32,11 @@ const AffectPublish = ({ post, handleAffectPublishClick }) => {
   );
 };
 
+AffectPublish.propTypes = {
+  post: PropTypes.shape({
+    published: PropTypes.bool.isRequired,
+  }).isRequired,
+  handleAffectPublishClick: PropTypes.func.isRequired,
+};
+
 export default AffectPublish;
