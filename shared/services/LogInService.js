@@ -1,6 +1,8 @@
+const API_URL = import.meta.env.API_URL;
+
 export const logInUser = async (email, password) => {
   try {
-    const response = await fetch('http://localhost:5000/users/login', {
+    const response = await fetch(`${API_URL}/users/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),

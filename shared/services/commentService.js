@@ -1,18 +1,17 @@
+const API_URL = import.meta.env.API_URL;
+
 export const submitComment = async (comment, user, postId) => {
   const userId = user.id;
   const token = user.token;
   try {
-    const response = await fetch(
-      `http://localhost:5000/comments/post/${postId}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Include the token here
-        },
-        body: JSON.stringify({ comment, userId }),
+    const response = await fetch(`${API_URL}/comments/post/${postId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, // Include the token here
       },
-    );
+      body: JSON.stringify({ comment, userId }),
+    });
     // Replace with your backend route
     if (!response.ok) {
       const errorMessage = `Failed to submit comment: ${response.status} ${response.statusText}`;
@@ -28,16 +27,13 @@ export const submitComment = async (comment, user, postId) => {
 export const deleteComment = async (commentId, user, postId) => {
   const token = user.token;
   try {
-    const response = await fetch(
-      `http://localhost:5000/comments/${postId}/${commentId}`,
-      {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Include the token here
-        },
+    const response = await fetch(`${API_URL}/comments/${postId}/${commentId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, // Include the token here
       },
-    );
+    });
     // Replace with your backend route
     if (!response.ok) {
       const errorMessage = `Failed to delete comment: ${response.status} ${response.statusText}`;
@@ -54,7 +50,7 @@ export const deleteComment = async (commentId, user, postId) => {
 // export const fetchComments = async (postId) => {
 //   try {
 //     const response = await fetch(
-//       `http://localhost:5000/comments/post/${postId}`,
+//       `${API_URL}/comments/post/${postId}`,
 //     );
 //     if (!response.ok) {
 //       throw new Error('Failed to fetch blog posts');

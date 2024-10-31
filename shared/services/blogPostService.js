@@ -1,3 +1,5 @@
+const API_URL = import.meta.env.API_URL;
+
 export const newBlogPost = async (
   user,
   title,
@@ -10,7 +12,7 @@ export const newBlogPost = async (
   const token = user.token;
 
   try {
-    const response = await fetch('http://localhost:5000/posts', {
+    const response = await fetch(`${API_URL}/posts`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -41,7 +43,7 @@ export const newBlogPost = async (
 
 export const fetchBlogPosts = async () => {
   try {
-    const response = await fetch('http://localhost:5000/posts'); // Replace with your backend route
+    const response = await fetch(`${API_URL}/posts`); // Replace with your backend route
     if (!response.ok) {
       throw new Error('Failed to fetch blog posts');
     }
@@ -54,7 +56,7 @@ export const fetchBlogPosts = async () => {
 
 export const fetchBlogPostById = async (postId) => {
   try {
-    const response = await fetch(`http://localhost:5000/posts/post/${postId}`); // Replace with your backend route
+    const response = await fetch(`${API_URL}/posts/post/${postId}`); // Replace with your backend route
     if (!response.ok) {
       throw new Error('Failed to fetch blog post');
     }
@@ -67,7 +69,7 @@ export const fetchBlogPostById = async (postId) => {
 
 export const fetchLatestPostId = async () => {
   try {
-    const response = await fetch('http://localhost:5000/posts/latest');
+    const response = await fetch(`${API_URL}/posts/latest`);
     if (!response.ok) {
       throw new Error('Failed to fetch blog post');
     }
@@ -83,7 +85,7 @@ export const deleteBlogPost = async (user, postId) => {
   const userId = user.id;
 
   try {
-    const response = await fetch(`http://localhost:5000/posts/post/${postId}`, {
+    const response = await fetch(`${API_URL}/posts/post/${postId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -113,7 +115,7 @@ export const updateBlogPost = async (
   const token = user.token;
 
   try {
-    const response = await fetch(`http://localhost:5000/posts/post/${postId}`, {
+    const response = await fetch(`${API_URL}/posts/post/${postId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

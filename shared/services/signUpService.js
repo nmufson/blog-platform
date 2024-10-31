@@ -1,3 +1,5 @@
+const API_URL = import.meta.env.API_URL;
+
 export const signUpUser = async ({
   email,
   username,
@@ -5,7 +7,7 @@ export const signUpUser = async ({
   confirmPassword,
   authorCode,
 }) => {
-  const response = await fetch('http://localhost:5000/users/signup', {
+  const response = await fetch(`${API_URL}/users/signup`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -29,7 +31,7 @@ export const signUpUser = async ({
 
 export const checkEmailAvailability = async (email) => {
   try {
-    const response = await fetch('http://localhost:5000/users/check-email', {
+    const response = await fetch(`${API_URL}/users/check-email`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email }),
@@ -49,7 +51,7 @@ export const checkEmailAvailability = async (email) => {
 
 export const checkUsernameAvailability = async (username) => {
   try {
-    const response = await fetch('http://localhost:5000/users/check-username', {
+    const response = await fetch(`${API_URL}/users/check-username`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username }),
