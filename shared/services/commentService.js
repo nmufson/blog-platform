@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.API_URL;
+const API_URL = process.env.API_URL;
 
 export const submitComment = async (comment, user, postId) => {
   const userId = user.id;
