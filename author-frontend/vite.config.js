@@ -3,6 +3,10 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
+  alias: {
+    '@': path.resolve(__dirname, 'src'), // Alias for the 'src' directory inside 'user-frontend'
+    '@shared': path.resolve(__dirname, '../shared'), // Alias for the 'shared' directory outside 'user-frontend'
+  },
   build: {
     rollupOptions: {
       external: [
@@ -13,7 +17,7 @@ export default defineConfig({
         '@mdi/react',
         'jwt-decode',
         '@tinymce/tinymce-react',
-        'jsonwebtoken'
+        'jsonwebtoken',
       ],
       output: {
         globals: {
@@ -24,9 +28,9 @@ export default defineConfig({
           '@mdi/react': 'mdiReact',
           'jwt-decode': 'jwtDecode',
           '@tinymce/tinymce-react': 'TinyMCE',
-          'jsonwebtoken': 'jwt'
-        }
-      }
-    }
-  }
+          'jsonwebtoken': 'jwt',
+        },
+      },
+    },
+  },
 });
