@@ -28,7 +28,7 @@ export const newBlogPost = async (
         imageAltText,
       }),
     });
-    // Replace with your backend route
+
     if (!response.ok) {
       const errorMessage = `Failed to submit post: ${response.status} ${response.statusText}`;
       throw new Error(errorMessage);
@@ -43,7 +43,7 @@ export const newBlogPost = async (
 
 export const fetchBlogPosts = async () => {
   try {
-    const response = await fetch(`${API_URL}/posts`); // Replace with your backend route
+    const response = await fetch(`${API_URL}/posts`);
     if (!response.ok) {
       throw new Error('Failed to fetch blog posts');
     }
@@ -56,7 +56,7 @@ export const fetchBlogPosts = async () => {
 
 export const fetchBlogPostById = async (postId) => {
   try {
-    const response = await fetch(`${API_URL}/posts/post/${postId}`); // Replace with your backend route
+    const response = await fetch(`${API_URL}/posts/post/${postId}`);
     if (!response.ok) {
       throw new Error('Failed to fetch blog post');
     }
@@ -89,7 +89,7 @@ export const deleteBlogPost = async (user, postId) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`, // Include the token here
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify({ userId }),
     });
