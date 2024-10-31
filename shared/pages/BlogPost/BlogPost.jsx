@@ -1,17 +1,16 @@
 import { useParams, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { fetchBlogPostById } from '../../services/blogPostService';
-import AffectPublish from '../../../author-frontend/src/components/AffectPublish/AffectPublish';
+import AffectPublish from '../../components/AffectPublish/AffectPublish';
 import CommentSection from '../../components/Blog/CommentSection/CommentSection.jsx';
 import styles from './BlogPost.module.css';
 import { useOutletContext } from 'react-router-dom';
 import formatDateTime from '../../utils/formatDateTime';
 import DOMPurify from 'dompurify';
 import Modal from '../../components/Modal/Modal';
-import EditDeleteIcons from '../../../author-frontend/src/components/EditDeleteIcons/EditDeleteIcons.jsx';
+import EditDeleteIcons from '../../components/EditDeleteIcons/EditDeleteIcons.jsx';
 import { useNavigate } from 'react-router-dom';
-
-import EditorComponent from '../../../author-frontend/src/components/EditorComponent/EditorComponent';
+import EditorComponent from '../../components/EditorComponent/EditorComponent';
 import { deleteBlogPost, updateBlogPost } from '../../services/blogPostService';
 
 const BlogPost = () => {
