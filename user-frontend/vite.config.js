@@ -12,13 +12,30 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      external: ['react', 'react-dom', 'react-router-dom', 'dompurify'],
+      external: [
+        'react',
+        'react-dom',
+        'react-router-dom',
+        'dompurify',
+        'prop-types',
+        '@mdi/js',
+        '@mdi/react',
+        'jwt-decode',
+        'masonry-layout',
+        'isomorphic-dompurify',
+      ],
       output: {
         globals: {
           'react': 'React',
           'react-dom': 'ReactDOM',
           'react-router-dom': 'ReactRouterDOM',
           'dompurify': 'DOMPurify',
+          'prop-types': 'PropTypes',
+          '@mdi/js': 'mdiJs',
+          '@mdi/react': 'mdiReact',
+          'jwt-decode': 'jwtDecode',
+          'masonry-layout': 'Masonry',
+          'isomorphic-dompurify': 'isomorphicDOMPurify',
         },
       },
     },
