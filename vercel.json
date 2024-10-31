@@ -1,0 +1,24 @@
+{
+  "builds": [
+    {
+      "src": "user-frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    },
+    {
+      "src": "author-frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/author/(.*)",
+      "dest": "author-frontend/dist/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "user-frontend/dist/$1"
+    }
+  ]
+}
