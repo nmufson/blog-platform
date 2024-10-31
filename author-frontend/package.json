@@ -13,6 +13,7 @@
     "@mdi/js": "^7.4.47",
     "@mdi/react": "^1.6.1",
     "@tinymce/tinymce-react": "^5.1.1",
+    "@types/dompurify": "^3.0.5",
     "dompurify": "^3.1.7",
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",

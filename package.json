@@ -39,6 +39,7 @@
   "dependencies": {
     "@mdi/js": "^7.4.47",
     "@mdi/react": "^1.6.1",
+    "@types/dompurify": "^3.0.5",
     "dompurify": "^3.1.7",
     "isomorphic-dompurify": "^2.16.0",
     "jwt-decode": "^4.0.0",
