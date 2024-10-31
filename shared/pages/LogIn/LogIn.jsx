@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { logInUser } from '../../services/LogInService';
-import { useNavigate } from 'react-router-dom';
-import { useOutletContext } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
 import { validateLogin, handleAuthError } from './LogIn';
 import LabelInput from '../../../author-frontend/src/components/LabelInput/LabelInput';
 import styles from './LogIn.module.css';
@@ -15,7 +12,6 @@ const LogIn = () => {
     emailError: '',
     passwordError: '',
   });
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
