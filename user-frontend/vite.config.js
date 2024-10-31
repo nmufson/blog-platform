@@ -23,6 +23,7 @@ export default defineConfig({
         'jwt-decode',
         'masonry-layout',
         'isomorphic-dompurify',
+        '@tinymce/tinymce-react',
       ],
       output: {
         globals: {
@@ -36,6 +37,7 @@ export default defineConfig({
           'jwt-decode': 'jwtDecode',
           'masonry-layout': 'Masonry',
           'isomorphic-dompurify': 'isomorphicDOMPurify',
+          '@tinymce/tinymce-react': 'Editor',
         },
       },
     },
