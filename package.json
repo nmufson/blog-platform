@@ -3,8 +3,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "build": "npm run build:user && npm run build:author",
-    "build:user": "cd user-frontend && npm run build",
-    "build:author": "cd author-frontend && npm run build"
+    "build:user": "cd user-frontend && npm install && npm run build",
+    "build:author": "cd author-frontend && npm install && npm run build"
   },
   "jest": {
     "testEnvironment": "jest-environment-jsdom",
