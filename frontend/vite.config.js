@@ -12,6 +12,17 @@ export default defineConfig({
   // },
   // build: {
   //   rollupOptions: {
+  //     external: ['@mdi/js', '@mdi/react'],
+  //     output: {
+  //       globals: {
+  //         '@mdi/js': 'mdiJs',
+  //         '@mdi/react': 'mdiReact',
+  //       },
+  //     },
+  //   },
+  // },
+  // build: {
+  //   rollupOptions: {
   //     external: [
   //       'react',
   //       'react-dom',
