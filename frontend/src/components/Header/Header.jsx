@@ -1,10 +1,9 @@
 import styles from './Header.module.css';
 import PropTypes from 'prop-types';
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate, useOutlet, useOutletContext } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 import React from 'react';
-import Modal from '../../../shared/components/Modal/Modal';
+import Modal from '../Modal/Modal';
 import { useModal } from '../../hooks/useModal/useModal';
 
 const Header = ({ user, setUser }) => {

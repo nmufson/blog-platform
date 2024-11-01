@@ -3,15 +3,14 @@ import {
   RouterProvider,
   redirect,
 } from 'react-router-dom';
-import { fetchLatestPostId } from '../../shared/services/blogPostService.js';
 
-import '../../shared/styles/index.css';
-import SignUp from '../../shared/pages/SignUp/SignUp.jsx';
-import Home from '../../shared/pages/Home/Home.jsx';
-import About from '../../shared/pages/About/About';
-import LogIn from '../../shared/pages/LogIn/LogIn.jsx';
-import Layout from '../../shared/components/Layout/Layout.jsx';
-import BlogPost from '../../shared/pages/BlogPost/BlogPost.jsx';
+import './styles/index.css';
+import SignUp from './pages/SignUp/SignUp.jsx';
+import Home from './pages/Home/Home.jsx';
+import About from './pages/About/About';
+import LogIn from './pages/LogIn/LogIn.jsx';
+import Layout from './components/Layout/Layout.jsx';
+import BlogPost from './pages/BlogPost/BlogPost.jsx';
 
 const router = createBrowserRouter([
   {
