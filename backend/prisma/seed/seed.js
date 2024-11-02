@@ -104,8 +104,8 @@ async function main() {
       published: true,
       timestamp: new Date(),
       imageURL:
-        'https://gurmentor.com/wp-content/uploads/2020/06/gurmentor.com-best-techniques-for-learning-a-foreign-language-2020-06-18_14-13-33_992016.jpg',
-      imageAltText: 'Art depicting different languages around the world',
+        'https://www.missiontolearn.com/wp-content/uploads/2009/12/learn-language-online-48592459_m.jpg',
+      imageAltText: 'Several language textbooks atop a world map',
     },
     {
       title: 'The Benefits of Maintaining a Consistent Sleep-Wake Routine',

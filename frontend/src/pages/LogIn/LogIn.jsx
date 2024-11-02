@@ -25,7 +25,7 @@ const LogIn = () => {
     }
 
     try {
-      const data = await logInUser(formData.email, formData.password); // Call the login service
+      const data = await logInUser(formData.email, formData.password);
       localStorage.setItem('token', data.token);
 
       window.location.href = '/home';

@@ -1,9 +1,10 @@
 .publishDiv {
+  align-self: start;
   margin-bottom: 20px;
 }
 
 .publishMessage {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
 }
 
 .linkButton {
@@ -13,7 +14,7 @@
 .linkButton {
   background: none;
   border: none;
-  color: blue; /* change this later */
+  color: blue;
   cursor: pointer;
   padding: 0;
   box-shadow: none;

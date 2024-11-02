@@ -1,4 +1,4 @@
-.Backdrop {
+.backdrop {
   position: fixed;
   top: 0;
   left: 0;
@@ -8,7 +8,7 @@
   z-index: 999; /* Ensure the backdrop appears behind the modal */
 }
 
-.Modal {
+.modal {
   background-color: var(--light-gray);
   position: fixed;
   top: 50%;
@@ -25,23 +25,23 @@
   border-radius: 8px;
 }
 
-.Modal h2 {
+.modal h2 {
   font-size: 1.7rem;
 }
 
-.Modal p,
-.Modal button {
+.modal p,
+.modal button {
   font-size: 1.3rem;
 }
 
-.ButtonGroup {
+.buttonGroup {
   margin-top: 1.5rem;
   display: flex;
   justify-content: space-around;
 }
 
-.CancelButton,
-.ConfirmButton {
+.cancelButton,
+.confirmButton {
   padding: 0.5rem 1rem;
   border-radius: 4px;
   border: none;
@@ -51,13 +51,13 @@
     color 0.3s;
 }
 
-.CancelButton {
+.cancelButton {
   background-color: var(--teal);
   color: var(--white);
   margin-right: 10px;
 }
 
-.ConfirmButton {
+.confirmButton {
   background-color: var(--alert);
   color: var(--white);
 }

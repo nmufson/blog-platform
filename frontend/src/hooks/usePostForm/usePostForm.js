@@ -1,7 +1,7 @@
 // usePostForm.js
 import { useState } from 'react';
 import DOMPurify from 'dompurify';
-import { validateField } from '../../../author-frontend/src/pages/NewPost/NewPost.js'; // Assuming you have this utility
+import { validateField } from '../../pages/NewPost/NewPost.js'; // Assuming you have this utility
 
 export const usePostForm = () => {
   const [post, setPost] = useState({

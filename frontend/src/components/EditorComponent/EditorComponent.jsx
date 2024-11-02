@@ -15,13 +15,11 @@ function EditorComponent({
       <Editor
         apiKey="fzq8ut8l4whwspu2pqzxwf84ukek80fotkywi6xvv99jpk5y"
         onInit={(_evt, editor) => (editorRef.current = editor)}
-        value={content} // Control the value of the editor
+        value={content}
         onEditorChange={(newContent) => {
-          // Call the parent component's onContentChange function
           onContentChange(newContent);
         }}
         onBlur={() => {
-          // Call the parent component's onBlur function when the editor loses focus
           onBlur();
         }}
         onClick={() => {

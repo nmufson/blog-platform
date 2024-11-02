@@ -1,4 +1,4 @@
-.Comment {
+.comment {
   display: flex;
   font-size: 1.3rem;
   flex-direction: column;
@@ -11,20 +11,20 @@
   padding: 10px 10px 5px 10px;
 }
 
-.Comment div:first-child {
+.comment div:first-child {
   display: flex;
   justify-content: space-between;
 }
 
-.Comment small {
+.comment small {
   align-self: end;
 }
 
-.Comment svg {
+.comment svg {
   height: 35px;
 }
 
-.Comment svg:hover {
+.comment svg:hover {
   height: 35px;
   transform: scale(1.2);
 }

@@ -15,7 +15,7 @@ import { deleteBlogPost, updateBlogPost } from '../../services/blogPostService';
 
 const BlogPost = () => {
   const { postId } = useParams();
-  const location = useLocation(); // Access state passed from navigation
+  const location = useLocation();
   const [post, setPost] = useState(location.state?.post || null);
   const [postContent, setPostContent] = useState(post?.content || '');
   const [postTitle, setPostTitle] = useState(post?.title || '');
@@ -34,7 +34,7 @@ const BlogPost = () => {
       try {
         const data = await fetchBlogPostById(postId);
         const post = data.post;
-        setPost(post); // Assuming the post is nested under `data.post`
+        setPost(post);
         setPostTitle(post.title);
         setPostContent(post.content);
       } catch (error) {
@@ -60,7 +60,6 @@ const BlogPost = () => {
     setIsModalOpen(false);
   };
 
-  // should i be concerned about scripts going into state? like post.title, post.content?
   const createUpdatePostFunction = () => {
     return async (newPublishedStatus = null) => {
       try {
@@ -85,7 +84,6 @@ const BlogPost = () => {
       await deleteBlogPost(user, post.id);
 
       navigate('/home');
-      // Optionally, you might want to redirect or update the UI here
     } catch (error) {
       console.error('Failed to delete post:', error);
     }
@@ -93,9 +91,9 @@ const BlogPost = () => {
 
   return (
     <>
-      <div className={styles.BlogPost}>
+      <div className={styles.blogPost}>
         <div className={styles.postContainer}>
-          <div className={styles.BlogHeader}>
+          <div className={styles.blogHeader}>
             {isEditing ? (
               <input
                 value={postTitle}
@@ -105,8 +103,8 @@ const BlogPost = () => {
             ) : (
               <h1>{post.title}</h1>
             )}
-            <p className={styles.AuthorName}>{post.user.username}</p>
-            <p className={styles.DateTime}>
+            <p className={styles.authorName}>{post.user.username}</p>
+            <p className={styles.dateTime}>
               {date}, {time}
             </p>
           </div>
@@ -142,7 +140,7 @@ const BlogPost = () => {
         </div>
 
         {user?.id === post.userId && (
-          <div className={styles.EditDeleteContainer}>
+          <div className={styles.editDeleteContainer}>
             <EditDeleteIcons
               setIsModalOpen={setIsModalOpen}
               setModalType={setModalType}

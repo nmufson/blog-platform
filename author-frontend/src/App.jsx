@@ -23,12 +23,12 @@ const router = createBrowserRouter([
           return redirect('/home');
         },
       },
-      { path: 'home', element: <Home /> }, // Home page with blog previews
-      { path: 'about', element: <About /> }, // About page
+      { path: 'home', element: <Home /> },
+      { path: 'about', element: <About /> },
       { path: 'login', element: <LogIn /> },
       { path: 'signup', element: <SignUp /> },
       {
-        path: 'posts/:postId', // Dynamic route for a specific blog post
+        path: 'posts/:postId',
         element: <BlogPost />,
       },
       { path: 'newpost', element: <NewPost /> },

@@ -1,10 +1,10 @@
-.Home {
+.home {
   display: flex;
   flex-direction: column;
-  width: clamp(300px, 80vw, 1200px);
+  width: clamp(300px, 70vw, 1200px);
 }
 
-.Home * {
+.home * {
   font-size: 1.3rem;
 }
 

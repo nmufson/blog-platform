@@ -17,7 +17,7 @@ const Comment = ({ comment, openModal, post }) => {
 
   return (
     <li>
-      <div className={styles.Comment}>
+      <div className={styles.comment}>
         <div>
           <strong>{username}</strong>
           {user && (comment.userId === user.id || post.userId === user.id) && (
@@ -53,7 +53,7 @@ Comment.propTypes = {
   }).isRequired,
   openModal: PropTypes.func.isRequired,
   post: PropTypes.shape({
-    userId: PropTypes.number.isRequired, // User ID of the post's author
+    userId: PropTypes.number.isRequired,
   }).isRequired,
 };
 

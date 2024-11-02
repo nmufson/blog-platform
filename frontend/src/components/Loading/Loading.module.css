@@ -3,10 +3,9 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 100vh; /* Full height to center the spinner */
-  background-color: var(
-    --light-gray
-  ); /* You can use your custom CSS variable here */
+  height: 100vh;
+  width: 100%;
+  background-color: var(--white);
 }
 
 .spinner {

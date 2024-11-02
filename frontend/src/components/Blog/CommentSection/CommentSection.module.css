@@ -1,16 +1,20 @@
-.CommentSection h2 {
+.commentSection {
+  width: 100%;
+}
+
+.commentSection h2 {
   font-size: 1.7rem;
 }
 
-.CommentSection li {
+.commentSection li {
   list-style-type: none;
 }
 
-.CommentSection p {
-  font-size: 1.3rem;
+.commentSection p {
+  font-size: 1.1rem;
 }
 
-.CommentSection a:hover {
+.commentSection a:hover {
   font-weight: bold;
   color: var(--deep-teal);
 }
@@ -30,7 +34,7 @@
   width: 100%;
   resize: vertical; /* Allow vertical resize for better UX */
   font-family: inherit; /* Use the same font as the rest of your app */
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   transition: border-color 0.2s ease-in-out; /* Smooth border transition */
 }
 

@@ -52,9 +52,8 @@ const SignUp = () => {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent the default form submission behavior
+    event.preventDefault();
 
-    // array of validation promises
     const validationPromises = Object.keys(formData).map((field) =>
       validateField(field, formData[field], formData, setFormErrors),
     );
@@ -66,7 +65,7 @@ const SignUp = () => {
     }
 
     try {
-      const data = await signUpUser(formData); // Use signupUser function with the formData
+      const data = await signUpUser(formData);
       localStorage.setItem('token', data.token);
 
       window.location.href = '/';

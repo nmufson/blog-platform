@@ -5,7 +5,7 @@ import styles from './BlogPreview.module.css';
 import formatDateTime from '../../../utils/formatDateTime';
 
 const BlogPreview = ({ post }) => {
-  const navigate = useNavigate(); // Hook to programmatically navigate
+  const navigate = useNavigate();
 
   const handlePostClick = () => {
     navigate(`/posts/${post.id}`, { state: { post } });
@@ -15,7 +15,7 @@ const BlogPreview = ({ post }) => {
   const formattedDate = date;
 
   return (
-    <div onClick={handlePostClick} className={styles.BlogPreview}>
+    <div onClick={handlePostClick} className={styles.blogPreview}>
       <>
         <img
           src={post.imageURL}

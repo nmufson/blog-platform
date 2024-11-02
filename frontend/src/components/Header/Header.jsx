@@ -20,7 +20,7 @@ const Header = ({ user, setUser }) => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownOpen(false); // Close dropdown if click is outside
+        setIsDropdownOpen(false);
       }
     };
 
@@ -39,7 +39,7 @@ const Header = ({ user, setUser }) => {
 
   return (
     <>
-      <header className={styles.Header}>
+      <header className={styles.header}>
         <h1>
           <a href="/home">Nick's Blog</a>
         </h1>
@@ -52,15 +52,15 @@ const Header = ({ user, setUser }) => {
               <a href="/about">About</a>
             </li>
             {user ? (
-              <li className={styles.UserMenu} ref={dropdownRef}>
-                <button onClick={toggleDropdown} className={styles.UserButton}>
+              <li className={styles.userMenu} ref={dropdownRef}>
+                <button onClick={toggleDropdown} className={styles.userButton}>
                   {user.username}
                 </button>
                 {isDropdownOpen && (
                   <button
                     onClick={() => {
                       openModal();
-                      setIsDropdownOpen(false); // Close dropdown when log out is clicked
+                      setIsDropdownOpen(false);
                     }}
                   >
                     Log Out

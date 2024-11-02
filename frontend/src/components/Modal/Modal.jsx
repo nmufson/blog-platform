@@ -18,15 +18,15 @@ const Modal = ({
 
   return (
     <>
-      <div className={styles.Backdrop} onClick={onClose} />
-      <div className={styles.Modal}>
+      <div className={styles.backdrop} onClick={onClose} />
+      <div className={styles.modal}>
         <h2>{title}</h2>
         <p>{message}</p>
-        <div className={styles.ButtonGroup}>
-          <button onClick={onClose} className={styles.CancelButton}>
+        <div className={styles.buttonGroup}>
+          <button onClick={onClose} className={styles.cancelButton}>
             Cancel
           </button>
-          <button onClick={onConfirm} className={styles.ConfirmButton}>
+          <button onClick={onConfirm} className={styles.confirmButton}>
             {confirmText}
           </button>
         </div>

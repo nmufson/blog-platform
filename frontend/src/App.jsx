@@ -11,6 +11,7 @@ import About from './pages/About/About';
 import LogIn from './pages/LogIn/LogIn.jsx';
 import Layout from './components/Layout/Layout.jsx';
 import BlogPost from './pages/BlogPost/BlogPost.jsx';
+import NewPost from './pages/NewPost/NewPost.jsx';
 
 const router = createBrowserRouter([
   {
@@ -23,14 +24,15 @@ const router = createBrowserRouter([
           return redirect('/home');
         },
       },
-      { path: 'home', element: <Home /> }, // Home page with blog previews
-      { path: 'about', element: <About /> }, // About page
+      { path: 'home', element: <Home /> },
+      { path: 'about', element: <About /> },
       { path: 'login', element: <LogIn /> },
       { path: 'signup', element: <SignUp /> },
       {
-        path: 'posts/:postId', // Dynamic route for a specific blog post
+        path: 'posts/:postId',
         element: <BlogPost />,
       },
+      { path: 'newpost', element: <NewPost /> },
     ],
   },
 ]);

@@ -1,11 +1,11 @@
 import React from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
-import { usePostForm } from '../../../../shared/hooks/usePostForm/usePostForm';
-import { useModal } from '../../../../shared/hooks/useModal/useModal';
-import { newBlogPost } from '../../../../shared/services/blogPostService.js';
-import LabelInput from '../../../../shared/components/LabelInput/LabelInput.jsx';
-import EditorComponent from '../../../../shared/components/EditorComponent/EditorComponent.jsx';
-import Modal from '../../../../shared/components/Modal/Modal.jsx';
+import { usePostForm } from '../../hooks/usePostForm/usePostForm';
+import { useModal } from '../../hooks/useModal/useModal';
+import { newBlogPost } from '../../services/blogPostService.js';
+import LabelInput from '../../components/LabelInput/LabelInput.jsx';
+import EditorComponent from '../../components/EditorComponent/EditorComponent.jsx';
+import Modal from '../../components/Modal/Modal.jsx';
 import styles from './NewPost.module.css';
 
 const NewPost = () => {
@@ -28,7 +28,6 @@ const NewPost = () => {
   };
 
   const submitPost = async (e, publish) => {
-    // e.preventDefault();
     if (post.content.trim() === '') return;
 
     try {

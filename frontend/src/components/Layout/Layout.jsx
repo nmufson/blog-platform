@@ -4,6 +4,7 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
 import { useAuth } from '../../hooks/useAuth/useAuth';
+import Loading from '../Loading/Loading';
 
 const Layout = () => {
   const { user, setUser, loading } = useAuth();
@@ -14,7 +15,7 @@ const Layout = () => {
   }, [location]);
 
   if (loading) {
-    return <div>Loading...</div>; // Or a more sophisticated loading component
+    return <Loading></Loading>;
   }
 
   return (

@@ -1,4 +1,4 @@
-footer {
+.footer {
   min-height: 100px;
   display: flex;
   justify-content: center;
@@ -6,11 +6,11 @@ footer {
   text-align: center;
 }
 
-footer p,
-footer a {
+.footer p,
+.footer a {
   color: var(--white);
 }
 
-footer * {
-  font-size: 1.3rem;
+.footer * {
+  font-size: 1.1rem;
 }

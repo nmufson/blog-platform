@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Comment from '../Comment/Comment'; // Assuming you have a Comment component
+import Comment from '../Comment/Comment';
 import { useOutletContext, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import styles from './CommentSection.module.css';
@@ -91,7 +91,7 @@ const CommentSection = ({ postId }) => {
 
   return (
     <>
-      <div className={styles.CommentSection}>
+      <div className={styles.commentSection}>
         <h2>Comments</h2>
         {user ? (
           <form onSubmit={handleCommentSubmit} className={styles.commentForm}>
