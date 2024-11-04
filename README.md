@@ -23,11 +23,17 @@ https://blog-platform-8okj8n72u-nmufsons-projects.vercel.app/
     - Visit the home page to view a collection of blog posts.
     - Click on any post title or image to read the full article.
 
+![Home Page with blog previews](./assets/home-page.png)
+
+![Blog Post page](./assets/blog-post.png)
 
 2. **Creating an Account**:
     - Navigate to the Sign Up page from the main menu.
     - Fill in your details to create a new account.
     - Optionally, enter an author code if you have one (this grants additional privileges).
+
+![Sign Up form](./assets/sign-up.png)
+
 ### For Regular Users
 3. **Commenting on Posts**:
     - Once logged in, you can leave comments on any blog post.
@@ -41,6 +47,9 @@ https://blog-platform-8okj8n72u-nmufsons-projects.vercel.app/
         - Image URL
         - Image description (for alt text)
     - Choose to either save as a draft or publish immediately.
+   
+![New Post Page](./assets/new-post.png)
+
 5. **Managing Posts**:
     - Edit your posts at any time by clicking the "Edit" icon on your post.
     - Delete your posts using the "Delete" button.
