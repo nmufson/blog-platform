@@ -76,7 +76,7 @@ const NewPost = () => {
         </div>
         <div className="form-group">
           <LabelInput
-            label="Image URL (optional):"
+            label="Image URL:"
             name="imageURL"
             placeholder="Image URL"
             value={post.imageURL}
