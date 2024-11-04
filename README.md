@@ -17,7 +17,7 @@ https://blog-platform-8okj8n72u-nmufsons-projects.vercel.app/
 - PostgreSQL
 - Prisma ORM for database management
 
-## Usage
+## Features
 
 ### For All Visitors
 1. **Browsing Posts**:
