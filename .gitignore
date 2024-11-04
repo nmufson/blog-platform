@@ -4,6 +4,5 @@
 **/dist
 **/.env
 **/node_modules
-**/*.test.js
 
 .env
