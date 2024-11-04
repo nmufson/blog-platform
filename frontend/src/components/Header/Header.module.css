@@ -35,9 +35,9 @@
 
 .header ul a,
 .header ul button {
-  text-decoration: none; /* Remove underline from links */
+  text-decoration: none;
   font-size: 1.5rem;
-  padding: 0.5rem 1rem; /* Padding around links */
+  padding: 0.5rem 1rem;
   border-radius: 0;
 }
 
@@ -46,9 +46,9 @@
 }
 
 .header button:nth-child(2) {
-  position: absolute; /* Position it relative to the first button */
-  top: 100%; /* Position it directly below the first button */
-  left: 0; /* Align with the left edge of the first button */
+  position: absolute;
+  top: 100%;
+  left: 0;
   width: 100%;
 }
 

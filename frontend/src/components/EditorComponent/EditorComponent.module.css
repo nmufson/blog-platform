@@ -1,9 +1,6 @@
 .my-editor-body {
-  background-color: var(--light-gray); /* Content area background */
+  background-color: var(--light-gray);
 }
-
-/* .tox-toolbar__group {
-} */
 
 .tox-tinymce {
   border: 2px solid black;
@@ -11,9 +8,7 @@
 
 .tox-tinymce,
 .tox.tinymce * {
-  background-color: var(
-    --light-gray
-  ); /* Optional: editor container background */
+  background-color: var(--light-gray);
 }
 
 .tox-tinymce {

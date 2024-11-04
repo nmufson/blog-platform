@@ -76,7 +76,7 @@ button:hover {
 
 form button:hover {
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px); /* Lift up slightly */
+  transform: translateY(-2px);
 }
 
 footer {
@@ -196,17 +196,6 @@ button:hover {
 
 .input-error {
   border: 1px solid red;
-}
-
-input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 30px #afc1e2 inset !important; /* Match your desired background */
-  box-shadow: 0 0 0 30px #afc1e2 inset !important; /* Match your desired background */
-  -webkit-text-fill-color: #0f4c75; /* Set text color to your body text color */
-}
-
-input:-webkit-autofill:focus {
-  border-color: #1b262c;
-  box-shadow: 0 0 0 3px rgba(27, 38, 44, 0.2);
 }
 
 .tox-tinymce.tox-tinymce {
