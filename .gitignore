@@ -4,5 +4,6 @@
 **/dist
 **/.env
 **/node_modules
+author-frontend/
 
 .env
