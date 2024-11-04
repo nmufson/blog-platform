@@ -7,6 +7,7 @@ https://blog-platform-8okj8n72u-nmufsons-projects.vercel.app/
 ### Frontend
 - React.js
 - React Router
+- Vitest
 ### Backend
 - Node.js
 - Express.js
@@ -23,11 +24,23 @@ https://blog-platform-8okj8n72u-nmufsons-projects.vercel.app/
     - Visit the home page to view a collection of blog posts.
     - Click on any post title or image to read the full article.
 
+![Home Page with blog previews](./assets/home-page.png)
+
+*Home Page with blog previews*
+
+![Blog Post page](./assets/blog-post.png)
+
+*Blog Post Page*
 
 2. **Creating an Account**:
     - Navigate to the Sign Up page from the main menu.
     - Fill in your details to create a new account.
     - Optionally, enter an author code if you have one (this grants additional privileges).
+
+![Sign Up form](./assets/sign-up.png)
+
+*Sign Up form with option to join as an author*
+
 ### For Regular Users
 3. **Commenting on Posts**:
     - Once logged in, you can leave comments on any blog post.
@@ -41,6 +54,11 @@ https://blog-platform-8okj8n72u-nmufsons-projects.vercel.app/
         - Image URL
         - Image description (for alt text)
     - Choose to either save as a draft or publish immediately.
+   
+![New Post Page](./assets/new-post.png)
+
+*New Post Page*
+
 5. **Managing Posts**:
     - Edit your posts at any time by clicking the "Edit" icon on your post.
     - Delete your posts using the "Delete" button.
@@ -109,6 +127,23 @@ Our blog application uses PostgreSQL as the database, with Prisma as the ORM. He
 - Relations:
     - Belongs to one User
     - Belongs to one Post
+
+## Testing
+
+### Testing Libraries
+- **Vitest**
+- **React Testing Library**
+- **@testing-library/jest-dom**
+
+### Test Coverage
+- Components and pages are tested for:
+  - User interactions (clicks, form inputs, etc.)
+  - Conditional rendering
+  - Error states
+  - Loading states
+  - API integration
+  - Custom hooks
+  - Routing behavior
 
 ## Contact Info
 For questions, suggestions, or feedback, please contact me at nickmufson1@gmail.com.
