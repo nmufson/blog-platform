@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import { Editor } from '@tinymce/tinymce-react';
+const myKey = import.meta.env.VITE_TINYMCE_API_KEY;
 
 function EditorComponent({ content, onContentChange = () => {} }) {
   return (
     <>
       <Editor
-        apiKey="fzq8ut8l4whwspu2pqzxwf84ukek80fotkywi6xvv99jpk5y"
+        apiKey={myKey}
         value={content}
         onEditorChange={onContentChange}
         init={{
