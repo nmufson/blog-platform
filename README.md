@@ -7,6 +7,7 @@ https://blog-platform-8okj8n72u-nmufsons-projects.vercel.app/
 ### Frontend
 - React.js
 - React Router
+- Vitest
 ### Backend
 - Node.js
 - Express.js
@@ -126,6 +127,23 @@ Our blog application uses PostgreSQL as the database, with Prisma as the ORM. He
 - Relations:
     - Belongs to one User
     - Belongs to one Post
+
+## Testing
+
+### Testing Libraries
+- **Vitest**
+- **React Testing Library**
+- **@testing-library/jest-dom**
+
+### Test Coverage
+- Components and pages are tested for:
+  - User interactions (clicks, form inputs, etc.)
+  - Conditional rendering
+  - Error states
+  - Loading states
+  - API integration
+  - Custom hooks
+  - Routing behavior
 
 ## Contact Info
 For questions, suggestions, or feedback, please contact me at nickmufson1@gmail.com.
