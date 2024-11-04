@@ -1,6 +1,8 @@
 # Full-Stack Blog Project
 
-Full-stack blogging platform integrating a backend with two frontends, offering a tailored experience for both authors and regular users.
+Full-stack blogging platform integrating a backend with a dynamic frontend that offers a tailored experience for both authors and regular users.
+## Live Demo 
+https://blog-platform-8okj8n72u-nmufsons-projects.vercel.app/
 ## Technologies Used
 ### Frontend
 - React.js
@@ -20,6 +22,8 @@ Full-stack blogging platform integrating a backend with two frontends, offering 
 1. **Browsing Posts**:
     - Visit the home page to view a collection of blog posts.
     - Click on any post title or image to read the full article.
+
+
 2. **Creating an Account**:
     - Navigate to the Sign Up page from the main menu.
     - Fill in your details to create a new account.
@@ -105,3 +109,6 @@ Our blog application uses PostgreSQL as the database, with Prisma as the ORM. He
 - Relations:
     - Belongs to one User
     - Belongs to one Post
+
+## Contact Info
+For questions, suggestions, or feedback, please contact me at nickmufson1@gmail.com.
