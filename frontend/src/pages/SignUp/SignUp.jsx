@@ -125,6 +125,7 @@ const SignUp = () => {
             label="Confirm Password:"
             name="confirmPassword"
             value={formData.confirmPassword}
+            placeholder="confirm password"
             type="password"
             formErrors={formErrors}
             onBlur={handleBlur}
@@ -137,6 +138,7 @@ const SignUp = () => {
             label="Author Code:"
             name="authorCode"
             value={formData.authorCode}
+            placeholder="author code"
             type="password"
             formErrors={formErrors}
             onBlur={handleBlur}
