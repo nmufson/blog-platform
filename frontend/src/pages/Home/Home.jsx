@@ -1,8 +1,9 @@
 import { useOutletContext } from 'react-router-dom';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import BlogPreview from '../../components/Blog/BlogPreview/BlogPreview';
 import shuffleArr from '../../utils/shuffleArr';
 import { fetchBlogPosts } from '../../services/blogPostService';
+import { useAuth } from '../../hooks/useAuth/useAuth';
 import styles from './Home.module.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,6 +12,7 @@ const Home = () => {
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
+  const { loading, setLoading } = useAuth();
 
   useEffect(() => {
     const loadPosts = async () => {
@@ -18,7 +20,9 @@ const Home = () => {
         const data = await fetchBlogPosts();
         setPosts(data.posts);
       } catch (error) {
-        setError('Failed to load posts');
+        setError(error.message || 'Failed to load posts');
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -28,6 +32,10 @@ const Home = () => {
   const onButtonClick = () => {
     navigate('/newpost');
   };
+
+  if (loading) {
+    return null;
+  }
 
   if (error) {
     return <p>{error}</p>;
@@ -40,28 +48,36 @@ const Home = () => {
 
   return (
     <>
-      <div className={styles.home}>
-        {user?.canPost && (
-          <button onClick={onButtonClick}>Draft New Post</button>
-        )}
+      {posts.length > 0 ? (
+        <div className={styles.home}>
+          {user?.canPost && (
+            <button onClick={onButtonClick} className={styles.newPost}>
+              Draft New Post
+            </button>
+          )}
 
-        <div className={styles.topGridContainer}>
-          {firstFourPosts.map((post) => (
-            <BlogPreview key={post.id} post={post} />
-          ))}
-        </div>
-        <div className={styles.headingDiv}>
-          <h3>Other Posts</h3>
-          <hr />
-        </div>
-        {remainingPosts.length > 0 && (
-          <div className={styles.otherPostsContainer}>
-            {remainingPosts.map((post) => (
+          <div className={styles.topGridContainer}>
+            {firstFourPosts.map((post) => (
               <BlogPreview key={post.id} post={post} />
             ))}
           </div>
-        )}
-      </div>
+          <div className={styles.headingDiv}>
+            <h3>Other Posts</h3>
+            <hr />
+          </div>
+          {remainingPosts.length > 0 && (
+            <div className={styles.otherPostsContainer}>
+              {remainingPosts.map((post) => (
+                <BlogPreview key={post.id} post={post} />
+              ))}
+            </div>
+          )}
+        </div>
+      ) : (
+        <div>
+          <p>No posts yet.</p>
+        </div>
+      )}
     </>
   );
 };

@@ -1,31 +1,13 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { Editor } from '@tinymce/tinymce-react';
 
-function EditorComponent({
-  content,
-  onContentChange = () => {},
-  onBlur = () => {},
-  editorRef = { current: null },
-  setTitleFocused = () => {},
-  setEditorFocused = () => {},
-}) {
+function EditorComponent({ content, onContentChange = () => {} }) {
   return (
     <>
       <Editor
         apiKey="fzq8ut8l4whwspu2pqzxwf84ukek80fotkywi6xvv99jpk5y"
-        onInit={(_evt, editor) => (editorRef.current = editor)}
         value={content}
-        onEditorChange={(newContent) => {
-          onContentChange(newContent);
-        }}
-        onBlur={() => {
-          onBlur();
-        }}
-        onClick={() => {
-          setTitleFocused(false);
-          setEditorFocused(true);
-        }}
+        onEditorChange={onContentChange}
         init={{
           height: 500,
           menubar: false,

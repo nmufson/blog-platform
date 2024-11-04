@@ -26,7 +26,6 @@ export const handleAuthError = (error, setFormErrors) => {
       passwordError: 'Incorrect password. Please try again.',
     }));
   } else {
-    // Handle other types of errors or set a general error message
     setFormErrors((prevErrors) => ({
       ...prevErrors,
       passwordError: 'An unexpected error occurred. Please try again later.',

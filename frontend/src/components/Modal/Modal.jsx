@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Modal.module.css';
 
@@ -18,7 +17,7 @@ const Modal = ({
 
   return (
     <>
-      <div className={styles.backdrop} onClick={onClose} />
+      <div className={styles.backdrop} onClick={onClose} role="complementary" />
       <div className={styles.modal}>
         <h2>{title}</h2>
         <p>{message}</p>

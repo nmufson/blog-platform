@@ -29,10 +29,6 @@ export const validateField = async (name, value, formData, setFormErrors) => {
       updatedErrors = validateConfirmPassword(value, formData.password);
       break;
 
-    // case 'authorCode':
-    //   updatedErrors = validateAuthorCode(value);
-    //   break;
-
     default:
       break;
   }
@@ -56,7 +52,7 @@ const validateEmail = async (value) => {
       if (isTaken) {
         updatedErrors.emailError = 'Email already in use';
       }
-    } catch (error) {
+    } catch {
       updatedErrors.emailError = 'Error checking email availability';
     }
   }
@@ -79,7 +75,7 @@ const validateUsername = async (value) => {
       if (isTaken) {
         updatedErrors.usernameError = 'Username already in use';
       }
-    } catch (error) {
+    } catch {
       updatedErrors.usernameError = 'Error checking username availability';
     }
   }
@@ -115,13 +111,3 @@ const validateConfirmPassword = (value, password) => {
 
   return updatedErrors;
 };
-
-// const validateAuthorCode = (value) => {
-//   const updatedErrors = { authorCodeError: '' };
-
-//   if (!value) {
-//     updatedErrors.authorCodeError = 'Author code cannot be blank';
-//   }
-
-//   return updatedErrors;
-// };

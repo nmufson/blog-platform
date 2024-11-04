@@ -1,4 +1,3 @@
-import React from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import { usePostForm } from '../../hooks/usePostForm/usePostForm';
 import { useModal } from '../../hooks/useModal/useModal';

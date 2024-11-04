@@ -59,16 +59,12 @@ const validateContent = (value) => {
   return updatedErrors;
 };
 
-const validateImageURL = (value, post) => {
+const validateImageURL = (value) => {
   const updatedErrors = { imageURLError: '' };
 
   if (!value) {
     updatedErrors.imageURLError = 'Image URL cannot be blank';
-  } else if (!post.imageAltText && !value) {
-    updatedErrors.imageURLError = '';
-    updatedErrors.imageAltTextError = '';
   } else {
-    // Regular expression to validate URL
     const urlPattern = new RegExp(
       /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg|webp))(\?.*)?$/i,
     );
@@ -80,7 +76,7 @@ const validateImageURL = (value, post) => {
   return updatedErrors;
 };
 
-const validateImageAltText = (value, post) => {
+const validateImageAltText = (value) => {
   const updatedErrors = { imageAltTextError: '' };
 
   if (!value) {
@@ -88,9 +84,6 @@ const validateImageAltText = (value, post) => {
   } else if (value.length === 50) {
     updatedErrors.imageAltTextError =
       'Alt text cannot be more than 50 characters';
-  } else if (!post.imageURL && !value) {
-    updatedErrors.imageAltTextError = '';
-    updatedErrors.imageURLError = '';
   }
 
   return updatedErrors;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { logInUser } from '../../services/LogInService';
-import { validateLogin, handleAuthError } from './LogIn';
+import { validateLogin, handleAuthError } from './LogInUtils';
 import LabelInput from '../../components/LabelInput/LabelInput';
 import styles from './LogIn.module.css';
 import DOMPurify from 'dompurify';

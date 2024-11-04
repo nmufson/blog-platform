@@ -4,6 +4,11 @@
   width: clamp(300px, 70vw, 1200px);
 }
 
+button.newPost {
+  width: 15rem;
+  align-self: center;
+}
+
 .home * {
   font-size: 1.3rem;
 }

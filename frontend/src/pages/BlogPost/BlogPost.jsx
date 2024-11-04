@@ -12,6 +12,7 @@ import EditDeleteIcons from '../../components/EditDeleteIcons/EditDeleteIcons.js
 import { useNavigate } from 'react-router-dom';
 import EditorComponent from '../../components/EditorComponent/EditorComponent';
 import { deleteBlogPost, updateBlogPost } from '../../services/blogPostService';
+import Loading from '../../components/Loading/Loading.jsx';
 
 const BlogPost = () => {
   const { postId } = useParams();
@@ -44,7 +45,7 @@ const BlogPost = () => {
     getPost();
   }, [postId]);
 
-  if (!post) return <div>Loading...</div>;
+  if (!post) return <Loading></Loading>;
 
   const handleAffectPublishClick = () => {
     setModalType('affectPublish');

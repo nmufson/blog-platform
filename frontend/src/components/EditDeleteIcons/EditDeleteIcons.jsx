@@ -1,5 +1,4 @@
 import Icon from '@mdi/react';
-import React from 'react';
 import PropTypes from 'prop-types';
 import { mdiTrashCanOutline } from '@mdi/js';
 import { mdiTextBoxEditOutline } from '@mdi/js';
@@ -28,7 +27,6 @@ const EditDeleteIcons = ({
 
   return (
     <>
-      {/* Edit Icon */}
       {isEditing ? (
         <Icon
           onClick={handleSaveClick}
@@ -45,7 +43,6 @@ const EditDeleteIcons = ({
         />
       )}
 
-      {/* Delete Icon */}
       <Icon
         onClick={handleDeleteClick}
         style={{ cursor: 'pointer' }}

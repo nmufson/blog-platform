@@ -1,6 +1,4 @@
-// useAuth.js
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -8,11 +6,11 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 export const useAuth = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  // const navigate = useNavigate();
 
   useEffect(() => {
     const verifyToken = async () => {
-      await delay(100); // Small delay to simulate network request
+      // include delay for smooth transitions
+      await delay(100);
       const token = localStorage.getItem('token');
 
       if (token) {
@@ -44,5 +42,5 @@ export const useAuth = () => {
     verifyToken();
   }, []);
 
-  return { user, setUser, loading };
+  return { user, setUser, loading, setLoading };
 };

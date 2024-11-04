@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { validateField } from './SignUp';
+import { useState } from 'react';
+import { validateField } from './SignUpUtils';
 import { signUpUser } from '../../services/signUpService';
 import DOMPurify from 'dompurify';
 import LabelInput from '../../components/LabelInput/LabelInput';
