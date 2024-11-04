@@ -136,7 +136,7 @@ const CommentSection = ({ postId }) => {
       </div>
       <Modal
         isOpen={isModalOpen}
-        onClose={closeModal}
+        closeModal={closeModal}
         onConfirm={handleConfirmDelete}
         title="Confirm Delete"
         message="Are you sure you want to delete this comment?"

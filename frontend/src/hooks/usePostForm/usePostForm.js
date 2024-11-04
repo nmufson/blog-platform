@@ -28,7 +28,6 @@ export const usePostForm = () => {
     setPost((prevPost) => {
       const updatedPost = { ...prevPost, [field]: DOMPurify.sanitize(value) };
 
-      // Validate the field
       validateField(name, value, updatedPost, setFormErrors);
 
       const areAllFieldsFilled = Object.keys(updatedPost).every(

@@ -34,25 +34,20 @@ vi.mock('../../components/Blog/CommentSection/CommentSection.jsx', () => ({
 }));
 
 vi.mock('../../components/Modal/Modal', () => ({
-  default: ({ isOpen, onConfirm }) =>
+  default: ({ isOpen, onConfirm, closeModal }) =>
     isOpen ? (
       <div data-testid="modal">
         <button onClick={onConfirm}>Confirm</button>
+        <button onClick={closeModal}>Cancel</button>
       </div>
     ) : null,
 }));
 
 vi.mock('../../components/EditDeleteIcons/EditDeleteIcons.jsx', () => ({
-  default: ({ setIsEditing, setIsModalOpen, setModalType }) => (
+  default: ({ openModal, setIsEditing }) => (
     <div data-testid="edit-delete-icons">
       <button onClick={() => setIsEditing(true)}>Edit</button>
-      <button
-        onClick={() => {
-          setModalType('delete');
-          setIsModalOpen(true);
-        }}
-        data-testid="delete-button"
-      >
+      <button onClick={() => openModal('delete')} data-testid="delete-button">
         Delete
       </button>
     </div>

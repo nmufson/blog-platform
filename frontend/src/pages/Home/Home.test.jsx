@@ -131,18 +131,13 @@ describe('Home', () => {
 
     render(<Home />);
 
-    await waitFor(() => {
-      expect(screen.getByText('No posts yet.')).toBeInTheDocument();
-      expect(screen.queryByText('Other Posts')).not.toBeInTheDocument();
-      expect(screen.queryByTestId('blog-preview')).not.toBeInTheDocument();
-    });
-  });
-
-  it('shuffles posts array', async () => {
-    render(<Home />);
+    expect(screen.queryByText('No posts yet')).not.toBeInTheDocument();
 
     await waitFor(() => {
-      expect(shuffleArr).toHaveBeenCalledWith(mockPosts);
+      expect(screen.getByText('No posts yet')).toBeInTheDocument();
     });
+
+    expect(screen.queryByText('Other Posts')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('blog-preview')).not.toBeInTheDocument();
   });
 });

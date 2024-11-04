@@ -1,6 +1,8 @@
 import { useParams, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { fetchBlogPostById } from '../../services/blogPostService';
+import { usePostForm } from '../../hooks/usePostForm/usePostForm';
+import { useModal } from '../../hooks/useModal/useModal';
 import AffectPublish from '../../components/AffectPublish/AffectPublish';
 import CommentSection from '../../components/Blog/CommentSection/CommentSection.jsx';
 import styles from './BlogPost.module.css';
@@ -13,43 +15,80 @@ import { useNavigate } from 'react-router-dom';
 import EditorComponent from '../../components/EditorComponent/EditorComponent';
 import { deleteBlogPost, updateBlogPost } from '../../services/blogPostService';
 import Loading from '../../components/Loading/Loading.jsx';
+import { useAuth } from '../../hooks/useAuth/useAuth.js';
 
 const BlogPost = () => {
   const { postId } = useParams();
   const location = useLocation();
-  const [post, setPost] = useState(location.state?.post || null);
-  const [postContent, setPostContent] = useState(post?.content || '');
-  const [postTitle, setPostTitle] = useState(post?.title || '');
-  const [modalType, setModalType] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
+  const [post, setPost] = useState(
+    location.state?.post || {
+      title: '',
+      content: '',
+      imageURL: '',
+      imageAltText: '',
+      user: { username: '' },
+      published: false,
+    },
+  );
+  const { isModalOpen, modalType, openModal, closeModal } = useModal();
   const [isEditing, setIsEditing] = useState(false);
+  const { loading, setLoading } = useAuth();
+  const { post: formData, onChange } = usePostForm();
 
   const { user } = useOutletContext();
   const { date, time } = formatDateTime(post?.timestamp);
-
-  const navigate = useNavigate();
 
   // tries to pull post data from location, calls api if it can't
   useEffect(() => {
     const getPost = async () => {
       try {
         const data = await fetchBlogPostById(postId);
-        const post = data.post;
-        setPost(post);
-        setPostTitle(post.title);
-        setPostContent(post.content);
+        setPost(data.post);
       } catch (error) {
         console.error('Error fetching post:', error);
+      } finally {
+        setLoading(false);
       }
     };
     getPost();
   }, [postId]);
 
-  if (!post) return <Loading></Loading>;
+  useEffect(() => {
+    if (post) {
+      onChange({ target: { value: post.title } }, 'title');
+      onChange({ target: { value: post.content } }, 'content');
+      onChange({ target: { value: post.imageURL } }, 'imageURL');
+      onChange({ target: { value: post.imageAltText } }, 'imageAltText');
+    }
+  }, [post]);
 
-  const handleAffectPublishClick = () => {
-    setModalType('affectPublish');
-    setIsModalOpen(true);
+  if (loading) return <Loading></Loading>;
+  if (!post) return <Loading />;
+
+  const updatePost = async (newPublishedStatus = null) => {
+    try {
+      const response = await updateBlogPost(
+        user,
+        post.id,
+        formData.title,
+        formData.content,
+        newPublishedStatus !== null ? newPublishedStatus : post.published,
+      );
+      setPost(response.updatedPost);
+      setIsEditing(false);
+    } catch (error) {
+      console.error('Failed to update post:', error);
+    }
+  };
+
+  const deletePost = async () => {
+    try {
+      await deleteBlogPost(user, post.id);
+      navigate('/home');
+    } catch (error) {
+      console.error('Failed to delete post:', error);
+    }
   };
 
   const handleConfirm = () => {
@@ -58,36 +97,7 @@ const BlogPost = () => {
     } else if (modalType === 'affectPublish') {
       updatePost(!post.published);
     }
-    setIsModalOpen(false);
-  };
-
-  const createUpdatePostFunction = () => {
-    return async (newPublishedStatus = null) => {
-      try {
-        const response = await updateBlogPost(
-          user,
-          post.id,
-          postTitle,
-          postContent,
-          newPublishedStatus !== null ? newPublishedStatus : post.published,
-        );
-        const updatedPost = response.updatedPost;
-        setPost(updatedPost);
-      } catch (error) {
-        console.error('Failed to update post:', error);
-      }
-    };
-  };
-  const updatePost = createUpdatePostFunction();
-
-  const deletePost = async () => {
-    try {
-      await deleteBlogPost(user, post.id);
-
-      navigate('/home');
-    } catch (error) {
-      console.error('Failed to delete post:', error);
-    }
+    closeModal();
   };
 
   return (
@@ -97,10 +107,10 @@ const BlogPost = () => {
           <div className={styles.blogHeader}>
             {isEditing ? (
               <input
-                value={postTitle}
+                value={formData.title}
                 maxLength={100}
-                onChange={(event) => setPostTitle(event.target.value)}
-              ></input>
+                onChange={(e) => onChange(e, 'title')}
+              />
             ) : (
               <h1>{post.title}</h1>
             )}
@@ -121,14 +131,16 @@ const BlogPost = () => {
           {user?.canPost && post.userId === user.id && !isEditing && (
             <AffectPublish
               post={post}
-              handleAffectPublishClick={handleAffectPublishClick}
+              handleAffectPublishClick={() => openModal('affectPublish')}
             />
           )}
 
           {isEditing ? (
             <EditorComponent
-              content={postContent || post.content}
-              onContentChange={(newContent) => setPostContent(newContent)}
+              content={formData.content}
+              onContentChange={(newContent) =>
+                onChange({ target: { value: newContent } }, 'content')
+              }
             />
           ) : (
             <div
@@ -143,12 +155,11 @@ const BlogPost = () => {
         {user?.id === post.userId && (
           <div className={styles.editDeleteContainer}>
             <EditDeleteIcons
-              setIsModalOpen={setIsModalOpen}
-              setModalType={setModalType}
+              openModal={openModal}
               isEditing={isEditing}
               setIsEditing={setIsEditing}
-              updatePost={createUpdatePostFunction()}
-            ></EditDeleteIcons>
+              updatePost={updatePost}
+            />
           </div>
         )}
 
@@ -172,7 +183,7 @@ const BlogPost = () => {
         }
         onConfirm={handleConfirm}
         isOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
+        closeModal={closeModal}
         confirmText={
           modalType === 'delete'
             ? 'Delete'

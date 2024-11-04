@@ -2,7 +2,6 @@ import styles from './Header.module.css';
 import PropTypes from 'prop-types';
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import React from 'react';
 import Modal from '../Modal/Modal';
 import { useModal } from '../../hooks/useModal/useModal';
 

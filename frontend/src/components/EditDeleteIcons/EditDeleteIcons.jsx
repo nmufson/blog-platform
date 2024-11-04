@@ -5,8 +5,7 @@ import { mdiTextBoxEditOutline } from '@mdi/js';
 import { mdiContentSaveCheckOutline } from '@mdi/js';
 
 const EditDeleteIcons = ({
-  setIsModalOpen,
-  setModalType,
+  openModal,
   setIsEditing,
   isEditing,
   updatePost,
@@ -16,8 +15,7 @@ const EditDeleteIcons = ({
   };
 
   const handleDeleteClick = () => {
-    setModalType('delete');
-    setIsModalOpen(true);
+    openModal('delete');
   };
 
   const handleSaveClick = async () => {
@@ -54,8 +52,7 @@ const EditDeleteIcons = ({
 };
 
 EditDeleteIcons.propTypes = {
-  setIsModalOpen: PropTypes.func.isRequired,
-  setModalType: PropTypes.func.isRequired,
+  openModal: PropTypes.func.isRequired,
   setIsEditing: PropTypes.func.isRequired,
   isEditing: PropTypes.bool.isRequired,
   updatePost: PropTypes.func.isRequired,

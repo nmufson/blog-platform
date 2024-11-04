@@ -19,5 +19,6 @@ export const useModal = () => {
     modalType,
     openModal,
     closeModal,
+    setModalType,
   };
 };

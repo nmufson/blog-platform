@@ -1,4 +1,4 @@
-export const validateField = (name, value, post, setFormErrors) => {
+export const validateField = (field, value, post, setFormErrors) => {
   let updatedErrors = {
     titleError: '',
     contentError: '',
@@ -6,7 +6,7 @@ export const validateField = (name, value, post, setFormErrors) => {
     imageAltTextError: '',
   };
 
-  switch (name) {
+  switch (field) {
     case 'title':
       updatedErrors = validateTitle(value);
       break;

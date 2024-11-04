@@ -15,8 +15,7 @@ vi.mock('@mdi/react', () => ({
 
 describe('EditDeleteIcons', () => {
   const defaultProps = {
-    setIsModalOpen: vi.fn(),
-    setModalType: vi.fn(),
+    openModal: vi.fn(),
     setIsEditing: vi.fn(),
     isEditing: false,
     updatePost: vi.fn(),
@@ -69,8 +68,7 @@ describe('EditDeleteIcons', () => {
     const deleteIcon = screen.getByTestId(`icon-${mdiTrashCanOutline}`);
     fireEvent.click(deleteIcon);
 
-    expect(defaultProps.setModalType).toHaveBeenCalledWith('delete');
-    expect(defaultProps.setIsModalOpen).toHaveBeenCalledWith(true);
+    expect(defaultProps.openModal).toHaveBeenCalledWith('delete');
   });
 
   it('handles save icon click', async () => {
