@@ -24,9 +24,11 @@ https://blog-platform-8okj8n72u-nmufsons-projects.vercel.app/
     - Click on any post title or image to read the full article.
 
 ![Home Page with blog previews](./assets/home-page.png)
+
 *Home Page with blog previews*
 
 ![Blog Post page](./assets/blog-post.png)
+
 *Blog Post Page*
 
 2. **Creating an Account**:
@@ -35,6 +37,7 @@ https://blog-platform-8okj8n72u-nmufsons-projects.vercel.app/
     - Optionally, enter an author code if you have one (this grants additional privileges).
 
 ![Sign Up form](./assets/sign-up.png)
+
 *Sign Up form with option to join as an author*
 
 ### For Regular Users
@@ -52,6 +55,7 @@ https://blog-platform-8okj8n72u-nmufsons-projects.vercel.app/
     - Choose to either save as a draft or publish immediately.
    
 ![New Post Page](./assets/new-post.png)
+
 *New Post Page*
 
 5. **Managing Posts**:
