@@ -2,7 +2,7 @@
 
 Full-stack blogging platform integrating a backend with a dynamic frontend that offers a tailored experience for both authors and regular users.
 ## Live Demo 
-https://blog-platform-8okj8n72u-nmufsons-projects.vercel.app/
+https://blog-platform-chi-seven.vercel.app/
 ## Technologies Used
 ### Frontend
 - React.js
@@ -17,7 +17,7 @@ https://blog-platform-8okj8n72u-nmufsons-projects.vercel.app/
 - PostgreSQL
 - Prisma ORM for database management
 
-## Usage
+## Features
 
 ### For All Visitors
 1. **Browsing Posts**:
