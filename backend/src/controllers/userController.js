@@ -9,9 +9,10 @@ async function checkEmail(req, res) {
 
   const user = await userServices.getUserByEmail(email);
   if (user) {
-    return res.status(200).json({ available: true });
+    return res.status(200).json({ taken: true });
   }
-  return res.status(200).json({ available: false });
+
+  return res.status(200).json({ taken: false });
 }
 
 async function checkUsername(req, res) {

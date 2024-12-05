@@ -45,14 +45,12 @@ async function main() {
     }),
   );
 
-  // Insert multiple users using createMany
   await prisma.user.createMany({
     data: hashedUsersData,
     skipDuplicates: true,
   });
   console.log(`Users created!`);
 
-  // Find all users (so we can use their IDs for posts)
   const allUsers = await prisma.user.findMany();
 
   // Hardcoded data for posts (each associated with a specific user)

@@ -42,7 +42,7 @@ export const checkEmailAvailability = async (email) => {
     }
 
     const data = await response.json();
-    return data.available; // bool
+    return data.taken; // bool
   } catch (error) {
     console.error('Error checking email availability:', error);
     return false;
