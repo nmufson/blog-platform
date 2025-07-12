@@ -1,8 +1,7 @@
 # Full-Stack Blog Project
 
 Full-stack blogging platform integrating a backend with a dynamic frontend that offers a tailored experience for both authors and regular users.
-## Live Demo 
-https://blog-platform-chi-seven.vercel.app/
+
 ## Technologies Used
 ### Frontend
 - React.js
