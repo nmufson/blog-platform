@@ -35,6 +35,18 @@ const Home = () => {
     navigate('/newpost');
   };
 
+  if (!hasFetched) {
+    return (
+      <div className={styles.spinnerContainer}>
+        <div
+          className={styles.spinner}
+          role="status"
+          aria-label="Loading posts"
+        />
+      </div>
+    );
+  }
+
   if (error) {
     return <p>{error}</p>;
   }
